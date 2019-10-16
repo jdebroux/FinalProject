@@ -13,8 +13,6 @@
 		<class>com.skilldistillery.tooldepotapp.entities.User</class>
 		<class>com.skilldistillery.tooldepotapp.entities.Address</class>
 		<class>com.skilldistillery.tooldepotapp.entities.Tool</class>
-		<class>com.skilldistillery.tooldepotapp.entities.Review</class>
-		<class>com.skilldistillery.tooldepotapp.entities.Transaction</class>
 		<!-- end entities -->
 		<properties>
 			<property name="javax.persistence.jdbc.url"
