@@ -41,6 +41,6 @@ class UserTests {
 
 	@Test
 	void test1() {
-		assertEquals("SOME FIRST NAME", "MAKE TEST HERE");
+		assertEquals("tool", user.getFirstName());
 	}
 }
