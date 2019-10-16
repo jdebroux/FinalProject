@@ -41,6 +41,6 @@ class AddressTests {
 
 	@Test
 	void test1() {
-		assertEquals("SOME FIRST NAME", "MAKE TEST HERE");
+		assertEquals("Tool", address.getCity());
 	}
 }

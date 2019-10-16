@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 public class User {
 
@@ -37,9 +40,11 @@ public class User {
 	
 	private String photo;
 	
+	@CreationTimestamp
 	@Column(name="create_date")
 	private LocalDateTime createDate;
 	
+	@UpdateTimestamp
 	@Column(name="update_date")
 	private LocalDateTime updateDate;
 	
