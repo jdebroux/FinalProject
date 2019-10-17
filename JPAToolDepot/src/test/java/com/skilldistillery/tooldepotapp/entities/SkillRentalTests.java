@@ -41,6 +41,6 @@ class SkillRentalTests {
 
 	@Test
 	void test1() {
-		assertEquals(5, skillRental.getHours());
+		assertEquals(24, skillRental.getHours());
 	}
 }

@@ -1,6 +1,7 @@
 package com.skilldistillery.tooldepotapp.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -41,7 +42,7 @@ class SkillTests {
 
 	@Test
 	void test1() {
-		assertEquals("ENTER SKILL NAME HERE", skill.getName());
-		assertEquals("ENTER USERS SIZE HERE", skill.getUsers().size());
+		assertEquals("Painter", skill.getName());
+		assertNotNull(skill.getUsers().size());
 	}
 }
