@@ -1,6 +1,8 @@
 package com.skilldistillery.tooldepotapp.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,10 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -51,6 +57,26 @@ public class User {
 	@OneToOne
 	@JoinColumn(name="address_id")
 	private Address address;
+	
+	@OneToMany(mappedBy="user")
+	@JsonIgnore
+	private List<Tool> tools;
+	
+	@OneToMany(mappedBy="renter")
+	@JsonIgnore
+	private List<ToolRental> toolRentals;
+	
+	@OneToMany(mappedBy="renter")
+	@JsonIgnore
+	private List<SkillRental> skillRentals;
+	
+	@ManyToMany(mappedBy="users")
+	@JsonIgnore
+    private List<Skill> skills;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="user")
+	private List<UserSkill> userSkills;
 
 	public User() {
 	}
@@ -73,6 +99,139 @@ public class User {
 		this.phone = phone;
 		this.photo = photo;
 		this.address = address;
+	}
+	
+	public void addUserSkill(UserSkill userSkill) {
+        if(userSkills == null) userSkills = new ArrayList<>();
+        
+        if(!userSkills.contains(userSkill)) {
+        	userSkills.add(userSkill);
+            if(userSkill.getUser() != null) {
+            	userSkill.getUser().getUserSkills().remove(userSkill);
+            }
+            userSkill.setUser(this);
+        }
+    }
+    
+    public void removeClient(UserSkill userSkill) {
+    	userSkill.setUser(null);
+        if(userSkills != null) {
+        	userSkills.remove(userSkill);
+        }
+    }
+	
+	public void addTool(Tool tool) {
+        if(tools == null) tools = new ArrayList<>();
+        
+        if(!tools.contains(tool)) {
+            tools.add(tool);
+            if(tool.getUser() != null) {
+                tool.getUser().getTools().remove(tool);
+            }
+            tool.setUser(this);
+        }
+    }
+    
+    public void removeToolRental(ToolRental toolRental) {
+        toolRental.setRenter(null);
+        if(toolRentals != null) {
+            toolRentals.remove(toolRental);
+        }
+    }
+    
+    public void addToolRental(ToolRental toolRental) {
+    	if(toolRentals == null) toolRentals = new ArrayList<>();
+    	
+    	if(!toolRentals.contains(toolRental)) {
+    		toolRentals.add(toolRental);
+    		if(toolRental.getRenter() != null) {
+    			toolRental.getRenter().getToolRentals().remove(toolRental);
+    		}
+    		toolRental.setRenter(this);
+    	}
+    }
+    
+    public void removeSkillRental(SkillRental skillRental) {
+    	skillRental.setRenter(null);
+    	if(skillRentals != null) {
+    		skillRentals.remove(skillRental);
+    	}
+    }
+    
+    public void addSkillRental(SkillRental skillRental) {
+    	if(skillRentals == null) skillRentals = new ArrayList<>();
+    	
+    	if(!skillRentals.contains(skillRental)) {
+    		skillRentals.add(skillRental);
+    		if(skillRental.getRenter() != null) {
+    			skillRental.getRenter().getSkillRentals().remove(skillRental);
+    		}
+    		skillRental.setRenter(this);
+    	}
+    }
+    
+    public void removeTool(Tool tool) {
+    	tool.setUser(null);
+    	if(tools != null) {
+    		tools.remove(tool);
+    	}
+    }
+    
+    public void addSkill(Skill skill) {
+        if (skills == null) {
+        	skills = new ArrayList<>();
+        }
+        if(!skills.contains(skill)) {
+        	skills.add(skill);
+        	skill.addUser(this);
+        }
+    }
+    
+    public void removeSkill(Skill skill) {
+        if (skills != null && skills.contains(skill)) {
+        	skills.remove(skill);
+        	skill.removeUser(this);
+        }
+    }
+    
+	public List<UserSkill> getUserSkills() {
+		return new ArrayList<>(userSkills);
+	}
+
+	public void setUserSkills(List<UserSkill> userSkills) {
+		this.userSkills = userSkills;
+	}
+
+	public List<Skill> getSkills() {
+		return new ArrayList<>(skills);
+	}
+
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
+
+	public List<SkillRental> getSkillRentals() {
+		return new ArrayList<>(skillRentals);
+	}
+
+	public void setSkillRentals(List<SkillRental> skillRentals) {
+		this.skillRentals = skillRentals;
+	}
+
+	public List<ToolRental> getToolRentals() {
+		return new ArrayList<>(toolRentals);
+	}
+
+	public void setToolRentals(List<ToolRental> toolRentals) {
+		this.toolRentals = toolRentals;
+	}
+
+	public List<Tool> getTools() {
+		return new ArrayList<>(tools);
+	}
+
+	public void setTools(List<Tool> tools) {
+		this.tools = tools;
 	}
 
 	public int getId() {
