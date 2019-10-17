@@ -62,11 +62,11 @@ public class User {
 	@JsonIgnore
 	private List<Tool> tools;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="renter")
 	@JsonIgnore
 	private List<ToolRental> toolRentals;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="renter")
 	@JsonIgnore
 	private List<SkillRental> skillRentals;
 	
@@ -75,7 +75,7 @@ public class User {
     private List<Skill> skills;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="renter")
+	@OneToMany(mappedBy="user")
 	private List<UserSkill> userSkills;
 
 	public User() {
