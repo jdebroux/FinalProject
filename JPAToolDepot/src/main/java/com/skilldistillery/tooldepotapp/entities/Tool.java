@@ -37,8 +37,8 @@ public class Tool {
 	
 	private boolean available;
 	
-	@Column(name="manufacture_Date")
-	private String manufactureDate;
+	@Column(name="manufacture_year")
+	private String manufactureYear;
 	
 	private String condition;
 	
@@ -55,7 +55,7 @@ public class Tool {
 
 
 	public Tool(int id, String name, String description, String type, double costPerDay, boolean available,
-			String manufactureDate, String condition) {
+			String manufactureYear, String condition) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -63,7 +63,7 @@ public class Tool {
 		this.type = type;
 		this.costPerDay = costPerDay;
 		this.available = available;
-		this.manufactureDate = manufactureDate;
+		this.manufactureYear = manufactureYear;
 		this.condition = condition;
 	}
 	
@@ -176,13 +176,13 @@ public class Tool {
 	}
 
 
-	public String getManufactureDate() {
-		return manufactureDate;
+	public String getManufactureYear() {
+		return manufactureYear;
 	}
 
 
-	public void setManufactureDate(String manufactureDate) {
-		this.manufactureDate = manufactureDate;
+	public void setManufactureYear(String manufactureYear) {
+		this.manufactureYear = manufactureYear;
 	}
 
 
@@ -241,8 +241,8 @@ public class Tool {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Tool [id=").append(id).append(", user=").append(user).append(", name=").append(name)
 				.append(", description=").append(description).append(", type=").append(type).append(", costPerDay=")
-				.append(costPerDay).append(", available=").append(available).append(", manufactureDate=")
-				.append(manufactureDate).append(", condition=").append(condition).append("]");
+				.append(costPerDay).append(", available=").append(available).append(", manufactureYear=")
+				.append(manufactureYear).append(", condition=").append(condition).append("]");
 		return builder.toString();
 	}
 	

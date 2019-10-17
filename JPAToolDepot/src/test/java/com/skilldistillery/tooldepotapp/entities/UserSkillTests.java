@@ -41,7 +41,7 @@ class UserSkillTests {
 
 	@Test
 	void test1() {
-		assertEquals("ENTER EXPERIENCE INT HERE", userSkill.getExperience());
-		assertEquals("ENTER FIRST NAME HERE", userSkill.getUser().getFirstName());
+		assertEquals(5, userSkill.getExperience());
+		assertEquals("Josh", userSkill.getUser().getFirstName());
 	}
 }
