@@ -184,9 +184,9 @@ DROP TABLE IF EXISTS `skill` ;
 CREATE TABLE IF NOT EXISTS `skill` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(500) NULL,
-  `cost` DOUBLE NULL,
+  `cost_per_hour` DOUBLE NULL,
   `available` TINYINT(1) NULL,
-  `description` TEXT NULL,
+  `description` TEXT(2000) NULL,
   `expertise` VARCHAR(500) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -198,9 +198,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `user_skill` ;
 
 CREATE TABLE IF NOT EXISTS `user_skill` (
+  `id` INT NOT NULL,
   `user_id` INT NOT NULL,
   `skill_id` INT NOT NULL,
-  PRIMARY KEY (`user_id`, `skill_id`),
+  `certified` TINYINT(1) NULL,
+  `experience` INT NULL,
+  PRIMARY KEY (`id`),
   INDEX `fk_user_has_skill_skill1_idx` (`skill_id` ASC),
   INDEX `fk_user_has_skill_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_user_has_skill_user1`
@@ -223,23 +226,22 @@ DROP TABLE IF EXISTS `skill_rental` ;
 
 CREATE TABLE IF NOT EXISTS `skill_rental` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `user_skill_user_id` INT NOT NULL,
-  `user_skill_skill_id` INT NOT NULL,
   `renter_id` INT NOT NULL,
+  `user_skill_id` INT NOT NULL,
   `start_date` DATETIME NULL,
   `finish_date` DATETIME NULL,
   `hours` INT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_skill_rental_user_skill1_idx` (`user_skill_user_id` ASC, `user_skill_skill_id` ASC),
   INDEX `fk_skill_rental_renter_idx` (`renter_id` ASC),
-  CONSTRAINT `fk_skill_rental_user_skill1`
-    FOREIGN KEY (`user_skill_user_id` , `user_skill_skill_id`)
-    REFERENCES `user_skill` (`user_id` , `skill_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_user_skill_id_idx` (`user_skill_id` ASC),
   CONSTRAINT `fk_skill_rental_renter`
     FOREIGN KEY (`renter_id`)
     REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_skill_rental_user_skill1`
+    FOREIGN KEY (`user_skill_id`)
+    REFERENCES `user_skill` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -252,12 +254,12 @@ DROP TABLE IF EXISTS `review_of_worker` ;
 
 CREATE TABLE IF NOT EXISTS `review_of_worker` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `skill_rental_id` INT NOT NULL,
   `worker_review` TEXT NULL,
   `worker_rating` INT NULL,
   `title` VARCHAR(45) NULL,
   `recommend` TINYINT(1) NULL,
   `finished_on_time` TINYINT(1) NULL,
-  `skill_rental_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_review_of_worker_skill_rental1_idx` (`skill_rental_id` ASC),
   CONSTRAINT `fk_review_of_worker_skill_rental1`
@@ -275,10 +277,10 @@ DROP TABLE IF EXISTS `review_of_customer` ;
 
 CREATE TABLE IF NOT EXISTS `review_of_customer` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `skill_rental_id` INT NOT NULL,
   `customer_review` TEXT NULL,
   `customer_rating` INT NULL,
   `title` VARCHAR(45) NULL,
-  `skill_rental_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_review_of_customer_skill_rental1_idx` (`skill_rental_id` ASC),
   CONSTRAINT `fk_review_of_customer_skill_rental1`
@@ -437,6 +439,16 @@ INSERT INTO `review_of_lender` (`id`, `tool_rental_id`, `renter_review`, `renter
 INSERT INTO `review_of_lender` (`id`, `tool_rental_id`, `renter_review`, `renter_rating`) VALUES (3, 3, 'Alicia was on time for the arranged pickup, and the shop vac was ok.', 4);
 INSERT INTO `review_of_lender` (`id`, `tool_rental_id`, `renter_review`, `renter_rating`) VALUES (4, 4, 'Josh ready with the weed trimmer when I arrived, everything seemed to be ok.', 4);
 INSERT INTO `review_of_lender` (`id`, `tool_rental_id`, `renter_review`, `renter_rating`) VALUES (5, 5, 'Justin was ready when I came to pick up the pole saw, condition was like new.', 5);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `skill`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `tooldepotdb`;
+INSERT INTO `skill` (`id`, `name`, `cost_per_hour`, `available`, `description`, `expertise`) VALUES (1, 'Painter', 25, 1, 'Howell Painting offers a full range of professional painting and sealing services for the interior and exterior of your home. With over 30 years of experience, we take care to work around your schedule and needs. You can always expect the highest level of service, attention to detail, and top-quality products. We are committed to your complete satisfaction on each house painting project in Colorado Springs, Castle Rock CO and the surrounding area. ', 'Expert');
 
 COMMIT;
 
