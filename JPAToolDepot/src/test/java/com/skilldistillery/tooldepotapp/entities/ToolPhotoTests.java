@@ -1,7 +1,6 @@
 package com.skilldistillery.tooldepotapp.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,10 +13,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class ToolTests {
+class ToolPhotoTests {
 	private static EntityManagerFactory emf; 
 	private static EntityManager em;
-	private static Tool tool;
+	private static ToolPhoto toolPhoto;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,38 +31,23 @@ class ToolTests {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		tool = em.find(Tool.class, 1);
+		toolPhoto = em.find(ToolPhoto.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em = null;
-		tool = null;
+		toolPhoto = null;
 	}
 
 	@Test
-	@DisplayName("Test Tool Entity")
+	@DisplayName("Test ToolPhoto Entity")
 	void test1() {
-		assertEquals("SOME TOOL NAME", tool.getName());
+		assertEquals("SOME PHOTO URL", toolPhoto.getPhotoUrl());
 	}
-	
 	@Test
-	@DisplayName("Test User Mapping")
+	@DisplayName("Test Tool Mapping")
 	void test2() {
-		assertEquals("SOME FIRST NAME", tool.getUser().getFirstName());
-	}
-	
-	@Test
-	@DisplayName("Test ToolPhoto Mapping")
-	void test3() {
-		assertNotNull(tool.getPhotos());
-		assertEquals("SOME URL", tool.getPhotos().get(0).getPhotoUrl());
-	}
-	
-	@Test
-	@DisplayName("Test ToolRental Mapping")
-	void test4() {
-		assertNotNull(tool.getRentals());
-		assertEquals("SOME FIRST NAME", tool.getRentals().get(0).getRenter().getFirstName());
+		assertEquals("SOME TOOL NAME", toolPhoto.getTool().getName());
 	}
 }

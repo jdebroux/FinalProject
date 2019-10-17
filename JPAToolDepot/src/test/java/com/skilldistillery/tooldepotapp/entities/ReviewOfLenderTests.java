@@ -14,10 +14,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class ToolTests {
+class ReviewOfLenderTests {
 	private static EntityManagerFactory emf; 
 	private static EntityManager em;
-	private static Tool tool;
+	private static ReviewOfLender lenderReview;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,38 +32,26 @@ class ToolTests {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		tool = em.find(Tool.class, 1);
+		lenderReview = em.find(ReviewOfLender.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em = null;
-		tool = null;
+		lenderReview = null;
 	}
 
 	@Test
-	@DisplayName("Test Tool Entity")
+	@DisplayName("Test ReviewOfLender Entity")
 	void test1() {
-		assertEquals("SOME TOOL NAME", tool.getName());
-	}
-	
-	@Test
-	@DisplayName("Test User Mapping")
-	void test2() {
-		assertEquals("SOME FIRST NAME", tool.getUser().getFirstName());
-	}
-	
-	@Test
-	@DisplayName("Test ToolPhoto Mapping")
-	void test3() {
-		assertNotNull(tool.getPhotos());
-		assertEquals("SOME URL", tool.getPhotos().get(0).getPhotoUrl());
+		assertEquals("SOME RENTER RATING", lenderReview.getRenterRating());
 	}
 	
 	@Test
 	@DisplayName("Test ToolRental Mapping")
-	void test4() {
-		assertNotNull(tool.getRentals());
-		assertEquals("SOME FIRST NAME", tool.getRentals().get(0).getRenter().getFirstName());
+	void test2() {
+		assertEquals("SOME TOTAL COST", lenderReview.getRental().getTotalCost());
 	}
+	
+	
 }
