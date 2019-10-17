@@ -13,6 +13,15 @@
 		<class>com.skilldistillery.tooldepotapp.entities.User</class>
 		<class>com.skilldistillery.tooldepotapp.entities.Address</class>
 		<class>com.skilldistillery.tooldepotapp.entities.Tool</class>
+		<class>com.skilldistillery.tooldepotapp.entities.ToolPhoto</class>
+		<class>com.skilldistillery.tooldepotapp.entities.ReviewOfRenter</class>
+		<class>com.skilldistillery.tooldepotapp.entities.ReviewOfLender</class>
+		<class>com.skilldistillery.tooldepotapp.entities.ToolRental</class>
+		<class>com.skilldistillery.tooldepotapp.entities.ReviewOfWorker</class>
+		<class>com.skilldistillery.tooldepotapp.entities.ReviewOfCustomer</class>
+		<class>com.skilldistillery.tooldepotapp.entities.SkillRental</class>
+		<class>com.skilldistillery.tooldepotapp.entities.UserSkill</class>
+		<class>com.skilldistillery.tooldepotapp.entities.Skill</class>
 		<!-- end entities -->
 		<properties>
 			<property name="javax.persistence.jdbc.url"

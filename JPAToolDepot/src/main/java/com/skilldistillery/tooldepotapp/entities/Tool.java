@@ -1,6 +1,6 @@
 package com.skilldistillery.tooldepotapp.entities;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -38,7 +38,7 @@ public class Tool {
 	private boolean available;
 	
 	@Column(name="manufacture_Date")
-	private LocalDateTime manufactureDate;
+	private String manufactureDate;
 	
 	private String condition;
 	
@@ -48,14 +48,14 @@ public class Tool {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "tool")
-	private List<ToolPhoto> photos;
+	private List<ToolPhoto> toolPhotos;
 	
 	
 	public Tool() {}
 
 
 	public Tool(int id, String name, String description, String type, double costPerDay, boolean available,
-			LocalDateTime manufactureDate, String condition) {
+			String manufactureDate, String condition) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -66,6 +66,44 @@ public class Tool {
 		this.manufactureDate = manufactureDate;
 		this.condition = condition;
 	}
+	
+    public void addPhoto(ToolPhoto photo) {
+        if(toolPhotos == null) toolPhotos = new ArrayList<>();
+        
+        if(!toolPhotos.contains(photo)) {
+            toolPhotos.add(photo);
+            if(photo.getTool() != null) {
+                photo.getTool().getPhotos().remove(photo);
+            }
+            photo.setTool(this);
+        }
+    }
+    
+    public void removePhoto(ToolPhoto photo) {
+        photo.setTool(null);
+        if(toolPhotos != null) {
+            toolPhotos.remove(photo);
+        }
+    }
+    
+    public void addRental(ToolRental rental) {
+        if(rentals == null) rentals = new ArrayList<>();
+        
+        if(!rentals.contains(rental)) {
+            rentals.add(rental);
+            if(rental.getTool() != null) {
+                rental.getTool().getRentals().remove(rental);
+            }
+            rental.setTool(this);
+        }
+    }
+    
+    public void removeRental(ToolRental rental) {
+        rental.setTool(null);
+        if(rentals != null) {
+            rentals.remove(rental);
+        }
+    }
 
 
 	public int getId() {
@@ -138,12 +176,12 @@ public class Tool {
 	}
 
 
-	public LocalDateTime getManufactureDate() {
+	public String getManufactureDate() {
 		return manufactureDate;
 	}
 
 
-	public void setManufactureDate(LocalDateTime manufactureDate) {
+	public void setManufactureDate(String manufactureDate) {
 		this.manufactureDate = manufactureDate;
 	}
 
@@ -157,24 +195,20 @@ public class Tool {
 		this.condition = condition;
 	}
 
-
-	public List<ToolPhoto> getPhotos() {
-		return photos;
-	}
-
-
-	public List<ToolRental> getRentals() {
-		return rentals;
-	}
-
-
 	public void setRentals(List<ToolRental> rentals) {
 		this.rentals = rentals;
 	}
 
+	public List<ToolRental> getRentals() {
+		return new ArrayList<>(rentals);
+	}
+	
+	public List<ToolPhoto> getPhotos() {
+		return new ArrayList<>(toolPhotos);
+	}
 
 	public void setPhotos(List<ToolPhoto> photos) {
-		this.photos = photos;
+		this.toolPhotos = photos;
 	}
 
 

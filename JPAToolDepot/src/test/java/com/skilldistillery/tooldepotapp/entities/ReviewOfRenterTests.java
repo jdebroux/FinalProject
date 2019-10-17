@@ -44,13 +44,13 @@ class ReviewOfRenterTests {
 	@Test
 	@DisplayName("Test ReviewOfRenter Entity")
 	void test1() {
-		assertEquals("SOME TOOL RATING", renterReview.getToolRating() );
+		assertEquals(5, renterReview.getToolRating() );
 	}
 	
 	@Test
 	@DisplayName("Test ToolRental Mapping")
 	void test2() {
-		assertEquals("SOME TOTAL COST", renterReview.getRental().getTotalCost());
+		assertEquals(50, renterReview.getToolRental().getTotalCost());
 	}
 	
 	
