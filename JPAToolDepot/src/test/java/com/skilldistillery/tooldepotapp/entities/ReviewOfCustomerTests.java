@@ -41,6 +41,8 @@ class ReviewOfCustomerTests {
 
 	@Test
 	void test1() {
-		assertEquals("ENTER TITLE HERE", reviewOfCustomer.getTitle());
+		assertEquals("Some Title", reviewOfCustomer.getTitle());
+		assertEquals("Centennial", reviewOfCustomer.getSkillRental().getRenter().getAddress().getCity());
+		assertEquals(8, reviewOfCustomer.getSkillRental().getRenter().getTools().size());
 	}
 }
