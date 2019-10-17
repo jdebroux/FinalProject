@@ -30,7 +30,7 @@ public class ReviewOfCustomer {
 	
 	@JsonIgnore
 	@OneToOne
-	@JoinColumn(name="skill_rental")
+	@JoinColumn(name="skill_rental_id")
 	private SkillRental skillRental;
 	
 	public ReviewOfCustomer() {
