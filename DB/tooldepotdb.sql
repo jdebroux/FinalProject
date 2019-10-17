@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `address_id` INT NOT NULL,
   `username` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(100) NOT NULL,
   `enabled` TINYINT(1) NOT NULL,
   `role` VARCHAR(10) NULL,
   `first_name` VARCHAR(45) NULL,
@@ -52,6 +52,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `update_date` DATETIME NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_user_address1_idx` (`address_id` ASC),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC),
   CONSTRAINT `fk_user_address1`
     FOREIGN KEY (`address_id`)
     REFERENCES `address` (`id`)
