@@ -233,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `skill_rental` (
   `hours` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_skill_rental_renter_idx` (`renter_id` ASC),
-  INDEX `fk_user_skill_id_idx` (`user_skill_id` ASC),
+  INDEX `fk_skill_rental_user_skill1_idx` (`user_skill_id` ASC),
   CONSTRAINT `fk_skill_rental_renter`
     FOREIGN KEY (`renter_id`)
     REFERENCES `user` (`id`)
@@ -257,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `review_of_worker` (
   `skill_rental_id` INT NOT NULL,
   `worker_review` TEXT NULL,
   `worker_rating` INT NULL,
-  `title` VARCHAR(45) NULL,
+  `title` VARCHAR(500) NULL,
   `recommend` TINYINT(1) NULL,
   `finished_on_time` TINYINT(1) NULL,
   PRIMARY KEY (`id`),
@@ -280,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `review_of_customer` (
   `skill_rental_id` INT NOT NULL,
   `customer_review` TEXT NULL,
   `customer_rating` INT NULL,
-  `title` VARCHAR(45) NULL,
+  `title` VARCHAR(500) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_review_of_customer_skill_rental1_idx` (`skill_rental_id` ASC),
   CONSTRAINT `fk_review_of_customer_skill_rental1`
@@ -449,6 +449,46 @@ COMMIT;
 START TRANSACTION;
 USE `tooldepotdb`;
 INSERT INTO `skill` (`id`, `name`, `cost_per_hour`, `available`, `description`, `expertise`) VALUES (1, 'Painter', 25, 1, 'Howell Painting offers a full range of professional painting and sealing services for the interior and exterior of your home. With over 30 years of experience, we take care to work around your schedule and needs. You can always expect the highest level of service, attention to detail, and top-quality products. We are committed to your complete satisfaction on each house painting project in Colorado Springs, Castle Rock CO and the surrounding area. ', 'Expert');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_skill`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `tooldepotdb`;
+INSERT INTO `user_skill` (`id`, `user_id`, `skill_id`, `certified`, `experience`) VALUES (1, 3, 1, 1, 5);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `skill_rental`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `tooldepotdb`;
+INSERT INTO `skill_rental` (`id`, `renter_id`, `user_skill_id`, `start_date`, `finish_date`, `hours`) VALUES (1, 5, 1, '2019-03-12', '2019-03-15', 24);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `review_of_worker`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `tooldepotdb`;
+INSERT INTO `review_of_worker` (`id`, `skill_rental_id`, `worker_review`, `worker_rating`, `title`, `recommend`, `finished_on_time`) VALUES (1, 1, 'Review', 5, 'Great Job', 1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `review_of_customer`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `tooldepotdb`;
+INSERT INTO `review_of_customer` (`id`, `skill_rental_id`, `customer_review`, `customer_rating`, `title`) VALUES (1, 1, 'Review', 5, 'Some Title');
 
 COMMIT;
 
