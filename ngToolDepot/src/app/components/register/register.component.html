@@ -1,0 +1,12 @@
+<form #newAccount="ngForm">
+  <label for="email">Email: </label>
+  <input type="email" name="email" ngModel>
+  <br>
+  <label for="username">Username: </label>
+  <input type="text" name="username" ngModel>
+  <br>
+  <label for="password">Password: </label>
+  <input type="password" name="password" ngModel>
+  <br>
+  <button class="btn-sm btn-primary" type="submit" (click)="register(newAccount)">Register account</button>
+</form>

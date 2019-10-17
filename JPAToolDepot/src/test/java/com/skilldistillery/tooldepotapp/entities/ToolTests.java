@@ -44,26 +44,26 @@ class ToolTests {
 	@Test
 	@DisplayName("Test Tool Entity")
 	void test1() {
-		assertEquals("SOME TOOL NAME", tool.getName());
+		assertEquals("Table Saw", tool.getName());
 	}
 	
 	@Test
 	@DisplayName("Test User Mapping")
 	void test2() {
-		assertEquals("SOME FIRST NAME", tool.getUser().getFirstName());
+		assertEquals("Alicia", tool.getUser().getFirstName());
 	}
 	
 	@Test
 	@DisplayName("Test ToolPhoto Mapping")
 	void test3() {
 		assertNotNull(tool.getPhotos());
-		assertEquals("SOME URL", tool.getPhotos().get(0).getPhotoUrl());
+		assertEquals("http://bit.ly/31l9OIv", tool.getPhotos().get(0).getPhotoUrl());
 	}
 	
 	@Test
 	@DisplayName("Test ToolRental Mapping")
 	void test4() {
 		assertNotNull(tool.getRentals());
-		assertEquals("SOME FIRST NAME", tool.getRentals().get(0).getRenter().getFirstName());
+		assertEquals(50, tool.getRentals().get(0).getTotalCost());
 	}
 }
