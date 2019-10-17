@@ -2,12 +2,16 @@ package com.skilldistillery.tooldepotapp.entities;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="tool_photo")
 public class ToolPhoto {
 	
 	@Id
@@ -15,7 +19,7 @@ public class ToolPhoto {
 	private int id;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "tool_id")
 	private Tool tool;
 	
 	@Column(name="photo_url")

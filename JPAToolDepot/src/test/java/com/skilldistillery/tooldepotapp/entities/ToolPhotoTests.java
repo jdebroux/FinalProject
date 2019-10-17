@@ -43,11 +43,11 @@ class ToolPhotoTests {
 	@Test
 	@DisplayName("Test ToolPhoto Entity")
 	void test1() {
-		assertEquals("SOME PHOTO URL", toolPhoto.getPhotoUrl());
+		assertEquals("http://bit.ly/31l9OIv", toolPhoto.getPhotoUrl());
 	}
 	@Test
 	@DisplayName("Test Tool Mapping")
 	void test2() {
-		assertEquals("SOME TOOL NAME", toolPhoto.getTool().getName());
+		assertEquals("Table Saw", toolPhoto.getTool().getName());
 	}
 }

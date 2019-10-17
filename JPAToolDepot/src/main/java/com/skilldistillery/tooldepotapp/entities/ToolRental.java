@@ -4,15 +4,17 @@ import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+@Entity
+@Table(name="tool_rental")
 public class ToolRental {
 	
 	@Id
@@ -33,12 +35,10 @@ public class ToolRental {
 	@JoinColumn(name = "renter_id")
 	private User renter;
 	
-	@OneToOne(mappedBy="rental")
-	@JsonIgnore
+	@OneToOne(mappedBy="toolRental", cascade = CascadeType.ALL)
 	private ReviewOfLender lenderReview;
 	
-	@OneToOne(mappedBy="rental")
-	@JsonIgnore
+	@OneToOne(mappedBy="toolRental", cascade = CascadeType.ALL)
 	private ReviewOfRenter renterReview;
 	
 	public ToolRental() {}
@@ -125,7 +125,7 @@ public class ToolRental {
 		StringBuilder builder = new StringBuilder();
 		builder.append("ToolRental [id=").append(id).append(", tool=").append(tool).append(", checkout=")
 				.append(checkout).append(", returned=").append(returned).append(", totalCost=").append(totalCost)
-				.append(", renter=").append(renter).append(", lenderReview=").append(lenderReview)
+				.append(", renter=").append(renter).append(", lenderReview=")
 				.append(", renterReview=").append(renterReview).append("]");
 		return builder.toString();
 	}

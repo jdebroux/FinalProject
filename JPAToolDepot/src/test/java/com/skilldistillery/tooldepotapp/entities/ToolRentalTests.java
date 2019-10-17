@@ -44,31 +44,31 @@ class ToolRentalTests {
 	@Test
 	@DisplayName("Test ToolRental Entity")
 	void test1() {
-		assertEquals("SOME TOTALCOST NAME", rental.getTotalCost());
+		assertEquals(50, rental.getTotalCost());
 	}
 	
 	@Test
 	@DisplayName("Test User Mapping")
 	void test2() {
-		assertEquals("SOME FIRST NAME", rental.getRenter().getFirstName());
+		assertEquals("Cody", rental.getRenter().getFirstName());
 	}
 	
 	@Test
 	@DisplayName("Test Tool Mapping")
 	void test3() {
-		assertEquals("SOME TOOL NAME", rental.getTool().getName());
+		assertEquals("Table Saw", rental.getTool().getName());
 	}
 	
 	@Test
 	@DisplayName("Test RevewOfLender Mapping")
 	void test4() {
-		assertEquals("SOME RENTER RATING", rental.getLenderReview().getRenterRating());
+		assertEquals(5, rental.getLenderReview().getRenterRating());
 	}
 	
 	@Test
 	@DisplayName("Test RevewOfLender Mapping")
 	void test5() {
-		assertEquals("SOME TOOL RATING", rental.getRenterReview().getToolRating());
+		assertEquals(5, rental.getRenterReview().getToolRating());
 	}
 	
 }

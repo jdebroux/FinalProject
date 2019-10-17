@@ -1,6 +1,6 @@
 package com.skilldistillery.tooldepotapp.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class AddressTests {
@@ -40,7 +41,14 @@ class AddressTests {
 	}
 
 	@Test
+	@DisplayName("Test Address Entity")
 	void test1() {
 		assertEquals("Tool", address.getCity());
+	}
+	
+	@Test
+	@DisplayName("Test User Mapping")
+	void test2() {
+		assertEquals("tool", address.getUser().getFirstName());
 	}
 }

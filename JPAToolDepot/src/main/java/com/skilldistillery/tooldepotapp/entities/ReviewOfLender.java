@@ -1,13 +1,17 @@
 package com.skilldistillery.tooldepotapp.entities;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Entity
+@Table(name="review_of_lender")
 public class ReviewOfLender {
 	
 	@Id
@@ -20,9 +24,9 @@ public class ReviewOfLender {
 	@Column(name="renter_rating")
 	private double renterRating;
 	
-	@OneToOne(mappedBy="tool_rental_id")
-	@JsonIgnore
-	private ToolRental rental;
+	@OneToOne
+	@JoinColumn(name="tool_rental_id")
+	private ToolRental toolRental;
 	
 	public ReviewOfLender() {}
 
@@ -57,19 +61,19 @@ public class ReviewOfLender {
 		this.renterRating = renterRating;
 	}
 
-	public ToolRental getRental() {
-		return rental;
+	public ToolRental getToolRental() {
+		return toolRental;
 	}
 
-	public void setRental(ToolRental rental) {
-		this.rental = rental;
+	public void setToolRental(ToolRental toolRental) {
+		this.toolRental = toolRental;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("ReviewOfLender [id=").append(id).append(", renterReview=").append(renterReview)
-				.append(", renterRating=").append(renterRating).append(", rental=").append(rental).append("]");
+				.append(", renterRating=").append(renterRating).append(", rental=").append(toolRental).append("]");
 		return builder.toString();
 	}
 
