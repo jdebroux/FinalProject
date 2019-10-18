@@ -13,6 +13,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { UserComponent } from './components/user/user.component';
+import { TransactionComponent } from './components/transaction/transaction.component';
+import { ToolComponent } from './components/tool/tool.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { AppComponent } from './app.component';
     HomeComponent,
     LoginComponent,
     LogoutComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserComponent,
+    TransactionComponent,
+    ToolComponent
   ],
   imports: [
     BrowserModule,
