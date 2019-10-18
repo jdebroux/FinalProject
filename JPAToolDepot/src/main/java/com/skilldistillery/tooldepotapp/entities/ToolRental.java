@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 @Table(name="tool_rental")
 public class ToolRental {
@@ -31,6 +34,14 @@ public class ToolRental {
 	@Column(name="total_cost")
 	private double totalCost;
 	
+	@CreationTimestamp
+	@Column(name="create_date")
+	private LocalDateTime createDate;
+	
+	@UpdateTimestamp
+	@Column(name="update_date")
+	private LocalDateTime updateDate;
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "renter_id")
 	private User renter;
@@ -43,15 +54,26 @@ public class ToolRental {
 	
 	public ToolRental() {}
 
-	public ToolRental(int id, Tool tool, LocalDateTime checkout, LocalDateTime returned, double totalCost,
-			User renter) {
+	public ToolRental(Tool tool, LocalDateTime checkout, LocalDateTime returned, double totalCost,
+			LocalDateTime createDate, LocalDateTime updateDate, User renter) {
 		super();
-		this.id = id;
 		this.tool = tool;
 		this.checkout = checkout;
 		this.returned = returned;
 		this.totalCost = totalCost;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
 		this.renter = renter;
+	}
+
+	public ToolRental(LocalDateTime checkout, LocalDateTime returned, double totalCost,
+			LocalDateTime createDate, LocalDateTime updateDate) {
+		super();
+		this.checkout = checkout;
+		this.returned = returned;
+		this.totalCost = totalCost;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
 	}
 
 	public int getId() {
@@ -110,7 +132,21 @@ public class ToolRental {
 		this.lenderReview = lenderReview;
 	}
 	
-	
+	public LocalDateTime getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(LocalDateTime createDate) {
+		this.createDate = createDate;
+	}
+
+	public LocalDateTime getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(LocalDateTime updateDate) {
+		this.updateDate = updateDate;
+	}
 
 	public ReviewOfRenter getRenterReview() {
 		return renterReview;
@@ -122,12 +158,9 @@ public class ToolRental {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ToolRental [id=").append(id).append(", tool=").append(tool).append(", checkout=")
-				.append(checkout).append(", returned=").append(returned).append(", totalCost=").append(totalCost)
-				.append(", renter=").append(renter).append(", lenderReview=")
-				.append(", renterReview=").append(renterReview).append("]");
-		return builder.toString();
+		return "ToolRental [id=" + id + ", tool=" + tool + ", checkout=" + checkout + ", returned=" + returned
+				+ ", totalCost=" + totalCost + ", createDate=" + createDate + ", updateDate=" + updateDate + ", renter="
+				+ renter + ", lenderReview=" + lenderReview + ", renterReview=" + renterReview + "]";
 	}
 
 	@Override
@@ -152,8 +185,4 @@ public class ToolRental {
 		return true;
 	}
 	
-	
-	
-	
-
 }
