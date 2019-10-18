@@ -33,6 +33,7 @@ import { ToolTransactionComponent } from './components/tool-transaction/tool-tra
 import { AdminComponent } from './components/admin/admin.component';
 import { SkillTransactionComponent } from './components/skill-transaction/skill-transaction.component';
 import { SkillComponent } from './components/skill/skill.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { SkillComponent } from './components/skill/skill.component';
     ToolRentalService,
     ToolService,
     UserSkillService,
-    UserService
+    UserService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
