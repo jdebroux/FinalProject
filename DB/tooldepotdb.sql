@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS `user` ;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `address_id` INT NOT NULL,
-  `username` VARCHAR(45) NOT NULL,
+  `username` VARCHAR(100) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
   `enabled` TINYINT(1) NOT NULL,
   `role` VARCHAR(10) NULL,
@@ -322,8 +322,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `tooldepotdb`;
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (1, 1, 'tool', 'tool', 1, 'user', 'tool', 'tool', 'tool@tool.com', '123-456-7890', 'none', NULL, NULL);
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (2, 2, 'admin', 'admin', 1, 'admin', 'admin', 'admin', 'admin@admin.com', '123-456-9999', 'none', NULL, NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (1, 1, 'admin', '$2a$10$aNWARjmakD5DkADI851RbeGyuElJUMfAelfciTVP1/tUI5AiAunAe', 1, 'admin', 'admin', 'admin', 'admin@admin.', '123-456-7890', 'none', NULL, NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (2, 2, 'tools', 'admin', 1, 'admin', 'admin', 'admin', 'admin@admin.coms', '123-456-9999', 'none', NULL, NULL);
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (3, 3, 'jhowell', 'jhowell', 1, 'user', 'Josh', 'Howell', 'josl@tooldepot.com', '458-489-6253', 'https://bit.ly/2MpfRrz', '2019-10-14 21:19:52', '2019-10-14 21:19:53');
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (4, 4, 'ibealicia', 'ibealicia', 1, 'user', 'Alicia', 'Glassmeyer', 'alicia@tooldepot.com', '254-896-3521', 'https://bit.ly/2pvn5kp', '2019-10-14 21:19:53', '2019-10-14 21:19:54');
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (5, 5, 'jdebroux', 'jdebroux', 1, 'user', 'Joe', 'DeBroux', 'joe@tooldepot.com', '258-741-9632', 'https://bit.ly/2BuacKx', '2019-10-14 21:19:54', '2019-10-14 21:19:55');
