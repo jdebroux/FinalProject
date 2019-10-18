@@ -53,8 +53,8 @@ export class SkillTransactionComponent implements OnInit {
   }
 
   setFinishDate(id: number, skillTransaction: SkillRental) {
-    if (skillTransaction.finishDate === null) {
-      skillTransaction.finishDate = new Date().toDateString();
+    if (skillTransaction.finishedDate === null) {
+      skillTransaction.finishedDate = new Date().toDateString();
     }
     this.updateSkillTransaction(id, skillTransaction);
   }
