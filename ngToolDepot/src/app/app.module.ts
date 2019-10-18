@@ -16,6 +16,8 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './components/user/user.component';
 import { TransactionComponent } from './components/transaction/transaction.component';
 import { ToolComponent } from './components/tool/tool.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { ToolComponent } from './components/tool/tool.component';
     NgbModule,
     FormsModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule,
+    MatGridListModule
   ],
   providers: [
     AuthService
