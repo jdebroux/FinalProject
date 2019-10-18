@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 @Table(name="skill_rental")
 public class SkillRental {
@@ -23,10 +26,21 @@ public class SkillRental {
 	@Column(name="start_date")
 	private LocalDateTime startDate;
 	
+	@Column(name="estimated_finish_date")
+	private LocalDateTime estimatedFinishDate;
+	
 	@Column(name="finish_date")
 	private LocalDateTime finishDate;
 	
 	private Integer hours;
+	
+	@CreationTimestamp
+	@Column(name="create_date")
+	private LocalDateTime createDate;
+	
+	@UpdateTimestamp
+	@Column(name="update_date")
+	private LocalDateTime updateDate;
 	
 	@ManyToOne
 	@JoinColumn(name="renter_id")
@@ -46,23 +60,35 @@ public class SkillRental {
 		super();
 	}
 
-	public SkillRental(LocalDateTime startDate, LocalDateTime finishDate, Integer hours, User renter,
-			UserSkill userSkill) {
+	public SkillRental(LocalDateTime startDate, LocalDateTime estimatedFinishDate, LocalDateTime finishDate,
+			Integer hours, LocalDateTime createDate, LocalDateTime updateDate) {
 		super();
 		this.startDate = startDate;
+		this.estimatedFinishDate = estimatedFinishDate;
 		this.finishDate = finishDate;
 		this.hours = hours;
-		this.renter = renter;
-		this.userSkill = userSkill;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
 	}
 
-	public SkillRental(LocalDateTime startDate, LocalDateTime finishDate, Integer hours) {
+
+
+	public SkillRental(LocalDateTime startDate, LocalDateTime estimatedFinishDate, LocalDateTime finishDate,
+			Integer hours, LocalDateTime createDate, LocalDateTime updateDate, User renter, UserSkill userSkill,
+			ReviewOfWorker reviewOfWorker, ReviewOfCustomer reviewOfCustomer) {
 		super();
 		this.startDate = startDate;
+		this.estimatedFinishDate = estimatedFinishDate;
 		this.finishDate = finishDate;
 		this.hours = hours;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
+		this.renter = renter;
+		this.userSkill = userSkill;
+		this.reviewOfWorker = reviewOfWorker;
+		this.reviewOfCustomer = reviewOfCustomer;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -126,6 +152,30 @@ public class SkillRental {
 	public void setReviewOfCustomer(ReviewOfCustomer reviewOfCustomer) {
 		this.reviewOfCustomer = reviewOfCustomer;
 	}
+	
+	public LocalDateTime getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(LocalDateTime createDate) {
+		this.createDate = createDate;
+	}
+
+	public LocalDateTime getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(LocalDateTime updateDate) {
+		this.updateDate = updateDate;
+	}
+	
+	public LocalDateTime getEstimatedFinishDate() {
+		return estimatedFinishDate;
+	}
+
+	public void setEstimatedFinishDate(LocalDateTime estimatedFinishDate) {
+		this.estimatedFinishDate = estimatedFinishDate;
+	}
 
 	@Override
 	public int hashCode() {
@@ -151,9 +201,9 @@ public class SkillRental {
 
 	@Override
 	public String toString() {
-		return "SkillRental [id=" + id + ", startDate=" + startDate + ", finishDate=" + finishDate + ", hours=" + hours
-				+ ", renter=" + renter + ", userSkill=" + userSkill + ", reviewOfWorker=" + reviewOfWorker
+		return "SkillRental [id=" + id + ", startDate=" + startDate + ", estimatedFinishDate=" + estimatedFinishDate
+				+ ", finishDate=" + finishDate + ", hours=" + hours + ", createDate=" + createDate + ", updateDate="
+				+ updateDate + ", renter=" + renter + ", userSkill=" + userSkill + ", reviewOfWorker=" + reviewOfWorker
 				+ ", reviewOfCustomer=" + reviewOfCustomer + "]";
 	}
-
 }

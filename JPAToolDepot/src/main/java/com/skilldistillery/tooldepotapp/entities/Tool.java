@@ -26,6 +26,7 @@ public class Tool {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
+	@Column(name="tool_name")
 	private String name;
 	
 	private String description;

@@ -1,68 +1,149 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-
+  editUser = null;
+  selected = null;
+  showComplete = false;
+  urlUserId: string;
   users: User[] = [];
-  newUser: User= new User();
-  selected: User = null;
 
-  constructor(private userService: UserService) { }
+  newUser = new User();
+
+  constructor(private userService: UserService,
+              private datePipe: DatePipe,
+              private currentRoute: ActivatedRoute,
+              private router: Router) {}
 
   ngOnInit() {
+    this.urlUserId = this.getCommandLineParameter();
+    this.reloadUsers();
+  }
+
+  getCommandLineParameter(): string {
+    let idString = '';
+    if (this.currentRoute.snapshot.paramMap.get('id')) {
+      idString =  this.currentRoute.snapshot.paramMap.get('id');
+    }
+    return idString;
+  }
+
+  showTotalUsers(): number {
+    const total = this.users.length;
+    return total;
+  }
+
+  displayUser(user: User) {
+    this.selected = user;
+  }
+
+  displayTable() {
+    this.selected = null;
+  }
+
+  switchCompleted(id: number, user: User) {
+    if (user.enabled === true) {
+      user.enabled = false;
+    } else if (user.enabled === false) {
+      user.enabled = true;
+    }
+    this.updateUser(id, user);
   }
 
   addUser(form: NgForm) {
+    this.newUser = new User();
+
+    // TODO need logic entered here.
+
     this.userService.create(this.newUser).subscribe(
-      data => {
-        this.newUser = new User();
-        form.reset();
-        this.reload();
+      () => {
+        this.reloadUsers();
       },
-      err => console.error('Error in UserComponent.addUser(): ' + err)
+      err => {
+        console.error('userComponent - addUser()');
+        console.error(err);
+      }
     );
+    form.reset();
   }
 
-  updateUser(user: User) {
-    this.userService.update(user).subscribe(
-      data => {
-        this.reload();
-        this.selected = null;
+  setEditUser() {
+    this.editUser = Object.assign({}, this.selected);
+  }
+
+  cancelEditUser() {
+    this.editUser = null;
+  }
+
+  updateUser(id: number, editedUser: User) {
+
+    // TODO logic needs to be entered here
+
+    this.userService.update(id, editedUser).subscribe(
+      () => {
+        this.reloadUsers();
       },
-      err => console.error('Error in UserComponent.updateUser(): ' + err)
+      err => {
+        console.error('userComponent - updateUser()');
+        console.error(err);
+      }
     );
+    this.editUser = null;
+    this.selected = null;
   }
 
   deleteUser(id: number) {
     this.userService.destroy(id).subscribe(
-      data => {
-        this.reload();
+      () => {
+        this.reloadUsers();
       },
       err => {
-        console.error('Error in Error in UserComponent.deleteUser():');
+        console.error('userComponent - deleteUser()');
         console.error(err);
       }
     );
+    this.reloadUsers();
   }
 
-  reload() {
+  reloadUsers() {
     this.userService.index().subscribe(
-      data => {
-        this.user = data;
+      lifeIsGood => {
+        this.users = lifeIsGood;
         if (this.urlUserId) {
-          this.selected = this.user[parseInt(this.urlUserId, 10) - 1];
-          this.urlUserId = '';
+          this.selected = this.users.find((data => data.id === Number(this.urlUserId)));
+          if (!this.selected) {
+            this.router.navigateByUrl('**');
+          }
         }
       },
-      err => {
-        console.error('Error in UserComponent.reload');
-        console.error(err);
+      lifeIsBad => {
+        console.error('Error in UserComponent.reloadUsers()');
+        console.error(lifeIsBad);
       }
     );
   }
 
+
+  // TODO we dont need this but could utilize in a different way.
+
+  // checkTotalUsers(): string {
+  //   let classColor = '';
+  //   if (this.showTotalUsers() >= 10) {
+  //     classColor = 'badge badge-pill badge-danger';
+  //   } else if (this.showTotalUsers() >= 5) {
+  //     classColor = 'badge badge-pill badge-warning';
+  //   } else if (this.showTotalUsers() < 5) {
+  //     classColor = 'badge badge-pill badge-success';
+  //   }
+  //   return classColor;
+  // }
 }

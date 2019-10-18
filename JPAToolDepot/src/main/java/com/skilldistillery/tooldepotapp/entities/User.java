@@ -113,7 +113,7 @@ public class User {
         }
     }
     
-    public void removeClient(UserSkill userSkill) {
+    public void removeUserSkill(UserSkill userSkill) {
     	userSkill.setUser(null);
         if(userSkills != null) {
         	userSkills.remove(userSkill);
@@ -132,7 +132,14 @@ public class User {
         }
     }
     
-    public void removeToolRental(ToolRental toolRental) {
+	public void removeTool(Tool tool) {
+		tool.setUser(null);
+		if(tools != null) {
+			tools.remove(tool);
+		}
+	}
+
+	public void removeToolRental(ToolRental toolRental) {
         toolRental.setRenter(null);
         if(toolRentals != null) {
             toolRentals.remove(toolRental);
@@ -170,12 +177,6 @@ public class User {
     	}
     }
     
-    public void removeTool(Tool tool) {
-    	tool.setUser(null);
-    	if(tools != null) {
-    		tools.remove(tool);
-    	}
-    }
     
     public void addSkill(Skill skill) {
         if (skills == null) {
