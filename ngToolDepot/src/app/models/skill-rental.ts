@@ -1,7 +1,8 @@
 export class SkillRental {
   id: number;
   startDate: string;
-  finishedDate: string;
+  estimatedFinishDate: string;
+  finishDate: string;
   hours: number;
   createDate: string;
   updateDate: string;
@@ -11,7 +12,8 @@ export class SkillRental {
   constructor(
     id?: number,
     startDate?: string,
-    finishedDate?: string,
+    estimatedFinishDate?: string,
+    finishDate?: string,
     hours?: number,
     createDate?: string,
     updateDate?: string,
@@ -20,7 +22,8 @@ export class SkillRental {
   ) {
     this.id = id;
     this.startDate = startDate;
-    this.finishedDate = finishedDate;
+    this.estimatedFinishDate = estimatedFinishDate;
+    this.finishDate = finishDate;
     this.hours = hours;
     this.createDate = createDate;
     this.updateDate = updateDate;

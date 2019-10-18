@@ -26,6 +26,9 @@ public class SkillRental {
 	@Column(name="start_date")
 	private LocalDateTime startDate;
 	
+	@Column(name="estimated_finish_date")
+	private LocalDateTime estimatedFinishDate;
+	
 	@Column(name="finish_date")
 	private LocalDateTime finishDate;
 	
@@ -57,11 +60,25 @@ public class SkillRental {
 		super();
 	}
 
-	public SkillRental(LocalDateTime startDate, LocalDateTime finishDate, Integer hours, LocalDateTime createDate,
-			LocalDateTime updateDate, User renter, UserSkill userSkill, ReviewOfWorker reviewOfWorker,
-			ReviewOfCustomer reviewOfCustomer) {
+	public SkillRental(LocalDateTime startDate, LocalDateTime estimatedFinishDate, LocalDateTime finishDate,
+			Integer hours, LocalDateTime createDate, LocalDateTime updateDate) {
 		super();
 		this.startDate = startDate;
+		this.estimatedFinishDate = estimatedFinishDate;
+		this.finishDate = finishDate;
+		this.hours = hours;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
+	}
+
+
+
+	public SkillRental(LocalDateTime startDate, LocalDateTime estimatedFinishDate, LocalDateTime finishDate,
+			Integer hours, LocalDateTime createDate, LocalDateTime updateDate, User renter, UserSkill userSkill,
+			ReviewOfWorker reviewOfWorker, ReviewOfCustomer reviewOfCustomer) {
+		super();
+		this.startDate = startDate;
+		this.estimatedFinishDate = estimatedFinishDate;
 		this.finishDate = finishDate;
 		this.hours = hours;
 		this.createDate = createDate;
@@ -70,16 +87,6 @@ public class SkillRental {
 		this.userSkill = userSkill;
 		this.reviewOfWorker = reviewOfWorker;
 		this.reviewOfCustomer = reviewOfCustomer;
-	}
-
-	public SkillRental(LocalDateTime startDate, LocalDateTime finishDate, Integer hours, LocalDateTime createDate,
-			LocalDateTime updateDate) {
-		super();
-		this.startDate = startDate;
-		this.finishDate = finishDate;
-		this.hours = hours;
-		this.createDate = createDate;
-		this.updateDate = updateDate;
 	}
 
 	public int getId() {
@@ -161,6 +168,14 @@ public class SkillRental {
 	public void setUpdateDate(LocalDateTime updateDate) {
 		this.updateDate = updateDate;
 	}
+	
+	public LocalDateTime getEstimatedFinishDate() {
+		return estimatedFinishDate;
+	}
+
+	public void setEstimatedFinishDate(LocalDateTime estimatedFinishDate) {
+		this.estimatedFinishDate = estimatedFinishDate;
+	}
 
 	@Override
 	public int hashCode() {
@@ -186,8 +201,9 @@ public class SkillRental {
 
 	@Override
 	public String toString() {
-		return "SkillRental [id=" + id + ", startDate=" + startDate + ", finishDate=" + finishDate + ", hours=" + hours
-				+ ", createDate=" + createDate + ", updateDate=" + updateDate + ", renter=" + renter + ", userSkill="
-				+ userSkill + ", reviewOfWorker=" + reviewOfWorker + ", reviewOfCustomer=" + reviewOfCustomer + "]";
+		return "SkillRental [id=" + id + ", startDate=" + startDate + ", estimatedFinishDate=" + estimatedFinishDate
+				+ ", finishDate=" + finishDate + ", hours=" + hours + ", createDate=" + createDate + ", updateDate="
+				+ updateDate + ", renter=" + renter + ", userSkill=" + userSkill + ", reviewOfWorker=" + reviewOfWorker
+				+ ", reviewOfCustomer=" + reviewOfCustomer + "]";
 	}
 }
