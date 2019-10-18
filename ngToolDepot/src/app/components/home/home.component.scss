@@ -9,8 +9,10 @@ mat-grid-tile {
 
 .seeAll {
   background-image: url("/assets/cover_tools.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
-.btn.seeAll {
+.btn.seeAllTools {
   background-color: #3D3B3D;
   color: #DFA000;
   font-weight: bold;

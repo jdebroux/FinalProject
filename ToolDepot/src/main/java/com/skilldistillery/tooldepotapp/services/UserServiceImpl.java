@@ -48,17 +48,17 @@ public class UserServiceImpl implements UserService {
 		User editUser = findById(id, username);
 
 		if (editUser != null) {
-			editUser.setUsername(editUser.getUsername());
-			editUser.setPassword(editUser.getPassword());
-			editUser.setEnabled(editUser.getEnabled());
-			editUser.setRole(editUser.getRole());
-			editUser.setFirstName(editUser.getFirstName());
-			editUser.setLastName(editUser.getLastName());
-			editUser.setEmail(editUser.getEmail());
-			editUser.setPhone(editUser.getPhone());
-			editUser.setPhoto(editUser.getPhoto());
-			editUser.setCreateDate(editUser.getCreateDate());
-			editUser.setUpdateDate(editUser.getUpdateDate());
+			editUser.setUsername(user.getUsername());
+			editUser.setPassword(user.getPassword());
+			editUser.setEnabled(user.getEnabled());
+			editUser.setRole(user.getRole());
+			editUser.setFirstName(user.getFirstName());
+			editUser.setLastName(user.getLastName());
+			editUser.setEmail(user.getEmail());
+			editUser.setPhone(user.getPhone());
+			editUser.setPhoto(user.getPhoto());
+			editUser.setCreateDate(user.getCreateDate());
+			editUser.setUpdateDate(user.getUpdateDate());
 		}
 		return repo.saveAndFlush(editUser);
 	}
