@@ -1,47 +1,44 @@
-import { Router } from '@angular/router';
-import { log } from 'util';
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/models/user';
-import { AuthService } from 'src/app/services/auth.service';
-
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(
-    private auth: AuthService,
-    private router: Router
-    ) { }
+  registerFail = '';
+
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
 
   register(form: NgForm) {
-    var newUser = new User();
-    newUser = form.value;
-    this.auth.register(newUser).subscribe(
-      data => {
-        console.log('RegisterComponent.register(): user registered.');
-        this.auth.login(newUser.username, newUser.password).subscribe(
+    console.log(form);
+    const user: User = form.value;
+    this.authService.register(user).subscribe(
+      lifeIsGood => {
+        this.authService.login(user.username, user.password).subscribe(
           next => {
-            console.log('RegisterComponent.register(): user logged in, routing to /todo.');
-            this.router.navigateByUrl('home');
+            this.router.navigateByUrl('/todo');
           },
-          error => {
-            console.error('RegisterComponent.register(): error logging in.');
-          }
+           error => {
+            console.error('Error in RegisterComponent.register.login()');
+            console.error(error);
+           }
         );
       },
-      err => {
-        console.error('RegisterComponent.register(): error registering.');
-        console.error(err);
+      lifeIsBad => {
+        console.error('Error in RegisterComponent.register()');
+        console.error(lifeIsBad);
+        this.registerFail = 'Something';
       }
     );
   }
+
 }

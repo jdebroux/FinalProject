@@ -13,6 +13,26 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { AddressService } from './services/address.service';
+import { ReviewOfCustomerService } from './services/review-of-customer.service';
+import { ReviewOfLenderService } from './services/review-of-lender.service';
+import { ReviewOfRenterService } from './services/review-of-renter.service';
+import { ReviewOfWorkerService } from './services/review-of-worker.service';
+import { SkillRentalService } from './services/skill-rental.service';
+import { SkillService } from './services/skill.service';
+import { ToolPhotoService } from './services/tool-photo.service';
+import { ToolRentalService } from './services/tool-rental.service';
+import { ToolService } from './services/tool.service';
+import { UserSkillService } from './services/user-skill.service';
+import { UserService } from './services/user.service';
+import { UserComponent } from './components/user/user.component';
+import { ToolComponent } from './components/tool/tool.component';
+import { ToolTransactionComponent } from './components/tool-transaction/tool-transaction.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { SkillTransactionComponent } from './components/skill-transaction/skill-transaction.component';
+import { SkillComponent } from './components/skill/skill.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +43,12 @@ import { AppComponent } from './app.component';
     LogoutComponent,
     RegisterComponent,
     FooterComponent,
+    ToolComponent,
+    UserComponent,
+    ToolTransactionComponent,
+    AdminComponent,
+    SkillTransactionComponent,
+    SkillComponent
   ],
   imports: [
     BrowserModule,
@@ -32,10 +58,24 @@ import { AppComponent } from './app.component';
     NgbModule,
     FormsModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule,
+    MatGridListModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    AddressService,
+    ReviewOfCustomerService,
+    ReviewOfLenderService,
+    ReviewOfRenterService,
+    ReviewOfWorkerService,
+    SkillRentalService,
+    SkillService,
+    ToolPhotoService,
+    ToolRentalService,
+    ToolService,
+    UserSkillService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
