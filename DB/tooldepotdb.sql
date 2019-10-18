@@ -99,6 +99,8 @@ CREATE TABLE IF NOT EXISTS `tool_rental` (
   `checkout` DATETIME NULL,
   `returned` DATETIME NULL,
   `total_cost` DOUBLE NULL,
+  `created_date` DATETIME NULL,
+  `updated_date` DATETIME NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_transaction_tool1_idx` (`tool_id` ASC),
   INDEX `fk_tool_rental_renter_id_idx` (`renter_id` ASC),
@@ -231,6 +233,8 @@ CREATE TABLE IF NOT EXISTS `skill_rental` (
   `start_date` DATETIME NULL,
   `finish_date` DATETIME NULL,
   `hours` INT NULL,
+  `created_date` DATETIME NULL,
+  `update_date` DATETIME NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_skill_rental_renter_idx` (`renter_id` ASC),
   INDEX `fk_skill_rental_user_skill1_idx` (`user_skill_id` ASC),
@@ -309,7 +313,7 @@ USE `tooldepotdb`;
 INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (1, '123 Tool St', 'Tool', 'TO', '99999', 'US');
 INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (2, '555 Admin Way', 'Admin', 'CO', '88888', 'US');
 INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (3, '6820 E 75th PL', 'Commerce City', 'CO', '80022', 'US');
-INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (4, '7567 Broadway ST\n7567 Broadway ST\n7567 Broadway ST\n', 'Denver', 'CO', '80022', 'US');
+INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (4, '7567 Broadway ST', 'Denver', 'CO', '80022', 'US');
 INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (5, '6155 Logan Pl', 'Centennial', 'CO', '80121', 'US');
 INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (6, '10391 Tennyson CT\n', 'Westminster', 'CO', '80036', 'US');
 INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (7, '509 Emporia ST\n', 'Aurora', 'CO', '80019', 'US');
@@ -322,13 +326,13 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `tooldepotdb`;
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (1, 1, 'admin', '$2a$10$aNWARjmakD5DkADI851RbeGyuElJUMfAelfciTVP1/tUI5AiAunAe', 1, 'admin', 'admin', 'admin', 'admin@admin.', '123-456-7890', 'none', NULL, NULL);
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (2, 2, 'tools', 'admin', 1, 'admin', 'admin', 'admin', 'admin@admin.coms', '123-456-9999', 'none', NULL, NULL);
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (3, 3, 'jhowell', 'jhowell', 1, 'user', 'Josh', 'Howell', 'josl@tooldepot.com', '458-489-6253', 'https://bit.ly/2MpfRrz', '2019-10-14 21:19:52', '2019-10-14 21:19:53');
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (4, 4, 'ibealicia', 'ibealicia', 1, 'user', 'Alicia', 'Glassmeyer', 'alicia@tooldepot.com', '254-896-3521', 'https://bit.ly/2pvn5kp', '2019-10-14 21:19:53', '2019-10-14 21:19:54');
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (5, 5, 'jdebroux', 'jdebroux', 1, 'user', 'Joe', 'DeBroux', 'joe@tooldepot.com', '258-741-9632', 'https://bit.ly/2BuacKx', '2019-10-14 21:19:54', '2019-10-14 21:19:55');
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (6, 6, 'jsbchoi', 'jsbchoi', 1, 'user', 'Justin', 'Choi', 'justin@tooldepot.com', '369*852-7451', 'https://bit.ly/2MKOmaE', '2019-10-14 21:19:55', '2019-10-14 21:19:56');
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (7, 7, 'ksmdmi5', 'ksmdmi5', 1, 'user', 'Cody', 'Fulker', 'cody@tooldepot.com', '254-987-1246', 'https://bit.ly/2MkPW3U', '2019-10-14 21:19:56', '2019-10-14 21:19:57');
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (1, 1, 'admin', '$2a$10$aNWARjmakD5DkADI851RbeGyuElJUMfAelfciTVP1/tUI5AiAunAe', 1, 'admin', 'admin', 'admin', 'admin@admin.com', '123-456-7890', 'none', NULL, NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (2, 2, 'tool', '$2a$10$vcwvfqyX0CPHPYjKm9PpUepfBsCvF.TBmtY5NXcjIdLxK8W9ZGmVC', 1, 'admin', 'tool', 'tool', 'tool@tool.com', '123-456-9999', 'none', NULL, NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (3, 3, 'josh', '$2a$10$3VUQSFrQL8lyUloI1hUk.e4fBPPZrxP.7BrfDbB7i3Bo4Et0APMKa', 1, 'user', 'Josh', 'Howell', 'josh@tooldepot.com', '458-489-6253', 'https://bit.ly/2MpfRrz', '2019-10-14 21:19:52', '2019-10-14 21:19:53');
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (4, 4, 'alicia', '$2a$10$o8HY6CAEHkP5936ncklGau2DOwryTXJJM/8Mpv6zbuLQUal/Yeu5G', 1, 'user', 'Alicia', 'Glassmeyer', 'alicia@tooldepot.com', '254-896-3521', 'https://bit.ly/2pvn5kp', '2019-10-14 21:19:53', '2019-10-14 21:19:54');
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (5, 5, 'joe', '$2a$10$kTw3gwrI7NqIMqF2cI8JZu9mYc9nXDP8.tUF6u1BQEVjf31x2GV1i', 1, 'user', 'Joe', 'DeBroux', 'joe@tooldepot.com', '258-741-9632', 'https://bit.ly/2BuacKx', '2019-10-14 21:19:54', '2019-10-14 21:19:55');
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (6, 6, 'justin', '$2a$10$p/LdfLwWHylswLT1fIFvDuFDC8k0SjuoxzbhkDAQn12/Kw5Is2KcC', 1, 'user', 'Justin', 'Choi', 'justin@tooldepot.com', '369-852-7451', 'https://bit.ly/2MKOmaE', '2019-10-14 21:19:55', '2019-10-14 21:19:56');
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (7, 7, 'cody', '$2a$10$KGWJsc9dSYa00HAd218Jx.lCM5LKOebGrjxCHL6xC9CnGJ.OVHSuK', 1, 'user', 'Cody', 'Fulker', 'cody@tooldepot.com', '254-987-1246', 'https://bit.ly/2MkPW3U', '2019-10-14 21:19:56', '2019-10-14 21:19:57');
 
 COMMIT;
 
@@ -372,11 +376,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `tooldepotdb`;
-INSERT INTO `tool_rental` (`id`, `tool_id`, `renter_id`, `checkout`, `returned`, `total_cost`) VALUES (1, 1, 7, '2019-10-12 21:19:52', '2019-10-14 21:19:52', 50);
-INSERT INTO `tool_rental` (`id`, `tool_id`, `renter_id`, `checkout`, `returned`, `total_cost`) VALUES (2, 2, 5, '2019-10-13 21:19:52', '2019-10-14 21:19:52', 10);
-INSERT INTO `tool_rental` (`id`, `tool_id`, `renter_id`, `checkout`, `returned`, `total_cost`) VALUES (3, 3, 6, '2019-10-14 21:19:52', '2019-10-16 21:19:52', 20);
-INSERT INTO `tool_rental` (`id`, `tool_id`, `renter_id`, `checkout`, `returned`, `total_cost`) VALUES (4, 4, 7, '2019-10-15 21:19:52', '2019-10-16 21:19:52', 10);
-INSERT INTO `tool_rental` (`id`, `tool_id`, `renter_id`, `checkout`, `returned`, `total_cost`) VALUES (5, 5, 4, '2019-10-16 21:19:52', '2019-10-19 21:19:52', 30);
+INSERT INTO `tool_rental` (`id`, `tool_id`, `renter_id`, `checkout`, `returned`, `total_cost`, `created_date`, `updated_date`) VALUES (1, 1, 7, '2019-10-12 21:19:52', '2019-10-14 21:19:52', 50, '2019-10-10 21:19:52', '2019-10-15 21:19:52');
+INSERT INTO `tool_rental` (`id`, `tool_id`, `renter_id`, `checkout`, `returned`, `total_cost`, `created_date`, `updated_date`) VALUES (2, 2, 5, '2019-10-13 21:19:52', '2019-10-14 21:19:52', 10, '2019-10-11 21:19:52', '2019-10-16 21:19:52');
+INSERT INTO `tool_rental` (`id`, `tool_id`, `renter_id`, `checkout`, `returned`, `total_cost`, `created_date`, `updated_date`) VALUES (3, 3, 6, '2019-10-14 21:19:52', '2019-10-16 21:19:52', 20, '2019-10-12 21:19:52', '2019-10-17 21:19:52');
+INSERT INTO `tool_rental` (`id`, `tool_id`, `renter_id`, `checkout`, `returned`, `total_cost`, `created_date`, `updated_date`) VALUES (4, 4, 7, '2019-10-15 21:19:52', '2019-10-16 21:19:52', 10, '2019-10-13 21:19:52', '2019-10-18 21:19:52');
+INSERT INTO `tool_rental` (`id`, `tool_id`, `renter_id`, `checkout`, `returned`, `total_cost`, `created_date`, `updated_date`) VALUES (5, 5, 4, '2019-10-16 21:19:52', '2019-10-19 21:19:52', 30, '2019-10-14 21:19:52', '2019-10-19 21:19:52');
 
 COMMIT;
 
@@ -468,7 +472,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `tooldepotdb`;
-INSERT INTO `skill_rental` (`id`, `renter_id`, `user_skill_id`, `start_date`, `finish_date`, `hours`) VALUES (1, 5, 1, '2019-03-12', '2019-03-15', 24);
+INSERT INTO `skill_rental` (`id`, `renter_id`, `user_skill_id`, `start_date`, `finish_date`, `hours`, `created_date`, `update_date`) VALUES (1, 5, 1, '2019-03-12', '2019-03-15', 24, '2019-03-10', '2019-03-16');
 
 COMMIT;
 
