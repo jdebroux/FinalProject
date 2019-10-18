@@ -1,5 +1,6 @@
 package com.skilldistillery.tooldepotapp.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,34 +28,39 @@ public class UserController {
 	@Autowired
 	private UserService svc;
 
+	@GetMapping("ping")
+	public String ping() {
+		return "pong";
+	}
+	
 	@GetMapping("user")
-	public List<User> userList(HttpServletResponse resp) {
-		List<User> users = svc.findAll();
-		return users;
+	public List<User> userList(Principal principal, HttpServletResponse resp) {
+		List<User> allUsers = svc.findAllUsers(principal.getName());
+		if (allUsers == null) {
+			resp.setStatus(401);
+		}
+		return allUsers;
 	}
 
 	@GetMapping("user/{id}")
-	public User getConcert(@PathVariable("id") Integer id, HttpServletResponse resp) {
-		User user = svc.findById(id);
+	public User getUser(@PathVariable("id") Integer id, HttpServletResponse resp, Principal principal) {
+		User user = svc.findById(id, principal.getName());
 		return user;
 	}
 
-	@GetMapping("user/search/{keyword}")
-	public List<User> searchKeyword(@PathVariable("keyword") String keyword, HttpServletResponse resp) {
-		List<User> concert = svc.findByUserName(keyword);
-		return concert;
-	}
-
 	@PostMapping("user")
-	public User addUser(@RequestBody User user, HttpServletResponse resp, HttpServletRequest req) {
+	public User addUser(@RequestBody User user, HttpServletResponse resp, HttpServletRequest req, Principal principal) {
 		try {
-			svc.create(user);
+			svc.create(principal.getName(), user);
+			if (user == null) {
+				resp.setStatus(400);
+			}else {
 			resp.setStatus(201);
 			StringBuffer url = req.getRequestURL();
-			System.err.println(url);
 			url.append("/");
 			url.append(user.getId());
 			resp.setHeader("Location", url.toString());
+			}
 		} catch (Exception e) {
 			resp.setStatus(400);
 			e.printStackTrace();
@@ -64,9 +70,10 @@ public class UserController {
 
 	@PutMapping("user/{id}")
 	public User editUser(@PathVariable("id") Integer id, @RequestBody User user, HttpServletResponse resp,
-			HttpServletResponse req) {
+			HttpServletResponse req, Principal principal) {
 		try {
-			user = svc.update(user, id);
+			
+			user = svc.update(principal.getName(), id, user);
 			if (user == null) {
 				resp.setStatus(404);
 			} else {
@@ -80,7 +87,7 @@ public class UserController {
 	}
 
 	@DeleteMapping("user/{id}")
-	public void deleteUser(@PathVariable("id") Integer id, HttpServletResponse resp) {
+	public void deleteUser(@PathVariable("id") Integer id, HttpServletResponse resp, Principal principal) {
 		Boolean success = svc.delete(id);
 		try {
 			if (success) {
