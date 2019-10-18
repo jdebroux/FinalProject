@@ -1,11 +1,11 @@
 <form #loginForm="ngForm">
-  <label for="username">Username: </label>
+  <label for="username">Username </label>
   <input type="text" name="username" ngModel>
   <br>
-  <label for="password">Password: </label>
+  <label for="password">Password </label>
   <input type="password" name="password" ngModel>
   <br>
-  <button class="btn btn-primary" type="submit" (click)="login(loginForm)">Login</button>
+  <button class="btn" type="submit" (click)="login(loginForm)">Login</button>
   <br>
-  <button class="btn btn-primary" type="submit" [routerLink]="['/register']" routerLinkActive="router-link-active">New? Sign up!</button>
+  <button class="btn" type="submit" [routerLink]="['/register']" routerLinkActive="router-link-active">New? Sign up!</button>
 </form>
