@@ -1,6 +1,6 @@
 <div id="navbar-container">
 
-  <mdb-navbar id="navbar" SideClass="navbar navbar-expand-lg navbar-dark indigo">
+  <mdb-navbar id="navbar" SideClass="navbar navbar-expand-lg background-color: #3D3B3D">
 
     <mdb-navbar-brand>
       <a class="navbar-brand" href="#">
@@ -24,7 +24,7 @@
         <li *ngIf="!checkIfLoggedInUser()" class="nav-item dropdown" dropdown [autoClose]="false">
           <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
             <span class="caret flex-row-reverse">Login</span></a>
-          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <div *dropdownMenu class="dropdown-menu dropdown" role="menu">
             <app-login></app-login>
           </div>
         </li>
