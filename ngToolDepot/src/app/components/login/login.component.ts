@@ -25,8 +25,9 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('home');
       },
       error => {
+        console.log(NgForm);
         console.error('LoginComponent.login(): error logging in.');
       }
-    );;
+    );
   }
 }
