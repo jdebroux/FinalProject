@@ -8,7 +8,7 @@ public interface ToolRentalService {
 
 	ToolRental findById(int id, String username);
 	
-	List<ToolRental> findAllUsers(String name);
+	List<ToolRental> index(int rid);
 
 	ToolRental update(String username, int id, ToolRental toolRental);
 

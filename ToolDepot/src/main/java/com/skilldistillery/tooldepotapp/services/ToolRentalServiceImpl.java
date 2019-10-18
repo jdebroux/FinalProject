@@ -6,14 +6,17 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.skilldistillery.tooldepotapp.entities.ToolRental;
-import com.skilldistillery.tooldepotapp.entities.User;
 import com.skilldistillery.tooldepotapp.repositories.ToolRentalRepository;
+import com.skilldistillery.tooldepotapp.repositories.UserRepository;
 
 public class ToolRentalServiceImpl implements ToolRentalService {
 
 	@Autowired
 	private ToolRentalRepository repo;
-
+	
+	@Autowired
+	private UserRepository userRepo;
+	
 	@Override
 	public ToolRental findById(int id, String username) {
 		Optional<ToolRental> toolRentalId = repo.findById(id);
@@ -23,20 +26,10 @@ public class ToolRentalServiceImpl implements ToolRentalService {
 		}
 		return toolRental;
 	}
-
+//	Finds all tool rentals associated with renter id
 	@Override
-	public List<ToolRental> findAllToolRentals(String name) {
-		List<ToolRental> allToolRentals = repo.findAll();
-		ToolRental admin = null;
-		for (ToolRental toolRental : allToolRentals) {
-			if (name.equals(toolRental.getToolRentalname())) {
-				admin = toolRental;
-			}
-		}
-		if (admin.getRole().equals("admin")) {
-			return allToolRentals;
-		}
-		return null;
+	public List<ToolRental> index(int rid) {
+		return repo.findByRenter_Id(rid);
 	}
 
 	@Override
@@ -55,7 +48,7 @@ public class ToolRentalServiceImpl implements ToolRentalService {
 	@Override
 	public ToolRental create(String username, ToolRental toolRental) {
 		try {
-			toolRental.setUser(userRepo.findByUsername(username));
+			toolRental.setRenter(userRepo.findByUsername(username));
 			repo.saveAndFlush(toolRental);
 		} catch (Exception e) {
 			toolRental = null;
@@ -72,18 +65,6 @@ public class ToolRentalServiceImpl implements ToolRentalService {
 			deleted = true;
 		}
 		return deleted;
-	}
-
-	@Override
-	public List<ToolRental> findAllUsers(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public User create(String username, ToolRental toolRental) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
