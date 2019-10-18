@@ -6,15 +6,13 @@ import com.skilldistillery.tooldepotapp.entities.User;
 
 public interface UserService {
 
-	User findById(int id);
+	User findById(int id, String username);
+	
+	List<User> findAllUsers(String name);
 
-	List<User> findByUserName(String keyword);
+	User update(String username, int id, User user);
 
-	List<User> findAll();
-
-	User update(User user, int id);
-
-	User create(User user);
+	User create(String username, User user);
 
 	Boolean delete(int id);
 
