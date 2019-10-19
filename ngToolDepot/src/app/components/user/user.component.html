@@ -1,10 +1,9 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12 mt-3">
+    <div class="col-fluid">
       <div class="card">
         <!-- badge for total lent/rented out/money -->
-        <div class="card border-dark mb-3">
-          <h5 class="card-header text-white bg-warning">User Name</h5>
+
           <div class="card-horizontal">
             <div class="img-square-wrapper">
               <img class="" src="https://bit.ly/2MpfRrz" alt="Card image cap" />
@@ -15,34 +14,36 @@
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </p>
-              <button data-toggle="collapse" data-target="#demo">
-                Collapsible
-              </button>
 
-              <div id="demo" class="collapse">
-                Lorem ipsum dolor text....
-              </div>
+
+                  <!-- <div class="" mdbCollapse #rentals="bs-collapse">
+                      <p>SHOW LIST OF ALL RENTALS</p>
+                    </div> -->
             </div>
           </div>
           <div class="card-footer text-white bg-warning">Footer Footer</div>
         </div>
       </div>
     </div>
-    <!-- <button class="accordion">Section 1</button>
-              <div class="panel">
-                <p>Lorem ipsum...</p>
-              </div>
-
-              <button class="accordion">Section 2</button>
-              <div class="panel">
-                <p>Lorem ipsum...</p>
-              </div>
-
-              <button class="accordion">Section 3</button>
-              <div class="panel">
-                <p>Lorem ipsum...</p>
-              </div>
-            </div>
-          </div> -->
-  </div>
 </div>
+<button mdbBtn class="btn btn-elegant btn-block"  type="button" (click)="rentals.toggle()" mdbWavesEffect>
+    My Rentals
+  </button>
+<div class="" mdbCollapse #rentals="bs-collapse">
+    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim
+      keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+  </div>
+  <button mdbBtn class="btn btn-elegant btn-block"  type="button" (click)="myTransactions.toggle()" mdbWavesEffect>
+      My Transactions
+    </button>
+  <div class="" mdbCollapse #myTransactions="bs-collapse">
+      <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim
+        keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+    </div>
+    <button mdbBtn class="btn btn-elegant btn-block"  type="button" (click)="myTools.toggle()" mdbWavesEffect>
+        My Tools
+      </button>
+    <div class="" mdbCollapse #myTools="bs-collapse">
+        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim
+          keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+      </div>

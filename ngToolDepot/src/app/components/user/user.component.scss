@@ -1,54 +1,4 @@
-#user-container {
-outline: none;
-letter-spacing: 1px;
-font-size: 16px;
-font-weight:normal;
-font-family: 'Muli', sans-serif;
-border-radius:30px;
--webkit-border-radius:30px;
--moz-border-radius:30px;
--o-border-radius:30px;
--ms-border-radius:30px;
-}
-input#image:focus,input#store_name:focus, input#store_type:focus,input#owner_type:focus, input#website:focus,input#contact_number:focus,input#contact_email:focus  {
-background-color:#f5f8fa !important;
-border:1px solid #dadada;
-}
-input::-webkit-input-placeholder {
-color: grey;
-}
-input:-moz-placeholder { /* Firefox 18- */
-color: grey;
-}
-input::-moz-placeholder {  /* Firefox 19+ */
-color: grey;
-}
-input:-ms-input-placeholder {
-color: grey;
-}
-.register {
-background-color: lightgreen;
-width: 52%;
-height: 55px;
-border: none;
-margin-left: 233px;
-cursor: pointer;
-color: #fff;
-outline: none;
-font-size: 20px;
-font-weight: normal;
-text-transform: uppercase;
-transition: all 0.5s ease-in-out;
--webkit-transition: all 0.5s ease-in-out;
--moz-transition: all 0.5s ease-in-out;
--o-transition: all 0.5s ease-in-out;
-border-radius: 30px;
--webkit-border-radius: 30px;
--moz-border-radius: 30px;
--o-border-radius: 30px;
--ms-border-radius: 30px;
-font-family: 'Muli', sans-serif;
-}
+
 .register:hover {
 background-color:#36b051;
 color:#fff;
@@ -58,27 +8,9 @@ color:#fff;
   display: flex;
   flex: 1 1 auto;
 }
-.accordion {
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  text-align: left;
-  border: none;
-  outline: none;
-  transition: 0.4s;
-}
 
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .accordion:hover {
-  background-color: #ccc;
-}
-
-/* Style the accordion panel. Note: hidden by default */
-.panel {
-  padding: 0 18px;
-  background-color: white;
-  display: none;
-  overflow: hidden;
+.btn.collapse{
+  background-color: #3D3B3D;
+  color: #DFA000;
+  font-weight: bold;
 }

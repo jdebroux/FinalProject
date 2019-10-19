@@ -4,11 +4,13 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
 
@@ -21,8 +23,8 @@ export class UserComponent implements OnInit {
   showComplete = false;
   urlUserId: string;
   users: User[] = [];
-
   newUser = new User();
+
   'use strict';
 
   ngOnInit() {
