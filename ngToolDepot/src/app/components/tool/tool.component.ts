@@ -10,7 +10,7 @@ import { Tool } from 'src/app/models/tool';
 @Component({
   selector: 'app-tool',
   templateUrl: './tool.component.html',
-  styleUrls: ['./tool.component.css']
+  styleUrls: ['./tool.component.scss']
 })
 export class ToolComponent implements OnInit {
   editTool = null;
@@ -33,7 +33,7 @@ export class ToolComponent implements OnInit {
   }
 
   checkLogin(owner): boolean {
-    if (this.authService.getUsername() == owner.name) {
+    if (this.authService.getUsername() === owner.name) {
       return true;
     } else {
       return false;
@@ -73,6 +73,7 @@ export class ToolComponent implements OnInit {
   addTool(form: NgForm) {
     this.newTool = new Tool();
     this.newTool = form.value;
+    // tslint:disable-next-line: no-string-literal
     this.newTool['photos'] = [];
     this.toolService.create(this.newTool).subscribe(
       () => {
