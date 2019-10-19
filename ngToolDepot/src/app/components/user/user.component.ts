@@ -31,6 +31,11 @@ export class UserComponent implements OnInit {
     this.reloadUsers();
   }
 
+  getAllUsers() {
+    this.reloadUsers();
+    return [...this.users];
+  }
+
   getCommandLineParameter(): string {
     let idString = '';
     if (this.currentRoute.snapshot.paramMap.get('id')) {

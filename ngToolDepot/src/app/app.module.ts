@@ -40,6 +40,8 @@ import { DeleteToolComponent } from './components/toolCRUD/delete-tool/delete-to
 import { AddToolRentalComponent } from './components/toolRentalCRUD/add-tool-rental/add-tool-rental.component';
 import { DeleteToolRentalComponent } from './components/toolRentalCRUD/delete-tool-rental/delete-tool-rental.component';
 import { UpdateToolRentalComponent } from './components/toolRentalCRUD/update-tool-rental/update-tool-rental.component';
+import { UpdateUserComponent } from './components/adminCRUDonUser/update-user/update-user.component';
+import { DeleteUserComponent } from './components/adminCRUDonUser/delete-user/delete-user.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { UpdateToolRentalComponent } from './components/toolRentalCRUD/update-to
     DeleteToolComponent,
     AddToolRentalComponent,
     DeleteToolRentalComponent,
-    UpdateToolRentalComponent
+    UpdateToolRentalComponent,
+    UpdateUserComponent,
+    DeleteUserComponent
   ],
   imports: [
     BrowserModule,
