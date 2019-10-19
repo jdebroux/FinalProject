@@ -16,6 +16,7 @@ export class UserComponent implements OnInit {
               private datePipe: DatePipe,
               private currentRoute: ActivatedRoute,
               private router: Router) {}
+
   editUser = null;
   selected = null;
   showComplete = false;

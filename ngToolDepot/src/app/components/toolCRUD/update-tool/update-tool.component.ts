@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class UpdateToolComponent implements OnInit {
   @Input() tool: Tool;
-  private url = environment.baseUrl + "api/tool"
+  private url = environment.baseUrl + 'api/tool';
   toolToBeUpdated: Tool = new Tool();
   constructor(private toolService: ToolService, private http: HttpClient) { }
 
@@ -25,7 +25,7 @@ export class UpdateToolComponent implements OnInit {
         this.toolToBeUpdated = data;
       },
       err => {
-        console.error("Error in update-tool - getTool()")
+        console.error('Error in update-tool - getTool()');
         console.error(err);
       }
     );
@@ -36,11 +36,11 @@ export class UpdateToolComponent implements OnInit {
     console.log(this.tool.id);
     this.toolService.update(this.tool.id, this.toolToBeUpdated).subscribe(
       () => {
-        console.log("Success editing");
+        console.log('Success editing');
         location.reload();
       },
       err => {
-        console.error("Error in update-tool - updateTool");
+        console.error('Error in update-tool - updateTool');
         console.error(err);
       }
     );

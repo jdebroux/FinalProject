@@ -17,7 +17,7 @@ export class AddToolComponent implements OnInit {
   }
 
   addTool(form: NgForm) {
-    console.log(form.value)
+    console.log(form.value);
     this.newTool = form.value;
     this.toolComp.addTool(form);
     location.reload();
