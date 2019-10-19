@@ -34,6 +34,9 @@ import { AdminComponent } from './components/admin/admin.component';
 import { SkillTransactionComponent } from './components/skill-transaction/skill-transaction.component';
 import { SkillComponent } from './components/skill/skill.component';
 import { DatePipe } from '@angular/common';
+import { AddToolComponent } from './components/toolCRUD/add-tool/add-tool.component';
+import { UpdateToolComponent } from './components/toolCRUD/update-tool/update-tool.component';
+import { DeleteToolComponent } from './components/toolCRUD/delete-tool/delete-tool.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { DatePipe } from '@angular/common';
     ToolTransactionComponent,
     AdminComponent,
     SkillTransactionComponent,
-    SkillComponent
+    SkillComponent,
+    AddToolComponent,
+    UpdateToolComponent,
+    DeleteToolComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +72,7 @@ import { DatePipe } from '@angular/common';
   providers: [
     AuthService,
     AddressService,
+    DatePipe,
     ReviewOfCustomerService,
     ReviewOfLenderService,
     ReviewOfRenterService,

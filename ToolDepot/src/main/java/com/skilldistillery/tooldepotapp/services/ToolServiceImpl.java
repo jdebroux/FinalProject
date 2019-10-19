@@ -14,13 +14,13 @@ import com.skilldistillery.tooldepotapp.repositories.UserRepository;
 public class ToolServiceImpl implements ToolService {
 	
 	@Autowired
-	private ToolRepository repo;
-	@Autowired
-	private UserRepository urep;
+	private ToolRepository toolRepo;
+	@Autowired 
+	private UserRepository userRepo;
 	
 	@Override
 	public Tool findById(int id) {
-		Optional<Tool> toolId = repo.findById(id);
+		Optional<Tool> toolId = toolRepo.findById(id);
 		Tool tool = null;
 		if (toolId.isPresent()) {
 			tool = toolId.get();
@@ -30,13 +30,13 @@ public class ToolServiceImpl implements ToolService {
 
 	@Override
 	public List<Tool> findAllTools() {
-		return repo.findAll();
+		return toolRepo.findAll();
 	}
 
 	@Override
 	public Tool update(int id, Tool tool) {
 		Tool editTool = findById(id);
-		urep.saveAndFlush(tool.getUser());
+		userRepo.saveAndFlush(tool.getUser());
 		if (editTool != null) {
 			editTool.setName(tool.getName());
 			editTool.setDescription(tool.getDescription());
@@ -46,19 +46,21 @@ public class ToolServiceImpl implements ToolService {
 			editTool.setManufactureYear(tool.getManufactureYear());
 			editTool.setCondition(tool.getCondition());
 		}
-		return repo.saveAndFlush(editTool);
+		return toolRepo.saveAndFlush(editTool);
 	}
 
 	@Override
-	public Tool create(Tool tool) {
-		return repo.saveAndFlush(tool);
+	public Tool create(Tool tool, String username) {
+		tool.setUser(userRepo.findByUsername(username));
+		return toolRepo.saveAndFlush(tool);
 	}
 
 	@Override
 	public Boolean delete(int id) {
 		Boolean deleted = false;
-		if (repo.existsById(id)) {
-			repo.deleteById(id);
+		if (toolRepo.existsById(id)) {
+			toolRepo.findById(id).get().setUser(null);
+			toolRepo.deleteById(id);
 			deleted = true;
 		}
 		return deleted;

@@ -6,14 +6,18 @@ import com.skilldistillery.tooldepotapp.entities.ToolRental;
 
 public interface ToolRentalService {
 
-	ToolRental findById(int id, String username);
-	
-	List<ToolRental> index(int rid);
+	List<ToolRental> getAllToolRentals();
 
-	ToolRental update(String username, int id, ToolRental toolRental);
+	List<ToolRental> getToolRentalsByUsername(String username);
+	
+	List<ToolRental> getToolRentalsByTool(int toolId);
 
 	ToolRental create(String username, ToolRental toolRental);
 
+	ToolRental update(String username, int id, ToolRental toolRental);
+	
 	Boolean delete(int id);
+
+
 
 }

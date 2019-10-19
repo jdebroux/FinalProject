@@ -1,5 +1,6 @@
 package com.skilldistillery.tooldepotapp.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,24 +25,24 @@ import com.skilldistillery.tooldepotapp.services.ToolService;
 public class ToolController {
 
 	@Autowired
-	private ToolService svc;
+	private ToolService toolSvc;
 
 	@GetMapping("tool")
 	public List<Tool> toolList(HttpServletResponse resp) {
-		List<Tool> allTools = svc.findAllTools();
+		List<Tool> allTools = toolSvc.findAllTools();
 		return allTools;
 	}
 
 	@GetMapping("tool/{id}")
 	public Tool getTool(@PathVariable("id") int id, HttpServletResponse resp) {
-		Tool tool = svc.findById(id);
+		Tool tool = toolSvc.findById(id);
 		return tool;
 	}
 
-	@PostMapping("tool/{id}")
-	public Tool addTool(@PathVariable("id") Integer id, Tool tool, HttpServletResponse resp, HttpServletResponse req) {
+	@PostMapping("tool")
+	public Tool addTool(Principal principal, @RequestBody Tool tool, HttpServletResponse resp, HttpServletResponse req) {
 		try {
-			tool = svc.update(id, tool);
+			tool = toolSvc.create(tool, principal.getName());
 			if (tool == null) {
 				resp.setStatus(404);
 			} else {
@@ -58,7 +59,7 @@ public class ToolController {
 	public Tool editTool(@PathVariable("id") Integer id, @RequestBody Tool tool, HttpServletResponse resp,
 			HttpServletResponse req) {
 		try {
-			tool = svc.update(id, tool);
+			tool = toolSvc.update(id, tool);
 			if (tool == null) {
 				resp.setStatus(404);
 			} else {
@@ -71,17 +72,19 @@ public class ToolController {
 		return tool;
 	}
 	@DeleteMapping("tool/{id}")
-	public void destroyTool(@PathVariable("id") Integer id, HttpServletResponse resp) {
-		Boolean success = svc.delete(id);
+	public boolean destroyTool(@PathVariable("id") Integer id, HttpServletResponse resp) {
+		Boolean success = toolSvc.delete(id);
 		try {
 			if (success) {
 				resp.setStatus(204);
+				return true;
 			} else {
 				resp.setStatus(404);
 			}
 		} catch (Exception e) {
 			resp.setStatus(400);
 		}
+		return true;
 
 	}
 
