@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+
 @Entity
 @Table(name="tool_rental")
 public class ToolRental {
@@ -35,11 +36,11 @@ public class ToolRental {
 	private double totalCost;
 	
 	@CreationTimestamp
-	@Column(name="create_date")
+	@Column(name="created_date")
 	private LocalDateTime createDate;
 	
 	@UpdateTimestamp
-	@Column(name="update_date")
+	@Column(name="updated_date")
 	private LocalDateTime updateDate;
 	
 	@ManyToOne(cascade = CascadeType.ALL)

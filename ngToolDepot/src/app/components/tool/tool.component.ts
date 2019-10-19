@@ -1,9 +1,11 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToolService } from 'src/app/services/tool.service';
 import { Tool } from 'src/app/models/tool';
+
 
 @Component({
   selector: 'app-tool',
@@ -22,11 +24,20 @@ export class ToolComponent implements OnInit {
   constructor(private toolService: ToolService,
               private datePipe: DatePipe,
               private currentRoute: ActivatedRoute,
-              private router: Router) {}
+              private router: Router,
+              private authService: AuthService) {}
 
   ngOnInit() {
     this.urlToolId = this.getCommandLineParameter();
     this.reloadTools();
+  }
+
+  checkLogin(owner): boolean {
+    if (this.authService.getUsername() == owner.name) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   getCommandLineParameter(): string {
@@ -61,9 +72,8 @@ export class ToolComponent implements OnInit {
 
   addTool(form: NgForm) {
     this.newTool = new Tool();
-
-    // TODO need logic entered here.
-
+    this.newTool = form.value;
+    this.newTool['photos'] = [];
     this.toolService.create(this.newTool).subscribe(
       () => {
         this.reloadTools();
@@ -74,6 +84,7 @@ export class ToolComponent implements OnInit {
       }
     );
     form.reset();
+    location.reload();
   }
 
   setEditTool() {
@@ -86,8 +97,6 @@ export class ToolComponent implements OnInit {
 
   updateTool(id: number, editedTool: Tool) {
 
-    // TODO logic needs to be entered here
-
     this.toolService.update(id, editedTool).subscribe(
       () => {
         this.reloadTools();
@@ -99,6 +108,7 @@ export class ToolComponent implements OnInit {
     );
     this.editTool = null;
     this.selected = null;
+    location.reload();
   }
 
   deleteTool(id: number) {
@@ -112,6 +122,7 @@ export class ToolComponent implements OnInit {
       }
     );
     this.reloadTools();
+    location.reload();
   }
 
   reloadTools() {
