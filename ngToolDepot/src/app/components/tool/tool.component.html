@@ -1,29 +1,29 @@
-<div class="toolpage" id="listTools">
-  <!-- <div class="row">
-      <div *ngFor="let tool of tools" >
-        <div class="card-deck col-lg-3">
-          <div class="card tm-4 ">
-            <div var="image">
-                <div>
+<div class="toolpage row" id="listTools" *ngIf="!selected">
+  <div class="card-deck col-lg-4 mb-3" *ngFor="let tool of tools">
+    <div class="card h-100 text-center ">
+      <!-- NEED TO CONNECT tool_photo TABLE -->
+      <div var="image">
+        <!-- <div>
                   <img class="img-thumbnail card-img-top img-responsive"
                    />
-                </div>
-              <div class="card-body text-center">
-                <h5 class="card-title">
-                  <p>{{tool.name}}</p>
-                </h5>
-                <p class="card-text">{{tool.description}}</p>
-              </div>
-             <div class="card-footer">
-                              <td><button *ngIf="loggedIn" (click)="displayTool(tool.id)" class='btn btn-sm btn-outline-secondary'>Rent</button></td>
-                              <td><button *ngIf="!loggedIn" (click)="displayRegister()" class='btn btn-sm btn-outline-secondary'>Sign In</button></td>
-              </div> -->
-            <!-- </div>
-          </div>
+                </div> -->
+        <div class="card-body mt-auto d-flex flex-column text-center">
+          <h5 class="card-title" ><a [routerLink]="['/toolTransaction']">
+            {{tool.name}}
+          </a>
+          </h5>
+          <p class="card-text">{{tool.type}}</p>
+
+        </div>
+        <div class="card-footer mt-auto" *ngIf="!loggedIn">
+          <app-update-tool  [tool]="tool"></app-update-tool>
+          <app-delete-tool  [tool]="tool"></app-delete-tool>
         </div>
       </div>
-    </div> -->
-    <table *ngIf="!selected" class='table table-striped'>
+    </div>
+  </div>
+</div>
+    <!-- <table *ngIf="!selected" class='table table-striped'>
     <thead class='thead thead-dark'>
       <tr>
         <td align='left'>Name</td>
@@ -37,21 +37,19 @@
     <tbody>
       <tr *ngFor="let tool of tools"> -->
         <!-- add photo here -->
-        <td>{{ tool.name }}</td>
+        <!-- <td>{{ tool.name }}</td>
         <td>{{ tool.type }}</td>
         <td>{{ tool.description }}</td>
         <td>{{ tool.costPerDay | currency }}</td>
         <td>{{ tool.condition }}</td>
         <td>{{ tool.manufactureYear }}</td>
-        <app-update-tool [tool]="tool"></app-update-tool>
-        <app-delete-tool [tool]="tool"></app-delete-tool> -->
-        <!-- <td><button *ngIf="loggedIn" (click)="displayTool(tool.id)"
-            class='btn btn-sm btn-outline-secondary'>Rent</button></td>
+        -->
+        <!-- < <td><button *ngIf="loggedIn" (click)="displayTool(tool.id)" -->
+            <!-- class='btn btn-sm btn-outline-secondary'>Rent</button></td>
         <td><button *ngIf="!loggedIn" (click)="displayRegister()" class='btn btn-sm btn-outline-secondary'>Sign
             In</button></td> -->
-      </tr>
+      <!-- </tr>
     </tbody>
-  </table>
-</div>
+  </table> -->
 <app-add-tool></app-add-tool>
 

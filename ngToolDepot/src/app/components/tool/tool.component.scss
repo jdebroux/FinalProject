@@ -12,7 +12,12 @@ button:hover {
 }
 .toolpage {
   background-color: #646264;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-thead {
-  color: #dfa000;
+a:hover {
+  color: #F9d31a;
+  font-weight: bold;
 }
+
