@@ -1,1 +1,28 @@
-<h1>HOME</h1>
+<div class="homeBkgd">
+  <mat-grid-list cols="2" rowHeight="3.5:1">
+    <mat-grid-tile>
+      <form class="form-inline">
+        <h3>Find A Tool</h3>
+        <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search">
+        <i class="fas fa-search" aria-hidden="true"></i>
+      </form>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <form class="form-inline ">
+        <div class="mr-3 w-100">
+          <h3>Lend A Tool</h3>
+          <a><button type="button" class="btn btn-sm mr-3 w-100 signUp">Sign Up</button></a>
+        </div>
+      </form>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+<div>
+  <mat-grid-list cols="1" rowHeight="2:1">
+    <mat-grid-tile class="seeAll">
+      <!-- <img src="assets/cover_tools.jpg" alt="Card image cap"> -->
+      <a><button type="button" class="btn seeAllTools" [routerLink]="['/tool']"
+          routerLinkActive="router-link-active">See All Tools</button></a>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
