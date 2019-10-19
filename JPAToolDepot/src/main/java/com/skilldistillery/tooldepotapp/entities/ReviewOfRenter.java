@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="review_of_renter")
@@ -31,6 +33,7 @@ public class ReviewOfRenter {
 	private double lenderRating;
 	
 	@OneToOne
+	@JsonIgnore
 	@JoinColumn(name="tool_rental_id")
 	private ToolRental toolRental;
 	
