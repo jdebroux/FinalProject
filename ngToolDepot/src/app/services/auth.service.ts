@@ -14,7 +14,6 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
   user = "";
-  loggedInUserRole: string = '';
   login(username, password) {
     // Make credentials
     const credentials = this.generateBasicAuthCredentials(username, password);
@@ -30,7 +29,6 @@ export class AuthService {
     return this.http.get(this.baseUrl + "authenticate", httpOptions).pipe(
       tap(res => {
         localStorage.setItem("credentials", credentials);
-        console.log(this.user);
         this.http.get(this.baseUrl + "api/user/" + this.user + "/role", {responseType:"text"}).subscribe(
         data => {
           localStorage.setItem('role', data);
@@ -61,6 +59,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem("credentials");
+    localStorage.removeItem("role");
   }
 
   checkLogin() {
