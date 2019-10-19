@@ -10,7 +10,7 @@ import { Tool } from 'src/app/models/tool';
 @Component({
   selector: 'app-tool',
   templateUrl: './tool.component.html',
-  styleUrls: ['./tool.component.css']
+  styleUrls: ['./tool.component.scss']
 })
 export class ToolComponent implements OnInit {
   editTool = null;

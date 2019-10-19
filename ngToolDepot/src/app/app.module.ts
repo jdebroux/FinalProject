@@ -55,7 +55,7 @@ import { DeleteToolComponent } from './components/toolCRUD/delete-tool/delete-to
     SkillComponent,
     AddToolComponent,
     UpdateToolComponent,
-    DeleteToolComponent
+    DeleteToolComponent,
   ],
   imports: [
     BrowserModule,
