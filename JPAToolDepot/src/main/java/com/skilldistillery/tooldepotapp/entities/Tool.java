@@ -26,10 +26,12 @@ public class Tool {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
+	@Column(name="tool_name")
 	private String name;
 	
 	private String description;
 	
+	@Column(name="tool_type")
 	private String type;
 	
 	@Column(name="cost_per_day")
@@ -40,10 +42,11 @@ public class Tool {
 	@Column(name="manufacture_year")
 	private String manufactureYear;
 	
+	@Column(name="tool_condition")
 	private String condition;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "tool")
+	@OneToMany(mappedBy = "tool", cascade=CascadeType.ALL)
 	private List<ToolRental> rentals;
 	
 	@JsonIgnore

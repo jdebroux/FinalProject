@@ -27,11 +27,6 @@ public class UserController {
 
 	@Autowired
 	private UserService svc;
-
-	@GetMapping("ping")
-	public String ping() {
-		return "pong";
-	}
 	
 	@GetMapping("user")
 	public List<User> userList(Principal principal, HttpServletResponse resp) {
