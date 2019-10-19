@@ -22,7 +22,7 @@ public class Tool {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "user_id")
 	private User user;
 	
@@ -46,7 +46,7 @@ public class Tool {
 	private String condition;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "tool", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "tool", cascade=CascadeType.MERGE)
 	private List<ToolRental> rentals;
 	
 	@JsonIgnore
