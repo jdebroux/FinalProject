@@ -13,11 +13,9 @@
           </a>
           </h5>
           <p class="card-text">{{tool.type}}</p>
-
         </div>
         <div class="card-footer mt-auto" *ngIf="!loggedIn">
-          <app-update-tool  [tool]="tool"></app-update-tool>
-          <app-delete-tool  [tool]="tool"></app-delete-tool>
+          <h5>${{tool.costPerDay}}/day</h5>
         </div>
       </div>
     </div>
