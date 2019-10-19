@@ -1,27 +1,32 @@
-<p>tools works!</p>
-
 <div id="listTools" *ngIf="!selected">
-    <table *ngIf="!selected" class='table table-striped'>
-      <thead class='thead thead-dark'>
-        <tr>
-          <th align='left'>Name</th>
-          <th align='left'>Type</th>
-          <th align='left'>Description</th>
-          <th align='left'>Completed</th>
-          <th></th>
-        </tr>
-      </thead>
+  <table *ngIf="!selected" class='table table-striped'>
+    <thead class='thead thead-dark'>
+      <tr>
+        <td align='left'>Name</td>
+        <td align='left'>Type</td>
+        <td align='left'>Description</td>
+        <td align='left'>Cost</td>
+        <td align='left'>Condition</td>
+        <td align='left'>Year Manufactured</td>
+      </tr>
+    </thead>
     <tbody>
-      <tr *ngFor="let tool of tools" >
+      <tr *ngFor="let tool of tools">
         <!-- add photo here -->
-        <td >{{ tool.name }}</td>
-        <td >{{ tool.type }}</td>
+        <td>{{ tool.name }}</td>
+        <td>{{ tool.type }}</td>
         <td>{{ tool.description }}</td>
-        <td>{{ tool.costPerDay }}</td>
-        <td>{{ tool.description }}</td>
-        <td><button *ngIf="loggedIn" (click)="displayTool(tool.id)" class='btn btn-sm btn-outline-secondary'>Rent</button></td>
-        <td><button *ngIf="!loggedIn" (click)="displayRegister()" class='btn btn-sm btn-outline-secondary'>Sign In</button></td>
+        <td>{{ tool.costPerDay | currency }}</td>
+        <td>{{ tool.condition }}</td>
+        <td>{{ tool.manufactureYear }}</td>
+        <app-update-tool [tool]="tool"></app-update-tool>
+        <app-delete-tool [tool]="tool"></app-delete-tool>
+        <!-- <td><button *ngIf="loggedIn" (click)="displayTool(tool.id)"
+            class='btn btn-sm btn-outline-secondary'>Rent</button></td>
+        <td><button *ngIf="!loggedIn" (click)="displayRegister()" class='btn btn-sm btn-outline-secondary'>Sign
+            In</button></td> -->
       </tr>
     </tbody>
-    </table>
-    </div>
+  </table>
+</div>
+<app-add-tool></app-add-tool>
