@@ -83,7 +83,8 @@ import { DeleteToolComponent } from './components/toolCRUD/delete-tool/delete-to
     ToolRentalService,
     ToolService,
     UserSkillService,
-    UserService
+    UserService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
