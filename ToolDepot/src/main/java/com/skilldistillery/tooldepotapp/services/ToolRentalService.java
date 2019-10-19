@@ -15,4 +15,14 @@ public interface ToolRentalService {
 	ToolRental create(ToolRental toolRental, String username);
 
 	Boolean delete(int id);
+
+	ToolRental findById(int id, String username);
+	
+	List<ToolRental> index(int rid);
+
+	ToolRental update(String username, int id, ToolRental toolRental);
+
+	ToolRental create(String username, ToolRental toolRental);
+
+
 }

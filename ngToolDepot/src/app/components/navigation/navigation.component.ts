@@ -19,7 +19,7 @@ export class NavigationComponent implements OnInit {
     return this.auth.checkLogin();
   }
 
-  getUsername(): string{
+  getUsername(): string {
     return this.auth.getUsername();
   }
 }
