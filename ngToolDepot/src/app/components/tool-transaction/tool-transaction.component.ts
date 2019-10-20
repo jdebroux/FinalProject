@@ -50,19 +50,16 @@ export class ToolTransactionComponent implements OnInit {
     this.selected = null;
   }
 
-  setReturned(id: number, toolTransaction: ToolRental) {
-    if (toolTransaction.returned === null) {
-      toolTransaction.returned = new Date().toDateString();
-    }
-    this.updateToolTransaction(id, toolTransaction);
-  }
+  // setReturned(id: number, toolTransaction: ToolRental) {
+  //   if (toolTransaction.returned === null) {
+  //     toolTransaction.returned = new Date().toDateString();
+  //   }
+  //   this.updateToolTransaction(id, toolTransaction);
+  // }
 
-  addToolTransactions(form: NgForm) {
-    this.newToolTransaction = new ToolRental();
+  addToolTransaction(toolRental: ToolRental, toolId: number) {
 
-    // TODO need logic entered here.
-
-    this.toolRentalService.create(this.newToolTransaction).subscribe(
+    this.toolRentalService.create(toolRental, toolId).subscribe(
       () => {
         this.reloadToolTransactions();
       },
@@ -71,7 +68,7 @@ export class ToolTransactionComponent implements OnInit {
         console.error(err);
       }
     );
-    form.reset();
+    location.reload();
   }
 
   setEditToolTransaction() {

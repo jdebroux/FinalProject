@@ -5,7 +5,6 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import { Address } from '../models/address';
 import { ToolRental } from '../models/tool-rental';
 
 @Injectable({
@@ -34,7 +33,11 @@ export class ToolRentalService {
       );
     }
 
-  create(toolRental: ToolRental) {
+  create(toolRental: ToolRental, toolId: number) {
+      console.log("IN HERE");
+      console.log(toolRental);
+      console.log(toolId);
+      console.log(this.url);
       if (localStorage.length === 0) {
         this.router.navigateByUrl('/login');
       }
@@ -45,7 +48,7 @@ export class ToolRentalService {
           'X-Requested-With': 'XMLHttpRequest'
         })
     };
-      return this.http.post(this.url, toolRental, httpOptions).pipe(
+      return this.http.post(this.url + '?toolId=' + toolId, toolRental, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error posting new tool rental in toolRental.Service.create()');

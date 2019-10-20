@@ -44,8 +44,8 @@ public class UserController {
 	}
 	
 	@GetMapping("user/{username}/role")
-	public User getUserByUsername(@PathVariable(value="username") String username) {
-		return svc.findByUsername(username);
+	public String getUserByUsername(@PathVariable(value="username") String username) {
+		return svc.findByUsername(username).getRole();
 	}
 
 	@PostMapping("user")

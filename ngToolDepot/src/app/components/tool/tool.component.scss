@@ -20,4 +20,15 @@ a:hover {
   color: #F9d31a;
   font-weight: bold;
 }
+a {
+  color:  #dfa000;
+}
+.row.display-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.row.display-flex > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
 
