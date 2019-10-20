@@ -16,6 +16,7 @@ export class UserComponent implements OnInit {
               private datePipe: DatePipe,
               private currentRoute: ActivatedRoute,
               private router: Router) {}
+
   editUser = null;
   selected = null;
   showComplete = false;
@@ -28,6 +29,11 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.urlUserId = this.getCommandLineParameter();
     this.reloadUsers();
+  }
+
+  getAllUsers() {
+    this.reloadUsers();
+    return [...this.users];
   }
 
   getCommandLineParameter(): string {

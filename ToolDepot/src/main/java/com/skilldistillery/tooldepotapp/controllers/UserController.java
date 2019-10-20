@@ -42,6 +42,11 @@ public class UserController {
 		User user = svc.findById(id, principal.getName());
 		return user;
 	}
+	
+	@GetMapping("user/{username}/role")
+	public User getUserByUsername(@PathVariable(value="username") String username) {
+		return svc.findByUsername(username);
+	}
 
 	@PostMapping("user")
 	public User addUser(@RequestBody User user, HttpServletResponse resp, HttpServletRequest req, Principal principal) {
