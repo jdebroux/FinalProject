@@ -46,7 +46,7 @@ public class Tool {
 	private String condition;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "tool", cascade=CascadeType.MERGE)
+	@OneToMany(mappedBy = "tool")
 	private List<ToolRental> rentals;
 	
 	@JsonIgnore

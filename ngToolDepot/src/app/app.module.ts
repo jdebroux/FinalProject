@@ -42,7 +42,6 @@ import { DeleteToolRentalComponent } from './components/toolRentalCRUD/delete-to
 import { UpdateToolRentalComponent } from './components/toolRentalCRUD/update-tool-rental/update-tool-rental.component';
 import { UpdateUserComponent } from './components/adminCRUDonUser/update-user/update-user.component';
 import { DeleteUserComponent } from './components/adminCRUDonUser/delete-user/delete-user.component';
-
 @NgModule({
   declarations: [
     AppComponent,

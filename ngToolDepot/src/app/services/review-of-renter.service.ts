@@ -34,7 +34,7 @@ export class ReviewOfRenterService {
       );
     }
 
-  create(reivewOfRenter: ReviewOfRenter) {
+  create(reviewOfRenter: ReviewOfRenter) {
       if (localStorage.length === 0) {
         this.router.navigateByUrl('/login');
       }
@@ -45,7 +45,7 @@ export class ReviewOfRenterService {
           'X-Requested-With': 'XMLHttpRequest'
         })
     };
-      return this.http.post(this.url, reivewOfRenter, httpOptions).pipe(
+      return this.http.post(this.url, reviewOfRenter, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error posting new review of renter in ReviewOfRenterService.create()');
