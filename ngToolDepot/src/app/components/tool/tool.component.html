@@ -14,27 +14,16 @@
               </a>
             </h5>
             <p class="card-text">{{tool.type}}</p>
+            <!-- <p class="card-text">{{ tool.description | slice:0:50 }}</p> -->
+            <p class="card-text">{{ (tool.description.length>50)? (tool.description | slice:0:50)+'..':(tool.description) }}</p>
           </div>
-          <div class="card-footer mt-auto" *ngIf="!loggedIn">
+          <div class="card-footer mt-auto">
             <h5>${{tool.costPerDay}}/day</h5>
           </div>
         </div>
       </div>
     </div>
 </div>
-<!-- <table *ngIf="!selected" class='table table-striped'>
-    <thead class='thead thead-dark'>
-      <tr>
-        <td align='left'>Name</td>
-        <td align='left'>Type</td>
-        <td align='left'>Description</td>
-        <td align='left'>Cost</td>
-        <td align='left'>Condition</td>
-        <td align='left'>Year Manufactured</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let tool of tools"> -->
 <!-- add photo here -->
 <!-- <td>{{ tool.name }}</td>
         <td>{{ tool.type }}</td>
@@ -52,4 +41,5 @@
 <!-- </tr>
     </tbody>
   </table> -->
-<app-add-tool></app-add-tool>
+    <app-add-tool></app-add-tool>
+
