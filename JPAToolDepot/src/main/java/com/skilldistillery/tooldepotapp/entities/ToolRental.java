@@ -25,7 +25,7 @@ public class ToolRental {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "tool_id")
 	private Tool tool;
 	
@@ -47,10 +47,10 @@ public class ToolRental {
 	@JoinColumn(name = "renter_id")
 	private User renter;
 	
-	@OneToOne(mappedBy="toolRental", cascade = CascadeType.MERGE)
+	@OneToOne(mappedBy="toolRental")
 	private ReviewOfLender lenderReview;
 	
-	@OneToOne(mappedBy="toolRental", cascade = CascadeType.MERGE)
+	@OneToOne(mappedBy="toolRental")
 	private ReviewOfRenter renterReview;
 	
 	public ToolRental() {}
@@ -67,9 +67,10 @@ public class ToolRental {
 		this.renter = renter;
 	}
 
-	public ToolRental(LocalDateTime checkout, LocalDateTime returned, double totalCost,
+	public ToolRental(Tool tool, LocalDateTime checkout, LocalDateTime returned, double totalCost,
 			LocalDateTime createDate, LocalDateTime updateDate) {
 		super();
+		this.tool = tool;
 		this.checkout = checkout;
 		this.returned = returned;
 		this.totalCost = totalCost;

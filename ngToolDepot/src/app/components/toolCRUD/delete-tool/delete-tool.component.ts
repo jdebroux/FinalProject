@@ -1,3 +1,4 @@
+import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Tool } from 'src/app/models/tool';
@@ -13,7 +14,11 @@ export class DeleteToolComponent implements OnInit {
   @Input() tool: Tool;
   private url = environment.baseUrl + 'api/tool';
   toolToBeDeleted: Tool = new Tool();
-  constructor(private toolService: ToolService, private http: HttpClient) { }
+  constructor(
+    private toolService: ToolService,
+    private http: HttpClient,
+    private auth: AuthService
+    ) { }
 
   ngOnInit() {
 

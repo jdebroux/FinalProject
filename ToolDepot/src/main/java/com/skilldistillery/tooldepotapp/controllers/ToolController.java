@@ -3,6 +3,7 @@ package com.skilldistillery.tooldepotapp.controllers;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,13 +41,18 @@ public class ToolController {
 	}
 
 	@PostMapping("tool")
-	public Tool addTool(Principal principal, @RequestBody Tool tool, HttpServletResponse resp, HttpServletResponse req) {
+	public Tool addTool(Principal principal, @RequestBody Tool tool, HttpServletResponse resp, HttpServletRequest req) {
 		try {
 			tool = toolSvc.create(tool, principal.getName());
 			if (tool == null) {
 				resp.setStatus(404);
 			} else {
 				resp.setStatus(201);
+				resp.setStatus(201);
+				StringBuffer url = req.getRequestURL();
+				url.append(tool.getId());
+				resp.setHeader("Location", url.toString());
+
 			}
 		} catch (Exception e) {
 			resp.setStatus(400);
