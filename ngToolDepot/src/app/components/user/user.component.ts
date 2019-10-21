@@ -1,3 +1,5 @@
+import { ToolRentalService } from 'src/app/services/tool-rental.service';
+import { AuthService } from './../../services/auth.service';
 import { ToolTransactionComponent } from './../tool-transaction/tool-transaction.component';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -8,6 +10,8 @@ import { UserService } from 'src/app/services/user.service';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ToolService } from 'src/app/services/tool.service';
+import { ToolRental } from 'src/app/models/tool-rental';
+import { Tool } from 'src/app/models/tool';
 
 @Component({
   selector: 'app-user',
@@ -19,21 +23,34 @@ export class UserComponent implements OnInit {
   constructor(private userService: UserService,
               private datePipe: DatePipe,
               private currentRoute: ActivatedRoute,
-              private tool: ToolService,
-              private router: Router) {}
+              private toolService: ToolService,
+              private router: Router,
+              private authService: AuthService,
+              private toolRentalService: ToolRentalService
+              ) {}
 
   editUser = null;
   selected = null;
+  loggedInUser= null;
   showComplete = false;
   urlUserId: string;
   users: User[] = [];
   newUser = new User();
+  toolTransactions: ToolRental[] = [];
+  myTools: Tool[] = [];
 
-  'use strict';
+  // 'use strict';
 
   ngOnInit() {
-    this.urlUserId = this.getCommandLineParameter();
-    this.reloadUsers();
+    // this.urlUserId = this.getCommandLineParameter();
+    // this.reloadUsers();
+    if (localStorage.getItem('role') === 'admin') {
+      this.reloadUsers();
+      this.getLoggedInUserTransactions();
+    } else if (localStorage.getItem('role') === 'user') {
+      this.getLoggedInUserTransactions();
+
+    }
   }
 
   getAllUsers() {
@@ -41,6 +58,40 @@ export class UserComponent implements OnInit {
     return [...this.users];
   }
 
+  getLoggedInUserTransactions() {
+    console.log(this.authService.user);
+    this.toolRentalService.getToolTransactionsByUserName(this.authService.getUsername()).subscribe(
+      data => {
+        this.toolTransactions = data;
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+  setLoggedInUser() {
+    this.userService.getUserByUsername().subscribe(
+      data => {
+        this.loggedInUser = data;
+      },
+      err => {
+        console.error(err);
+        console.error('error in user component.setLoggedInUser');
+      }
+    );
+  }
+
+  getLoggedInUserTools() {
+    this.toolService.getToolListByUserName(this.authService.getUsername()).subscribe(
+      data => {
+        this.myTools = data;
+      },
+      err => {
+        console.error(err);
+      }
+    )
+
+  }
   getCommandLineParameter(): string {
     let idString = '';
     if (this.currentRoute.snapshot.paramMap.get('id')) {
@@ -142,6 +193,12 @@ export class UserComponent implements OnInit {
         console.error(lifeIsBad);
       }
     );
+  }
+
+  getUser() {
+
+
+
   }
 
   // TODO we dont need this but could utilize in a different way.

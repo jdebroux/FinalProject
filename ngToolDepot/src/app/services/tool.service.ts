@@ -85,4 +85,22 @@ export class ToolService {
       })
     );
   }
+
+  getToolListByUserName(username: string) {
+    if (localStorage.length === 0) {
+      this.router.navigateByUrl("/login");
+    }
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ` + this.authService.getCredentials(),
+        "X-Requested-With": "XMLHttpRequest"
+      })
+    };
+    return this.http.get<Tool[]>(this.url + '/' + username, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error in tool service - getToolListBy User');
+      })
+    );
+  }
 }
