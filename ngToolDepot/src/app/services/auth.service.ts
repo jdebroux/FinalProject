@@ -36,7 +36,6 @@ export class AuthService {
           data => {
             localStorage.setItem('role', data);
             localStorage.setItem('user', username);
-
         },
         err => {
           console.error(err);

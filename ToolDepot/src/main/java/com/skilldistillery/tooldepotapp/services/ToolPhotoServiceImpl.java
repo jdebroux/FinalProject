@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.tooldepotapp.entities.Tool;
 import com.skilldistillery.tooldepotapp.entities.ToolPhoto;
 import com.skilldistillery.tooldepotapp.repositories.ToolPhotoRepository;
-import com.skilldistillery.tooldepotapp.repositories.ToolRepository;
 
 @Service
 public class ToolPhotoServiceImpl implements ToolPhotoService {

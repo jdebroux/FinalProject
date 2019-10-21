@@ -89,7 +89,7 @@ export class UserService {
         console.log(err);
         return throwError('Error in user service -- getUserbyUsername');
       })
-    )
+    );
   }
   destroy(id: number) {
     if (localStorage.length === 0) {
