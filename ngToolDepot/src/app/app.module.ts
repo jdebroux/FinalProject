@@ -67,7 +67,7 @@ import { DeleteToolComponent } from './components/toolCRUD/delete-tool/delete-to
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
-    MatGridListModule
+    MatGridListModule,
   ],
   providers: [
     AuthService,
