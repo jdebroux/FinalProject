@@ -1,32 +1,66 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col" id="listOfSearchedTools">
-      <table *ngIf="!selected" class='table table-striped'>
-        <thead class='thead thead-dark'>
+      <!-- <table *ngIf="!selected" class='table table-striped'>
+        <thead class='thead'>
           <tr>
-            <td align='left'>Name</td>
-            <td align='left'>Type</td>
-            <td align='left'>Cost</td>
-            <td align='left'>Condition</td>
-            <td align='left'>Year Manufactured</td>
+            <th align='left'>Name</th>
+            <th align='left'>Type</th>
+            <th align='left'>Cost</th>
+            <th align='left'>Condition</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let tool of searchResults">
             <!-- add photo here -->
-            <td>{{ tool.name }}</td>
+            <!-- <td>{{ tool.name }}</td>
             <td>{{ tool.type }}</td>
             <td>{{ tool.costPerDay | currency }}</td>
             <td>{{ tool.condition }}</td>
-            <td>{{ tool.manufactureYear }}</td>
-            <!-- <td><button *ngIf="loggedIn" (click)="displayTool(tool.id)"
-            class='btn btn-sm btn-outline-secondary'>Rent</button></td>
-            <td><button *ngIf="!loggedIn" (click)="displayRegister()" class='btn btn-sm btn-outline-secondary'>Sign
-              In</button></td> -->
+            <td><button *ngIf="loggedIn" (click)="displayTool(tool.id)"
+            class='btn btn-sm'>Rent</button></td>
+            <td><button *ngIf="!loggedIn" (click)="displayRegister()" class='btn btn-sm btn-outline'>Sign
+              In</button></td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
+
+    <!-- TRYING WITH CARD  -->
+
+    <!-- Card Light -->
+    <div *ngIf='!selected' class="card">
+      <div class="card-horizontal">
+        <!-- Card image -->
+        <div class="row" *ngFor="let tool of searchResults">
+        <div class="col-sm-4 img-square-right">
+          <img class="" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%28131%29.jpg" width="200" height="200" alt="Card image cap">
+        </div>
+
+        <!-- Card content -->
+        <div class="col-sm-8 card-body">
+
+          <!-- Title -->
+          <h5 class="card-title">{{ tool.name }}</h5>
+          <hr>
+          <!-- Text -->
+          <p class="card-text">{{ tool.type }}</p>
+          <p class="card-text">{{ tool.costPerDay | currency }} / day</p>
+          <!-- Link -->
+          <a href="#!" class="black-text d-flex justify-content-end"><h5>Rent tool <i class="fas fa-angle-double-right"></i></h5></a>
+
+        </div>
+      </div>
+      </div>
+
     </div>
+      <!-- Card Light -->
+
+
+        <!-- ----------------- -->
+
+    </div>
+
+
     <div id="map" class="col">
       <agm-map [latitude]="lat" [longitude]="lng">
           <agm-marker *ngFor="let coordinate of coordinates; let i = index" [latitude]="coordinate.lat" [longitude]="coordinate.lng">
@@ -35,3 +69,4 @@
     </div>
   </div>
 </div>
+

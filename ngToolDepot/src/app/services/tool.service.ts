@@ -86,15 +86,14 @@ export class ToolService {
       })
     );
   }
-
   getToolListByUserName(username: string) {
     if (localStorage.length === 0) {
-      this.router.navigateByUrl("/login");
+      this.router.navigateByUrl('/login');
     }
     const httpOptions = {
       headers: new HttpHeaders({
         Authorization: `Basic ` + this.authService.getCredentials(),
-        "X-Requested-With": "XMLHttpRequest"
+        'X-Requested-With': 'XMLHttpRequest'
       })
     };
     return this.http.get<Tool[]>(this.url + '/' + username, httpOptions).pipe(
