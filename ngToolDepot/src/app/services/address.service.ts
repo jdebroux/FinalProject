@@ -91,4 +91,12 @@ export class AddressService {
       })
       );
     }
+    getAddressOfToolOwner(toolId: number) {
+      return this.http.get<Address>(environment.baseUrl + 'api/tool/' + toolId + '/address').pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('Error retrieving a Address in address.service.ts');
+        })
+      );
+    }
   }

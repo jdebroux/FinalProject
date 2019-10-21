@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col" id="listOfSearchedTools">
+      <table *ngIf="!selected" class='table table-striped'>
+        <thead class='thead thead-dark'>
+          <tr>
+            <td align='left'>Name</td>
+            <td align='left'>Type</td>
+            <td align='left'>Cost</td>
+            <td align='left'>Condition</td>
+            <td align='left'>Year Manufactured</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tool of searchResults">
+            <!-- add photo here -->
+            <td>{{ tool.name }}</td>
+            <td>{{ tool.type }}</td>
+            <td>{{ tool.costPerDay | currency }}</td>
+            <td>{{ tool.condition }}</td>
+            <td>{{ tool.manufactureYear }}</td>
+            <!-- <td><button *ngIf="loggedIn" (click)="displayTool(tool.id)"
+            class='btn btn-sm btn-outline-secondary'>Rent</button></td>
+            <td><button *ngIf="!loggedIn" (click)="displayRegister()" class='btn btn-sm btn-outline-secondary'>Sign
+              In</button></td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="map" class="col">
+      <agm-map [latitude]="lat" [longitude]="lng">
+          <agm-marker *ngFor="let coordinate of coordinates; let i = index" [latitude]="coordinate.lat" [longitude]="coordinate.lng">
+        </agm-marker>
+      </agm-map>
+    </div>
+  </div>
+</div>

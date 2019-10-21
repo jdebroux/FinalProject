@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export class Tool {
   id: number;
   name: string;
@@ -7,7 +9,7 @@ export class Tool {
   available: boolean;
   manufactureYear: string;
   condition: string;
-  owner: object;
+  owner: User;
 
   constructor(
     id?: number,
@@ -18,7 +20,7 @@ export class Tool {
     available?: boolean,
     manufactureYear?: string,
     condition?: string,
-    owner?: object
+    owner?: User
   ) {
     this.id = id;
     this.name = name;
