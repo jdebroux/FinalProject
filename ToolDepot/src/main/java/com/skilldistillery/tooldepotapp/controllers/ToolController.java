@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.tooldepotapp.entities.Tool;
+import com.skilldistillery.tooldepotapp.entities.ToolPhoto;
 import com.skilldistillery.tooldepotapp.services.ToolService;
 
 @RestController

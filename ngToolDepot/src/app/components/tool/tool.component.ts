@@ -14,7 +14,7 @@ import { Tool } from 'src/app/models/tool';
 })
 export class ToolComponent implements OnInit {
   editTool = null;
-  selected = null;
+  selected: Tool = null;
   showComplete = false;
   urlToolId: string;
   tools: Tool[] = [];
@@ -55,6 +55,7 @@ export class ToolComponent implements OnInit {
 
   displayTool(tool: Tool) {
     this.selected = tool;
+    console.log(this.selected);
   }
 
   displayTable() {
