@@ -7,15 +7,14 @@
                   <img class="img-thumbnail card-img-top img-responsive"
                    />
                 </div> -->
-          <!--d-flex  -->
-          <div class="card-body mt-auto flex-column  text-center">
+          <!--  -->
+          <div class="card-body mt-auto d-flex flex-column  text-center">
             <h5 class="card-title"><a [routerLink]="['/toolTransaction']">
                 {{tool.name}}
               </a>
             </h5>
             <p class="card-text">{{tool.type}}</p>
-            <!-- <p class="card-text">{{ tool.description | slice:0:50 }}</p> -->
-            <p class="card-text">{{ (tool.description.length>50)? (tool.description | slice:0:50)+'..':(tool.description) }}</p>
+            <p class="card-text">{{ (tool.description.length>50)? (tool.description | slice:0:50)+'...':(tool.description) }}</p>
           </div>
           <div class="card-footer mt-auto">
             <h5>${{tool.costPerDay}}/day</h5>
