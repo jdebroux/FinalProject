@@ -30,7 +30,7 @@
         <div class="col-xs-12 col-sm-6 col-md-3">
           <div class="widget no-box">
             <h5 class="widget-title">Get Started<span></span></h5>
-            <a class="btn" href="#." target="_blank" *ngIf="!checkIfLoggedInUser()">Register Now</a>
+            <a class="btn" *ngIf="!checkIfLoggedInUser()" (click)="registerModal.show()">Register Now</a>
           </div>
         </div>
 
@@ -64,3 +64,29 @@
     </div>
   </div>
 </footer>
+
+<div mdbModal #registerModal="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+    aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="registerModal.hide()">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title w-100" id="myModalLabel">Register </h4>
+        </div>
+        <div id="regForm" class="modal-body">
+          <form #newAccount="ngForm">
+            <input class='form-control' type="text" name="username" ngModel placeholder="Username">
+            <br>
+            <input class='form-control' type="password" name="password" ngModel placeholder="Password">
+            <br>
+            <input class='form-control' type="email" name="email" ngModel placeholder="Email">
+            <br>
+            <br>
+            <button type="button" class="btn" (click)="register(newAccount);registerModal.hide();" mdbRippleRadius>Create Account</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
