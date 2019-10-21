@@ -1,3 +1,4 @@
+import { GeocodeService } from './services/geocode.service';
 import { FooterComponent } from './components/footer/footer.component';
 import { MDBBootstrapModule, ButtonsModule, InputsModule} from 'angular-bootstrap-md';
 import { HttpClientModule } from '@angular/common/http';
@@ -42,6 +43,10 @@ import { DeleteToolRentalComponent } from './components/toolRentalCRUD/delete-to
 import { UpdateToolRentalComponent } from './components/toolRentalCRUD/update-tool-rental/update-tool-rental.component';
 import { UpdateUserComponent } from './components/adminCRUDonUser/update-user/update-user.component';
 import { DeleteUserComponent } from './components/adminCRUDonUser/delete-user/delete-user.component';
+import { ToolAvailablePipe } from './pipes/tool-available.pipe';
+import { AgmCoreModule } from '@agm/core';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +69,9 @@ import { DeleteUserComponent } from './components/adminCRUDonUser/delete-user/de
     DeleteToolRentalComponent,
     UpdateToolRentalComponent,
     UpdateUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    ToolAvailablePipe,
+    SearchResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +83,10 @@ import { DeleteUserComponent } from './components/adminCRUDonUser/delete-user/de
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
-    MatGridListModule
+    MatGridListModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAQWXrkW5JByvZhl8kjGHaCwSUMongsLng'
+    })
   ],
   providers: [
     AuthService,
@@ -93,7 +103,8 @@ import { DeleteUserComponent } from './components/adminCRUDonUser/delete-user/de
     ToolService,
     UserSkillService,
     UserService,
-    DatePipe
+    DatePipe,
+    ToolAvailablePipe
   ],
   bootstrap: [AppComponent]
 })

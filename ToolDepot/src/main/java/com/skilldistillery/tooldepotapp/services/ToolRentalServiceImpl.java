@@ -2,6 +2,7 @@ package com.skilldistillery.tooldepotapp.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,16 @@ public class ToolRentalServiceImpl implements ToolRentalService {
 	@Override
 	public List<ToolRental> getAllToolRentals() {
 		return trRepo.findAll();
+	}
+	
+	@Override
+	public ToolRental findById(int id) {
+		Optional<ToolRental> toolRentalOpt = trRepo.findById(id);
+		ToolRental toolRental = null;
+		if (toolRentalOpt.isPresent()) {
+			toolRental = toolRentalOpt.get();
+		}
+		return toolRental;
 	}
 	
 	@Override

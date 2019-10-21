@@ -1,3 +1,4 @@
+import { Address } from './address';
 export class User {
   id: number;
   username: string;
@@ -11,7 +12,7 @@ export class User {
   photo: string;
   createDate: string;
   updateDate: string;
-  address: object;
+  address: Address;
 
   constructor(
     id?: number,
@@ -26,7 +27,7 @@ export class User {
     photo?: string,
     createDate?: string,
     updateDate?: string,
-    address?: object
+    address?: Address
     ) {
       this.id = id;
       this.username = username;
