@@ -18,6 +18,5 @@ public interface ToolRentalService {
 	
 	Boolean delete(int id);
 
-
-
+	ToolRental findById(int id);
 }

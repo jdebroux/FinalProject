@@ -101,7 +101,7 @@ public class ReviewOfRenter {
 		StringBuilder builder = new StringBuilder();
 		builder.append("ReviewOfRenter [id=").append(id).append(", toolReview=").append(toolReview)
 				.append(", renterRating=").append(toolRating).append(", lenderReview=").append(lenderReview)
-				.append(", lenderRating=").append(lenderRating).append(", rental=").append(toolRental).append("]");
+				.append(", lenderRating=").append(lenderRating);
 		return builder.toString();
 	}
 

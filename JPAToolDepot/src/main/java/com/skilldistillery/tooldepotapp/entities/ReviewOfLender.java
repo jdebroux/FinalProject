@@ -76,7 +76,7 @@ public class ReviewOfLender {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("ReviewOfLender [id=").append(id).append(", renterReview=").append(renterReview)
-				.append(", renterRating=").append(renterRating).append(", rental=").append(toolRental).append("]");
+				.append(", renterRating=").append(renterRating);
 		return builder.toString();
 	}
 
