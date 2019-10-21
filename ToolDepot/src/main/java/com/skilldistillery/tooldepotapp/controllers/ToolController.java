@@ -34,7 +34,7 @@ public class ToolController {
 		return allTools;
 	}
 
-	@GetMapping("tool/{username}")
+	@GetMapping("tool/user/{username}")
 	public List<Tool> getUsersTools(@PathVariable("username") String username, HttpServletResponse resp) {
 		List<Tool> tools = toolSvc.findByUserUsername(username);
 		try {
