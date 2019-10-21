@@ -1,5 +1,7 @@
 import { Address } from './address';
 import { Tool } from 'src/app/models/tool';
+import { ToolRental } from './tool-rental';
+
 export class User {
   id: number;
   username: string;
@@ -15,6 +17,7 @@ export class User {
   updateDate: string;
   address: Address;
   tools: Tool[];
+  toolRentals: ToolRental[];
   constructor(
     id?: number,
     username?: string,
@@ -29,7 +32,8 @@ export class User {
     createDate?: string,
     updateDate?: string,
     address?: Address,
-    tools?: Tool[]
+    tools?: Tool[],
+    toolRentals?: ToolRental[]
 
     ) {
       this.id = id;
@@ -46,5 +50,6 @@ export class User {
       this.updateDate = updateDate;
       this.address = address;
       this.tools = tools;
+      this.toolRentals = toolRentals;
     }
 }

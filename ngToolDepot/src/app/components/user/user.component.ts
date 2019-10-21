@@ -72,6 +72,7 @@ export class UserComponent implements OnInit {
   setLoggedInUser() {
     this.userService.getUserByUsername().subscribe(
       data => {
+        console.error(data + '***************');
         this.loggedInUser = data;
       },
       err => {
@@ -82,7 +83,7 @@ export class UserComponent implements OnInit {
   }
 
   getLoggedInUserTools() {
-    this.toolService.getToolListByUserName(this.authService.getUsername()).subscribe(
+    this.toolService.getToolListByUserName(localStorage.getItem('user')).subscribe(
       data => {
         this.myTools = data;
       },
