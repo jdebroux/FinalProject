@@ -7,12 +7,13 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { Address } from '../models/address';
 import { ToolPhoto } from '../models/tool-photo';
+import { Tool } from '../models/tool';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ToolPhotoService {
-  private url = environment.baseUrl + 'api/toolPhoto';
+  private url = environment.baseUrl + 'api/tool';
 
   constructor(private http: HttpClient, private authService: AuthService, private router: Router) {}
 
@@ -91,5 +92,19 @@ export class ToolPhotoService {
         return throwError('Error deleting a tool photo in toolPhoto.service.ts.destroy()');
       })
       );
+    }
+
+    getToolPhotos(id: Tool) {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      };
+      return this.http.get<ToolPhoto[]>(this.url + '/' + id + 'toolPhoto', httpOptions).pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('Error in ToolPhotoService.index()');
+        })
+        );
     }
   }

@@ -49,7 +49,7 @@ public class Tool {
 	@OneToMany(mappedBy = "tool")
 	private List<ToolRental> rentals;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(mappedBy = "tool")
 	private List<ToolPhoto> toolPhotos;
 	
