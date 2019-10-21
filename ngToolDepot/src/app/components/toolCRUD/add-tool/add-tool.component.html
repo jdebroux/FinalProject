@@ -1,5 +1,7 @@
-<button type="button" class="btn btn-primary relative waves-light" (click)="basicModal.show()" mdbRippleRadius>Add
+<div style="text-align:center; background-color: #646264;">
+<button type="button" class="btn relative waves-light" (click)="basicModal.show()" mdbRippleRadius>Add
   tool</button>
+</div>
 
 <div mdbModal #basicModal="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
   aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
@@ -39,7 +41,7 @@
           <br>
           <button type="button" class="btn btn-secondary waves-light" aria-label="Close" (click)="basicModal.hide()"
             mdbRippleRadius>Close</button>
-          <button type="button" class="btn btn-primary relative waves-light" (click)="addTool(newTool); basicModal.hide();" mdbRippleRadius>Save</button>
+          <button type="button" class="btn relative waves-light" (click)="addTool(newTool); basicModal.hide();" mdbRippleRadius>Save</button>
         </form>
       </div>
     </div>

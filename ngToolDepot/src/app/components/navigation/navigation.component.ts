@@ -17,7 +17,6 @@ export class NavigationComponent implements OnInit {
               private loginComp: LoginComponent) { }
 
   ngOnInit() {
-
   }
 
   checkIfLoggedInUser(): boolean {
@@ -25,7 +24,7 @@ export class NavigationComponent implements OnInit {
   }
 
   getUsername(): string {
-    return this.auth.getUsername();
+    return localStorage.getItem('user');
   }
 
   register(form: NgForm) {

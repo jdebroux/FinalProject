@@ -1,4 +1,4 @@
-<div id="navbar-container">
+<div id="navbar-container" style="width: 100%;">
 
   <mdb-navbar id="navbar" SideClass="navbar navbar-expand-lg navbar-dark">
 
@@ -18,7 +18,7 @@
           <a class="nav-link waves-light " mdbWavesEffect (click)="registerModal.show()"><span>Register</span></a>
         </li>
         <li *ngIf="checkIfLoggedInUser()">
-          <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/user']">{{getUsername()}}</a>
+          <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/user']">{{this.getUsername()}}</a>
         </li>
 
         <li *ngIf="!checkIfLoggedInUser()">
