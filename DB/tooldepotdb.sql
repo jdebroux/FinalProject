@@ -314,8 +314,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `tooldepotdb`;
-INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (1, '123 Tool St', 'Tool', 'TO', '99999', 'US');
-INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (2, '555 Admin Way', 'Admin', 'CO', '88888', 'US');
+INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (1, '7755 E Quincy Ave', 'Denver', 'CO', '80237', 'US');
+INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (2, '7400 E Orchard Rd', 'Greenwood Village', 'CO', '88888', 'US');
 INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (3, '6820 E 75th PL', 'Commerce City', 'CO', '80022', 'US');
 INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (4, '7567 Broadway ST', 'Denver', 'CO', '80022', 'US');
 INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (5, '6155 Logan Pl', 'Centennial', 'CO', '80121', 'US');

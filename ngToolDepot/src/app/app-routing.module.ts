@@ -13,7 +13,7 @@ import { SkillTransactionComponent } from './components/skill-transaction/skill-
 
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'todo' },
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'user', component: UserComponent },

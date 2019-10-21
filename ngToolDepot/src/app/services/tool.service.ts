@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { AuthService } from "./auth.service";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
@@ -82,6 +83,15 @@ export class ToolService {
       catchError((err: any) => {
         console.log(err);
         return throwError("Error deleting a tool in tool.service.ts.destroy()");
+      })
+    );
+  }
+
+  search(searchTerm: string) {
+    return this.http.get<Tool[]>(this.url + '/search/' + searchTerm).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError("Error searching for tools in tool.service.ts.search()");
       })
     );
   }

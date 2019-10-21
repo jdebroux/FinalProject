@@ -12,12 +12,11 @@ public interface ToolRentalService {
 	
 	List<ToolRental> getToolRentalsByTool(int toolId);
 
-	ToolRental create(String username, ToolRental toolRental);
+	ToolRental create(String username, int toolId, ToolRental toolRental);
 
-	ToolRental update(String username, int id, ToolRental toolRental);
+	ToolRental update(int id, ToolRental toolRental);
 	
 	Boolean delete(int id);
 
-
-
+	ToolRental findById(int id);
 }
