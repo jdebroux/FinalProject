@@ -32,6 +32,7 @@ export class AuthService {
         this.http.get(this.baseUrl + "api/user/" + this.user + "/role", {responseType:"text"}).subscribe(
         data => {
           localStorage.setItem('role', data);
+          localStorage.setItem('user', username);
         },
         err => {
           console.error(err);
@@ -58,8 +59,9 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem("credentials");
-    localStorage.removeItem("role");
+    localStorage.removeItem('credentials');
+    localStorage.removeItem('role');
+    localStorage.removeItem('user')
   }
 
   checkLogin() {

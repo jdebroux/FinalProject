@@ -18,7 +18,7 @@
           <a class="nav-link waves-light " mdbWavesEffect [routerLink]="['/register']">Register</a>
         </li>
         <li *ngIf="checkIfLoggedInUser()">
-          <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/user']">{{getUsername()}}</a>
+          <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/user']">{{this.getUsername()}}</a>
         </li>
 
         <li *ngIf="!checkIfLoggedInUser()" class="nav-item dropdown" dropdown [autoClose]="false">
