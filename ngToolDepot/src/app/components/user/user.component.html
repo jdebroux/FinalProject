@@ -1,37 +1,10 @@
-<!-- <div class="" mdbCollapse #MyTransactions="bs-collapse">
-    <div id="listToolRentals" *ngIf="!selected">
-      <table *ngIf="!selected" class="table table-striped">
-        <thead class="thead thead-dark">
-          <tr>
-            <td align="left">Checked out</td>
-            <td align="left">Returned</td>
-            <td align="left">Total Cost</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let toolTransaction of toolTransactions">
-            <td>{{ toolTransaction.checkout }}</td>
-            <td>{{ toolTransaction.returned }}</td>
-            <td>{{ toolTransaction.totalCost }}</td>
-            <app-update-tool-rental
-              [toolRental]="toolTransaction"
-            ></app-update-tool-rental>
-            <app-delete-tool-rental
-              [toolRental]="toolTransaction"
-            ></app-delete-tool-rental>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div> -->
 <div class="container-fluid">
   <div class="row">
     <div class="col-fluid">
       <div class="card">
         <!-- badge for total lent/rented out/money -->
-
         <h3 class="card-header text-white bg-warning">
-          <span class="badge badge-pill badge-dark m-2">{{loggedInUser.username}}</span>User
+          <span class="badge badge-pill badge-dark m-2">User Name</span>User
           Name
           <span class="badge badge-pill badge-dark float-right m-2"
             >Tool Count/Money Earned
@@ -43,7 +16,7 @@
           </div>
           <div class="card-body">
             <h4 class="card-title"></h4>
-            {{loggedInUser.firstname}}
+            <!-- {{loggedInUser.firstname}} -->
             <!-- {{selected.lastname}} -->
             <!-- {{selected.firstname}} -->
             <p class="card-text ">
@@ -117,7 +90,7 @@
   My Toolbox
 </button>
 <div class="" mdbCollapse #myTools="bs-collapse">
-  <div id="listToolRentals" *ngIf="!selected">
+  <!-- <div id="listToolRentals" *ngIf="!selected">
     <table *ngIf="!selected" class="table table-striped">
       <thead class="thead thead-dark">
         <tr>
@@ -140,6 +113,6 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </div>  -->
 </div>
 
