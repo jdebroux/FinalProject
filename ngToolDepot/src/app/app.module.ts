@@ -42,6 +42,7 @@ import { DeleteToolRentalComponent } from './components/toolRentalCRUD/delete-to
 import { UpdateToolRentalComponent } from './components/toolRentalCRUD/update-tool-rental/update-tool-rental.component';
 import { UpdateUserComponent } from './components/adminCRUDonUser/update-user/update-user.component';
 import { DeleteUserComponent } from './components/adminCRUDonUser/delete-user/delete-user.component';
+import { ToolAvailablePipe } from './pipes/tool-available.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +65,8 @@ import { DeleteUserComponent } from './components/adminCRUDonUser/delete-user/de
     DeleteToolRentalComponent,
     UpdateToolRentalComponent,
     UpdateUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    ToolAvailablePipe
   ],
   imports: [
     BrowserModule,
@@ -93,7 +95,8 @@ import { DeleteUserComponent } from './components/adminCRUDonUser/delete-user/de
     ToolService,
     UserSkillService,
     UserService,
-    DatePipe
+    DatePipe,
+    ToolAvailablePipe
   ],
   bootstrap: [AppComponent]
 })
