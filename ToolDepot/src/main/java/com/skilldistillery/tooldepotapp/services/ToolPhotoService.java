@@ -2,18 +2,17 @@ package com.skilldistillery.tooldepotapp.services;
 
 import java.util.List;
 
-import com.skilldistillery.tooldepotapp.entities.Tool;
 import com.skilldistillery.tooldepotapp.entities.ToolPhoto;
 
 public interface ToolPhotoService {
 
-	ToolPhoto findById(int id);
+	ToolPhoto findById(Integer Tid, Integer TPid);
 	
-	List<ToolPhoto> findAllPhotos();
+	List<ToolPhoto> findAllPhotos(Integer tid);
 
-	ToolPhoto update(int id, Tool tool);
+	ToolPhoto update(Integer Tid, Integer TPid, ToolPhoto toolPhoto);
 
-	ToolPhoto create(Tool tool, String username);
+	ToolPhoto create(ToolPhoto toolPhoto, Integer Tid);
 
-	Boolean delete(int id);
+	Boolean delete(Integer Tid, Integer TPid);
 }

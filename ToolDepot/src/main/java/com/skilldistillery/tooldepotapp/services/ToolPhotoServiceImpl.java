@@ -16,36 +16,43 @@ public class ToolPhotoServiceImpl implements ToolPhotoService {
 	@Autowired
 	private ToolPhotoRepository photoRepo;
 	@Autowired
-	private ToolRepository toolRepo;
+	private ToolService toolSvc;
+	
 	
 	@Override
-	public ToolPhoto findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ToolPhoto findById(Integer Tid, Integer TPid) {
+		return photoRepo.findByToolIdAndId(Tid, TPid);
 	}
-
 	@Override
-	public List<ToolPhoto> findAllPhotos() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ToolPhoto> findAllPhotos(Integer Tid) {
+		return photoRepo.findByToolId(Tid);
 	}
-
 	@Override
-	public ToolPhoto update(int id, Tool tool) {
-		// TODO Auto-generated method stub
-		return null;
+	public ToolPhoto update(Integer Tid, Integer TPid, ToolPhoto toolPhoto) {
+		ToolPhoto editToolPhoto = findById(Tid, TPid);
+		if (editToolPhoto != null) {
+			toolPhoto.setTool(editToolPhoto.getTool());
+			editToolPhoto.setPhotoUrl(toolPhoto.getPhotoUrl());
+		}
+		return photoRepo.saveAndFlush(editToolPhoto);
 	}
-
 	@Override
-	public ToolPhoto create(Tool tool, String username) {
-		// TODO Auto-generated method stub
-		return null;
+	public ToolPhoto create(ToolPhoto toolPhoto, Integer Tid) {
+		toolPhoto.setTool(toolSvc.findById(Tid));
+		return photoRepo.saveAndFlush(toolPhoto);
 	}
-
 	@Override
-	public Boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean delete(Integer Tid, Integer TPid) {
+		Boolean deleted = false;
+		Tool tool = toolSvc.findById(Tid);
+		if (photoRepo.existsById(TPid)) {
+			ToolPhoto toolPhoto = photoRepo.findById(TPid).get();
+			if (tool.getPhotos().contains(toolPhoto)) {
+				toolPhoto.setTool(null);
+				photoRepo.deleteById(TPid);
+				deleted = true;
+			}
+		}
+		return deleted;
 	}
-
 }
