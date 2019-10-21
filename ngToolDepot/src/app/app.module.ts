@@ -104,6 +104,9 @@ import { SearchResultsComponent } from './components/search-results/search-resul
     UserSkillService,
     UserService,
     DatePipe,
+    GeocodeService,
+    RegisterComponent,
+    LoginComponent,
     ToolAvailablePipe
   ],
   bootstrap: [AppComponent]
