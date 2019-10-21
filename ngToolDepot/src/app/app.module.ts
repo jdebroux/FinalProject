@@ -37,7 +37,11 @@ import { DatePipe } from '@angular/common';
 import { AddToolComponent } from './components/toolCRUD/add-tool/add-tool.component';
 import { UpdateToolComponent } from './components/toolCRUD/update-tool/update-tool.component';
 import { DeleteToolComponent } from './components/toolCRUD/delete-tool/delete-tool.component';
-
+import { AddToolRentalComponent } from './components/toolRentalCRUD/add-tool-rental/add-tool-rental.component';
+import { DeleteToolRentalComponent } from './components/toolRentalCRUD/delete-tool-rental/delete-tool-rental.component';
+import { UpdateToolRentalComponent } from './components/toolRentalCRUD/update-tool-rental/update-tool-rental.component';
+import { UpdateUserComponent } from './components/adminCRUDonUser/update-user/update-user.component';
+import { DeleteUserComponent } from './components/adminCRUDonUser/delete-user/delete-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +59,12 @@ import { DeleteToolComponent } from './components/toolCRUD/delete-tool/delete-to
     SkillComponent,
     AddToolComponent,
     UpdateToolComponent,
-    DeleteToolComponent
+    DeleteToolComponent,
+    AddToolRentalComponent,
+    DeleteToolRentalComponent,
+    UpdateToolRentalComponent,
+    UpdateUserComponent,
+    DeleteUserComponent
   ],
   imports: [
     BrowserModule,

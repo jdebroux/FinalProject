@@ -1,7 +1,7 @@
 export class ToolRental {
   id: number;
-  checkout: string;
-  returned: string;
+  checkout: Date;
+  returned: Date;
   totalCost: number;
   createDate: string;
   updateDate: string;
@@ -10,8 +10,8 @@ export class ToolRental {
 
   constructor(
     id?: number,
-    checkout?: string,
-    returned?: string,
+    checkout?: Date,
+    returned?: Date,
     totalCost?: number,
     createDate?: string,
     updateDate?: string,

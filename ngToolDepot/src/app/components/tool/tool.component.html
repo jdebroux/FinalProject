@@ -21,6 +21,7 @@
         <td>{{ tool.manufactureYear }}</td>
         <app-update-tool [tool]="tool"></app-update-tool>
         <app-delete-tool [tool]="tool"></app-delete-tool>
+        <app-add-tool-rental [tool]="tool"></app-add-tool-rental>
         <!-- <td><button *ngIf="loggedIn" (click)="displayTool(tool.id)"
             class='btn btn-sm btn-outline-secondary'>Rent</button></td>
         <td><button *ngIf="!loggedIn" (click)="displayRegister()" class='btn btn-sm btn-outline-secondary'>Sign
