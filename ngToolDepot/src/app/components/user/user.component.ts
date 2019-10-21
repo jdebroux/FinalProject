@@ -11,6 +11,12 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
+
+  constructor(private userService: UserService,
+              private datePipe: DatePipe,
+              private currentRoute: ActivatedRoute,
+              private router: Router) {}
+
   editUser = null;
   selected = null;
   showComplete = false;
@@ -18,15 +24,16 @@ export class UserComponent implements OnInit {
   users: User[] = [];
 
   newUser = new User();
-
-  constructor(private userService: UserService,
-              private datePipe: DatePipe,
-              private currentRoute: ActivatedRoute,
-              private router: Router) {}
+  'use strict';
 
   ngOnInit() {
     this.urlUserId = this.getCommandLineParameter();
     this.reloadUsers();
+  }
+
+  getAllUsers() {
+    this.reloadUsers();
+    return [...this.users];
   }
 
   getCommandLineParameter(): string {

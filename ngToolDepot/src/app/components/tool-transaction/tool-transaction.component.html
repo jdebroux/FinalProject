@@ -1,1 +1,20 @@
-<p>tool-transaction works!</p>
+<div id="listToolRentals" *ngIf="!selected">
+  <table *ngIf="!selected" class='table table-striped'>
+    <thead class='thead thead-dark'>
+      <tr>
+        <td align='left'>Checked out</td>
+        <td align='left'>Returned</td>
+        <td align='left'>Total Cost</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let toolTransaction of toolTransactions">
+        <td>{{ toolTransaction.checkout }}</td>
+        <td>{{ toolTransaction.returned }}</td>
+        <td>{{ toolTransaction.totalCost }}</td>
+        <app-update-tool-rental [toolRental]="toolTransaction"></app-update-tool-rental>
+        <app-delete-tool-rental [toolRental]="toolTransaction"></app-delete-tool-rental>
+      </tr>
+    </tbody>
+  </table>
+</div>

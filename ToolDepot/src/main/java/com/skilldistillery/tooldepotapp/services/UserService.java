@@ -8,6 +8,8 @@ public interface UserService {
 
 	User findById(int id, String username);
 	
+	User findByUsername(String username);
+	
 	List<User> findAllUsers(String name);
 
 	User update(String username, int id, User user);
