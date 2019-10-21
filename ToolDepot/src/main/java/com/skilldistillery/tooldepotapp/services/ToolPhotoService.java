@@ -1,20 +1,19 @@
 package com.skilldistillery.tooldepotapp.services;
+
 import java.util.List;
 
 import com.skilldistillery.tooldepotapp.entities.Tool;
 import com.skilldistillery.tooldepotapp.entities.ToolPhoto;
 
-public interface ToolService {
+public interface ToolPhotoService {
 
-	Tool findById(int id);
+	ToolPhoto findById(int id);
 	
-	List<Tool> findAllTools();
+	List<ToolPhoto> findAllPhotos();
 
-	Tool update(int id, Tool tool);
+	ToolPhoto update(int id, Tool tool);
 
-	Tool create(Tool tool, String username);
+	ToolPhoto create(Tool tool, String username);
 
 	Boolean delete(int id);
-
-	List<Tool> findToolsBySearchTerm(String searchTerm);
 }

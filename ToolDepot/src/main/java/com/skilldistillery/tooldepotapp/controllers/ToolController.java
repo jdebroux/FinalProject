@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.tooldepotapp.entities.Tool;
+import com.skilldistillery.tooldepotapp.entities.ToolPhoto;
 import com.skilldistillery.tooldepotapp.services.ToolService;
 
 @RestController
@@ -38,6 +39,11 @@ public class ToolController {
 	public Tool getTool(@PathVariable("id") int id, HttpServletResponse resp) {
 		Tool tool = toolSvc.findById(id);
 		return tool;
+	}
+	
+	@GetMapping("tool/search/{searchTerm}")
+	public List<Tool> getToolsBySearch(@PathVariable("searchTerm") String searchTerm, HttpServletResponse resp) {
+		return toolSvc.findToolsBySearchTerm(searchTerm);
 	}
 
 	@PostMapping("tool")
@@ -91,7 +97,8 @@ public class ToolController {
 			resp.setStatus(400);
 		}
 		return true;
-
 	}
+	
+	
 
 }
