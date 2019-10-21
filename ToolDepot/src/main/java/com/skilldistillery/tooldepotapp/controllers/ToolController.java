@@ -39,6 +39,11 @@ public class ToolController {
 		Tool tool = toolSvc.findById(id);
 		return tool;
 	}
+	
+	@GetMapping("tool/search/{searchTerm}")
+	public List<Tool> getToolsBySearch(@PathVariable("searchTerm") String searchTerm, HttpServletResponse resp) {
+		return toolSvc.findToolsBySearchTerm(searchTerm);
+	}
 
 	@PostMapping("tool")
 	public Tool addTool(Principal principal, @RequestBody Tool tool, HttpServletResponse resp, HttpServletRequest req) {
@@ -91,7 +96,8 @@ public class ToolController {
 			resp.setStatus(400);
 		}
 		return true;
-
 	}
+	
+	
 
 }
