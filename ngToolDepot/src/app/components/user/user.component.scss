@@ -5,6 +5,8 @@ color:#fff;
 }
 
 .card-horizontal {
+  width: 100%;
+  padding: 0px;
   display: flex;
   flex: 1 1 auto;
 }
@@ -13,4 +15,8 @@ color:#fff;
   background-color: #3D3B3D;
   color: #DFA000;
   font-weight: bold;
+}
+
+.body {
+  width: 100%;
 }

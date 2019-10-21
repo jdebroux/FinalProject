@@ -1,3 +1,4 @@
+import { ToolTransactionComponent } from './../tool-transaction/tool-transaction.component';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DatePipe } from '@angular/common';
@@ -6,6 +7,7 @@ import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { ToolService } from 'src/app/services/tool.service';
 
 @Component({
   selector: 'app-user',
@@ -17,6 +19,7 @@ export class UserComponent implements OnInit {
   constructor(private userService: UserService,
               private datePipe: DatePipe,
               private currentRoute: ActivatedRoute,
+              private tool: ToolService,
               private router: Router) {}
   editUser = null;
   selected = null;
@@ -134,7 +137,6 @@ export class UserComponent implements OnInit {
       }
     );
   }
-
 
   // TODO we dont need this but could utilize in a different way.
 

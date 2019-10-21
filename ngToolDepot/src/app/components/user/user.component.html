@@ -4,21 +4,25 @@
       <div class="card">
         <!-- badge for total lent/rented out/money -->
 
+          <h3 class="card-header text-white bg-warning"><span class="badge badge-pill badge-dark m-2"
+            >User Name</span><!-- {{selected.username}} --><span class="badge badge-pill badge-dark float-right m-2"
+            >Tool Count/Money Earned </span></h3>
           <div class="card-horizontal">
             <div class="img-square-wrapper">
               <img class="" src="https://bit.ly/2MpfRrz" alt="Card image cap" />
             </div>
             <div class="card-body">
-              <h4 class="card-title">Card title</h4>
+              <h4 class="card-title"></h4>
+              <!-- {{selected.firstname}} -->
+              <!-- {{selected.lastname}} -->
+              <!-- {{selected.firstname}} -->
               <p class="card-text ">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                  Some quick example text to build on the card title and make up
+                  the bulk  the card's content. fdadsffsdfffsdsdfNeeds to have enough text to fill screen
               </p>
 
 
-                  <!-- <div class="" mdbCollapse #rentals="bs-collapse">
-                      <p>SHOW LIST OF ALL RENTALS</p>
-                    </div> -->
+
             </div>
           </div>
           <div class="card-footer text-white bg-warning">Footer Footer</div>
@@ -27,23 +31,23 @@
     </div>
 </div>
 <button mdbBtn class="btn btn-elegant btn-block"  type="button" (click)="rentals.toggle()" mdbWavesEffect>
-    My Rentals
+    Tools I Have Currently Lent Out
   </button>
 <div class="" mdbCollapse #rentals="bs-collapse">
-    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim
-      keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+  <p>Tools I am currently renting</p>
+    <!-- <p>A list of tools currently checked out</p> -->
   </div>
-  <button mdbBtn class="btn btn-elegant btn-block"  type="button" (click)="myTransactions.toggle()" mdbWavesEffect>
-      My Transactions
+  <button mdbBtn class="btn btn-elegant btn-block"  type="button" (click)="transactions.toggle()" mdbWavesEffect>
+    My Transaction History
     </button>
-  <div class="" mdbCollapse #myTransactions="bs-collapse">
-      <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim
-        keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+  <div class="" mdbCollapse #transactions="bs-collapse">
+    <p>My transaction history</p>
+      <!-- <p>Need a list of Tool Rentals History </p> -->
     </div>
     <button mdbBtn class="btn btn-elegant btn-block"  type="button" (click)="myTools.toggle()" mdbWavesEffect>
-        My Tools
+        My Toolbox
       </button>
     <div class="" mdbCollapse #myTools="bs-collapse">
-        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim
-          keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+      <p>Tools I own</p>
+        <!-- <p>Need a list of Tools User Owns</p> -->
       </div>
