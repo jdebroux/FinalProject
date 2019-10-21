@@ -8,9 +8,9 @@ public interface ReviewOfLenderService {
 	
 	ReviewOfLender findLendersReview(Integer TRid);
 
-	ReviewOfLender update(Integer TRid, Integer ROLid, ReviewOfLender reviewOfLender);
-
 	ReviewOfLender create(ReviewOfLender reviewOfLender, Integer id);
+
+	ReviewOfLender update(Integer TRid, Integer ROLid, ReviewOfLender reviewOfLender);
 
 	Boolean delete(Integer TRid, Integer ROLid);
 }

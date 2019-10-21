@@ -5,6 +5,7 @@
   padding-left: 0px;
   background-color: #3D3B3D;
 }
+
 a {
   color: #dfa000;
   font-weight: bold;
@@ -15,6 +16,14 @@ a:hover {
 }
 span {
   color: #dfa000;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  background-color: #DFA000;
+  color: #3D3B3D;
+  font-weight: bold;
 }
 
 
