@@ -2,6 +2,7 @@ package com.skilldistillery.tooldepotapp.services;
 import java.util.List;
 
 import com.skilldistillery.tooldepotapp.entities.Tool;
+import com.skilldistillery.tooldepotapp.entities.ToolPhoto;
 
 public interface ToolService {
 
@@ -16,5 +17,4 @@ public interface ToolService {
 	Boolean delete(int id);
 
 	List<Tool> findToolsBySearchTerm(String searchTerm);
-	
 }
