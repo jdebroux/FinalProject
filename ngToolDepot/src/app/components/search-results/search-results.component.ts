@@ -41,12 +41,12 @@ export class SearchResultsComponent implements OnInit {
             err => {
               console.error(err);
             }
-          )
+          );
         },
         err => {
           console.error(err);
         }
-      )
+      );
     }
 
   }

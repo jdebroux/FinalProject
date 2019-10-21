@@ -1,98 +1,126 @@
-import { AuthService } from './auth.service';
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { throwError } from 'rxjs/internal/observable/throwError';
-import { map, catchError } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
-import { Router } from '@angular/router';
-import { ToolRental } from '../models/tool-rental';
+import { AuthService } from "./auth.service";
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { throwError } from "rxjs/internal/observable/throwError";
+import { map, catchError } from "rxjs/operators";
+import { environment } from "src/environments/environment";
+import { Router } from "@angular/router";
+import { ToolRental } from "../models/tool-rental";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ToolRentalService {
-  private url = environment.baseUrl + 'api/toolRental';
+  private url = environment.baseUrl + "api/toolRental";
 
-  constructor(private http: HttpClient, private authService: AuthService, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   index() {
     if (localStorage.length === 0) {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl("/login");
     }
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': `Basic ` + this.authService.getCredentials(),
-        'X-Requested-With': 'XMLHttpRequest'
+        Authorization: `Basic ` + this.authService.getCredentials(),
+        "X-Requested-With": "XMLHttpRequest"
       })
     };
     return this.http.get<ToolRental[]>(this.url, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('Error in ToolRentalService.index()');
+        return throwError("Error in ToolRentalService.index()");
       })
-      );
+    );
+  }
+  getToolTransactionsByUserName(username: string) {
+    if (localStorage.length === 0) {
+      this.router.navigateByUrl("/login");
     }
-
-  create(toolRental: ToolRental, toolId: number) {
-      console.log("IN HERE");
-      console.log(toolRental);
-      console.log(toolId);
-      console.log(this.url);
-      if (localStorage.length === 0) {
-        this.router.navigateByUrl('/login');
-      }
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Authorization': `Basic ` + this.authService.getCredentials(),
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest'
-        })
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ` + this.authService.getCredentials(),
+        "X-Requested-With": "XMLHttpRequest"
+      })
     };
-      return this.http.post(this.url + '?toolId=' + toolId, toolRental, httpOptions).pipe(
+    return this.http.get<ToolRental[]>(this.url + '/' + username, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('Error posting new tool rental in toolRental.Service.create()');
+        return throwError('Error in toolRentalService - getToolTransactionsBy User');
       })
-      );
+    )
+  }
+  create(toolRental: ToolRental, toolId: number) {
+    console.log("IN HERE");
+    console.log(toolRental);
+    console.log(toolId);
+    console.log(this.url);
+    if (localStorage.length === 0) {
+      this.router.navigateByUrl("/login");
     }
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ` + this.authService.getCredentials(),
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest"
+      })
+    };
+    return this.http
+      .post(this.url + "?toolId=" + toolId, toolRental, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(
+            "Error posting new tool rental in toolRental.Service.create()"
+          );
+        })
+      );
+  }
 
-    update(id: number, toolRental: ToolRental) {
-      if (localStorage.length === 0) {
-        this.router.navigateByUrl('/login');
-      }
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Authorization': `Basic ` + this.authService.getCredentials(),
-          'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest'
+  update(id: number, toolRental: ToolRental) {
+    if (localStorage.length === 0) {
+      this.router.navigateByUrl("/login");
+    }
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ` + this.authService.getCredentials(),
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest"
         // Authorization: 'my-auth-token'
       })
     };
-      return this.http.put(this.url + '/' + id, toolRental, httpOptions).pipe(
+    return this.http.put(this.url + "/" + id, toolRental, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('Error editing an tool rental in toolRental.service.ts.update()');
+        return throwError(
+          "Error editing an tool rental in toolRental.service.ts.update()"
+        );
       })
-      );
+    );
   }
 
   destroy(id: number) {
     if (localStorage.length === 0) {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl("/login");
     }
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Basic ` + this.authService.getCredentials(),
-        'X-Requested-With': 'XMLHttpRequest'
+        "Content-Type": "application/json",
+        Authorization: `Basic ` + this.authService.getCredentials(),
+        "X-Requested-With": "XMLHttpRequest"
         // Authorization: 'my-auth-token'
       })
     };
-    return this.http.delete(this.url + '/' + id, httpOptions).pipe(
+    return this.http.delete(this.url + "/" + id, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('Error deleting a tool rental in toolRental.service.ts.destory()');
+        return throwError(
+          "Error deleting a tool rental in toolRental.service.ts.destory()"
+        );
       })
-      );
-    }
+    );
   }
+}

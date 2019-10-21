@@ -50,12 +50,6 @@ export class ToolTransactionComponent implements OnInit {
     this.selected = null;
   }
 
-  // setReturned(id: number, toolTransaction: ToolRental) {
-  //   if (toolTransaction.returned === null) {
-  //     toolTransaction.returned = new Date().toDateString();
-  //   }
-  //   this.updateToolTransaction(id, toolTransaction);
-  // }
 
   addToolTransaction(toolRental: ToolRental, toolId: number) {
 

@@ -10,9 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class NavigationComponent implements OnInit {
   public navbarCollapse = true;
   constructor(private auth: AuthService) { }
-
   ngOnInit() {
-
   }
 
   checkIfLoggedInUser(): boolean {
@@ -20,7 +18,7 @@ export class NavigationComponent implements OnInit {
   }
 
   getUsername(): string {
-    return this.auth.getUsername();
+    return localStorage.getItem('user');
   }
 }
 

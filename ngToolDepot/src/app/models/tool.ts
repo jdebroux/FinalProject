@@ -20,7 +20,7 @@ export class Tool {
     available?: boolean,
     manufactureYear?: string,
     condition?: string,
-    owner?: User
+    owner?: User,
   ) {
     this.id = id;
     this.name = name;
