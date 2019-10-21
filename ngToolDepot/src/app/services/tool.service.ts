@@ -86,7 +86,7 @@ export class ToolService {
       })
     );
   }
-  
+
   getToolListByUserName(username: string) {
     if (localStorage.length === 0) {
       this.router.navigateByUrl("/login");
@@ -101,17 +101,6 @@ export class ToolService {
       catchError((err: any) => {
         console.log(err);
         return throwError('Error in tool service - getToolListBy User');
-
-  search(searchTerm: string) {
-    return this.http.get<Tool[]>(this.url + '/search/' + searchTerm).pipe(
-      catchError((err: any) => {
-        console.log(err);
-<<<<<<< HEAD
-        return throwError('Error searching for tools in tool.service.ts.search()');
-=======
-        return throwError("Error searching for tools in tool.service.ts.search()");
-
->>>>>>> 1f75cc142c6342b6edf8ea7686d4146b97dec0f5
       })
     );
   }
