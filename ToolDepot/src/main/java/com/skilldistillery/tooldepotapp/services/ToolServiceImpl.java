@@ -71,4 +71,9 @@ public class ToolServiceImpl implements ToolService {
 		return toolRepo.findToolsContainingSearchTerm(searchTerm);
 	}
 
+	@Override
+	public List<Tool> findByUserUsername(String username) {
+		return toolRepo.findByUserUsername(username);
+	}
+
 }
