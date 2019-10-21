@@ -1,4 +1,5 @@
 import { User } from './user';
+import { ToolPhoto } from './tool-photo';
 
 export class Tool {
   id: number;
@@ -10,6 +11,7 @@ export class Tool {
   manufactureYear: string;
   condition: string;
   owner: User;
+  photos: ToolPhoto[];
 
   constructor(
     id?: number,
@@ -21,6 +23,7 @@ export class Tool {
     manufactureYear?: string,
     condition?: string,
     owner?: User,
+    photos?: ToolPhoto[]
   ) {
     this.id = id;
     this.name = name;
@@ -31,5 +34,6 @@ export class Tool {
     this.manufactureYear = manufactureYear;
     this.condition = condition;
     this.owner = owner;
+    this.photos = photos;
   }
 }

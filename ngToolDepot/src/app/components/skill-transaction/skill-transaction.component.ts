@@ -52,12 +52,12 @@ export class SkillTransactionComponent implements OnInit {
     this.selected = null;
   }
 
-  setFinishDate(id: number, skillTransaction: SkillRental) {
-    if (skillTransaction.finishDate === null) {
-      skillTransaction.finishDate = new Date().toDateString();
-    }
-    this.updateSkillTransaction(id, skillTransaction);
-  }
+  // setFinishDate(id: number, skillTransaction: SkillRental) {
+  //   if (skillTransaction.finishDate === null) {
+  //     skillTransaction.finishDate = new Date().toDateString();
+  //   }
+  //   this.updateSkillTransaction(id, skillTransaction);
+  // }
 
   addSkillTransactions(form: NgForm) {
     this.newSkillTransaction = new SkillRental();

@@ -24,8 +24,8 @@ export class HomeComponent implements OnInit {
         this.searchResults = data;
       },
       err => {
-        console.error("Error in home.component - search")
-        console.error(err)
+        console.error('Error in home.component - search');
+        console.error(err);
       }
     )
   }

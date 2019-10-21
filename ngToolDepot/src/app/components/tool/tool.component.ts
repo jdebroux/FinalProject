@@ -1,3 +1,4 @@
+import { ToolPhotoService } from './../../services/tool-photo.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -5,7 +6,7 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToolService } from 'src/app/services/tool.service';
 import { Tool } from 'src/app/models/tool';
-
+import { ToolPhoto } from 'src/app/models/tool-photo';
 
 @Component({
   selector: 'app-tool',
@@ -18,6 +19,7 @@ export class ToolComponent implements OnInit {
   showComplete = false;
   urlToolId: string;
   tools: Tool[] = [];
+  toolPhotos: ToolPhoto[] = [];
 
   newTool = new Tool();
 
@@ -25,10 +27,14 @@ export class ToolComponent implements OnInit {
               private datePipe: DatePipe,
               private currentRoute: ActivatedRoute,
               private router: Router,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private photoService: ToolPhotoService) {}
 
   ngOnInit() {
     this.urlToolId = this.getCommandLineParameter();
+    // this.photoService.getToolPhotos().subscribe(photos => {
+    //   this.toolPhotos = photos;
+    // });
     this.reloadTools();
   }
 
@@ -144,6 +150,7 @@ export class ToolComponent implements OnInit {
       }
     );
   }
+
 
 
   // TODO we dont need this but could utilize in a different way.
