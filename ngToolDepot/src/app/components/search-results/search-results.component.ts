@@ -1,15 +1,15 @@
 import { Location } from './../../models/location';
 import { AddressService } from './../../services/address.service';
-import { Address } from "./../../models/address";
-import { GeocodeService } from "./../../services/geocode.service";
-import { Component, OnInit, Input, ViewChild } from "@angular/core";
-import { Tool } from "src/app/models/tool";
-import { AgmMap } from "@agm/core";
+import { Address } from './../../models/address';
+import { GeocodeService } from './../../services/geocode.service';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Tool } from 'src/app/models/tool';
+import { AgmMap } from '@agm/core';
 
 @Component({
-  selector: "app-search-results",
-  templateUrl: "./search-results.component.html",
-  styleUrls: ["./search-results.component.scss"]
+  selector: 'app-search-results',
+  templateUrl: './search-results.component.html',
+  styleUrls: ['./search-results.component.scss']
 })
 export class SearchResultsComponent implements OnInit {
   @Input() searchResults: Tool[];

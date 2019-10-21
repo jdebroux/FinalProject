@@ -112,6 +112,9 @@ import { ToolphotoComponent } from './components/toolphoto/toolphoto.component';
     UserSkillService,
     UserService,
     DatePipe,
+    GeocodeService,
+    RegisterComponent,
+    LoginComponent,
     ToolAvailablePipe
   ],
   bootstrap: [AppComponent]

@@ -1,5 +1,7 @@
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { RegisterComponent } from '../register/register.component';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-footer',
@@ -8,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService,
+              private registerComp: RegisterComponent) { }
 
   ngOnInit() {
   }
@@ -18,5 +21,9 @@ export class FooterComponent implements OnInit {
 
   getUsername(): string{
     return this.auth.getUsername();
+  }
+
+  register(form: NgForm) {
+    this.registerComp.register(form);
   }
 }

@@ -85,14 +85,14 @@ public class ReviewOfRenterController {
 		try {
 			if (success) {
 				resp.setStatus(204);
-				return true;
 			} else {
 				resp.setStatus(404);
 			}
 		} catch (Exception e) {
 			resp.setStatus(400);
+			e.printStackTrace();
 		}
-		return true;
+		return success;
 
 	}
 }
