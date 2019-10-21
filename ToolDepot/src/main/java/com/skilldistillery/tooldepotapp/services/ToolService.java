@@ -14,5 +14,6 @@ public interface ToolService {
 	Tool create(Tool tool, String username);
 
 	Boolean delete(int id);
-	
+
+	List<Tool> findToolsBySearchTerm(String searchTerm);
 }

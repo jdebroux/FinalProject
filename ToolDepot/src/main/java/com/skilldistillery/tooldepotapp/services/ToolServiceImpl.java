@@ -65,6 +65,10 @@ public class ToolServiceImpl implements ToolService {
 		}
 		return deleted;
 	}
-	
+
+	@Override
+	public List<Tool> findToolsBySearchTerm(String searchTerm) {
+		return toolRepo.findToolsContainingSearchTerm(searchTerm);
+	}
 
 }

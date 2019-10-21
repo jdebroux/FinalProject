@@ -37,9 +37,9 @@ public class UserController {
 		return allUsers;
 	}
 
-	@GetMapping("user/{id}")
-	public User getUser(@PathVariable("id") Integer id, HttpServletResponse resp, Principal principal) {
-		User user = svc.findById(id, principal.getName());
+	@GetMapping("user/{username}")
+	public User getUser(@PathVariable("username") String username, HttpServletResponse resp, Principal principal) {
+		User user = svc.findByUsername(principal.getName());
 		return user;
 	}
 	

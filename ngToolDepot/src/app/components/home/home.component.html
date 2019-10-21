@@ -3,21 +3,21 @@
     <mat-grid-tile>
       <form class="form-inline">
         <h3>Find A Tool</h3>
-        <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" aria-label="Search">
-        <i class="fas fa-search" aria-hidden="true"></i>
+        <input class="form-control form-control-sm mr-3 w-75" name="searchTerm" type="text" placeholder="Search" [(ngModel)]="searchTerm" aria-label="Search">
+        <a (click)="search();searched=true;"><i id="searchIcon" class="fas fa-search" aria-hidden="true"></i></a>
       </form>
     </mat-grid-tile>
     <mat-grid-tile>
       <form class="form-inline ">
         <div class="mr-3 w-100">
           <h3>Lend A Tool</h3>
-          <a><button type="button" class="btn btn-sm mr-3 w-100 signUp">Sign Up</button></a>
+          <a><button type="button" class="btn btn-sm mr-3 w-100 signUp" [routerLink]="['/register']" routerLinkActive="router-link-active" >Sign Up</button></a>
         </div>
       </form>
     </mat-grid-tile>
   </mat-grid-list>
 </div>
-<div>
+<div *ngIf="!searched">
   <mat-grid-list cols="1" rowHeight="2:1">
     <mat-grid-tile class="seeAll">
       <!-- <img src="assets/cover_tools.jpg" alt="Card image cap"> -->
@@ -26,3 +26,4 @@
     </mat-grid-tile>
   </mat-grid-list>
 </div>
+<app-search-results *ngIf="searched" [searchResults]="searchResults"></app-search-results>

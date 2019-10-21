@@ -1,0 +1,35 @@
+button.btn {
+  background-color: #dfa000;
+  color: #f2ebe4;
+}
+button.close {
+  background-color: #dfa000;
+  color: #f2ebe4;
+}
+button:hover {
+  color: #F9d31a;
+  color: #646264;
+}
+.toolpage {
+  background-color: #646264;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+a:hover {
+  color: #F9d31a;
+  font-weight: bold;
+}
+a {
+  color:  #dfa000;
+}
+.row.display-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.row.display-flex > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
+
+
