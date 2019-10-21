@@ -1,8 +1,6 @@
 package com.skilldistillery.tooldepotapp.controllers;
 
 import java.security.Principal;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,22 +27,25 @@ public class ReviewOfLenderController {
 	@Autowired
 	private ReviewOfLenderService reviewOfLenderSvc;
 
-	@GetMapping("reviewOfLender")
-	public List<ReviewOfLender> lendersReviewlist(HttpServletResponse resp) {
-		List<ReviewOfLender> lendersReviews = reviewOfLenderSvc.findAllLendersReviews();
-		return lendersReviews;
+	@GetMapping("toolRental/{TRid}/reviewOfLender")
+	public ReviewOfLender lendersReviewlist(@PathVariable("TRid") Integer TRid, HttpServletResponse resp) {
+		ReviewOfLender lendersReview = reviewOfLenderSvc.findLendersReview(TRid);
+		if (lendersReview == null) {
+			resp.setStatus(404);
+		}
+		return lendersReview;
 	}
 	
-	@GetMapping("reviewOfLender/{id}")
-	public ReviewOfLender getLendersReview(@PathVariable("id") int id, HttpServletResponse resp) {
-		ReviewOfLender lenderReview = reviewOfLenderSvc.findById(id);
+	@GetMapping("toolRental/{TRid}/reviewOfLender/{ROLid}")
+	public ReviewOfLender getLendersReview(@PathVariable("TRid") Integer TRid, @PathVariable("ROLid") Integer ROLid, HttpServletResponse resp) {
+		ReviewOfLender lenderReview = reviewOfLenderSvc.findById(TRid, ROLid);
 		return lenderReview;
 	}
 	
-	@PostMapping("reviewOfLender/toolRental/{id}")
-	public ReviewOfLender addLenderReview(Principal principal, @PathVariable("id") Integer id, @RequestBody ReviewOfLender lenderReview, HttpServletResponse resp, HttpServletRequest req) {
+	@PostMapping("toolRental/{TRid}/reviewOfLender")
+	public ReviewOfLender addLenderReview(Principal principal, @PathVariable("TRid") Integer TRid, @RequestBody ReviewOfLender lenderReview, HttpServletResponse resp, HttpServletRequest req) {
 		try {
-			lenderReview = reviewOfLenderSvc.create(lenderReview, id);
+			lenderReview = reviewOfLenderSvc.create(lenderReview, TRid);
 			if (lenderReview == null) {
 				resp.setStatus(404);
 			} else {
@@ -63,11 +64,12 @@ public class ReviewOfLenderController {
 		return lenderReview;
 	}
 	
-	@PutMapping("reviewOfLender/{id}")
-	public ReviewOfLender editLenderReview(@PathVariable("id") Integer id, @RequestBody ReviewOfLender lenderReview, HttpServletResponse resp,
+	@PutMapping("toolRental/{TRid}/reviewOfLender/{ROLid}")
+	public ReviewOfLender editLenderReview(@PathVariable("TRid") Integer TRid, @PathVariable("ROLid") Integer ROLid, @RequestBody ReviewOfLender lenderReview, HttpServletResponse resp,
 			HttpServletResponse req) {
+		System.err.println(lenderReview + " ****************************************");
 		try {
-			lenderReview = reviewOfLenderSvc.update(id, lenderReview);
+			lenderReview = reviewOfLenderSvc.update(TRid, ROLid, lenderReview);
 			if (lenderReview == null) {
 				resp.setStatus(404);
 			} else {
@@ -81,9 +83,9 @@ public class ReviewOfLenderController {
 		return lenderReview;
 	}
 	
-	@DeleteMapping("reviewOfLender/{id}")
-	public boolean destroyLenderReview(@PathVariable("id") Integer id, HttpServletResponse resp) {
-		Boolean success = reviewOfLenderSvc.delete(id);
+	@DeleteMapping("toolRental/{TRid}/reviewOfLender/{ROLid}")
+	public boolean destroyLenderReview(@PathVariable("TRid") Integer TRid, @PathVariable("ROLid") Integer ROLid, HttpServletResponse resp) {
+		Boolean success = reviewOfLenderSvc.delete(TRid, ROLid);
 		try {
 			if (success) {
 				resp.setStatus(204);

@@ -6,4 +6,7 @@ import com.skilldistillery.tooldepotapp.entities.ReviewOfLender;
 
 public interface ReviewOfLenderRepository  extends JpaRepository<ReviewOfLender, Integer>{
 
+	ReviewOfLender findByToolRentalId(Integer TRid);
+	
+	ReviewOfLender findByToolRentalIdAndId(Integer TRid, Integer ROLid);
 }

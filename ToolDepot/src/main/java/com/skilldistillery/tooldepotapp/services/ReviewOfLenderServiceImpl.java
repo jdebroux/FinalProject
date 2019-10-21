@@ -1,45 +1,43 @@
 package com.skilldistillery.tooldepotapp.services;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.tooldepotapp.entities.ReviewOfLender;
+import com.skilldistillery.tooldepotapp.entities.ToolRental;
 import com.skilldistillery.tooldepotapp.repositories.ReviewOfLenderRepository;
-import com.skilldistillery.tooldepotapp.repositories.ToolRentalRepository;
 
 @Service
 public class ReviewOfLenderServiceImpl implements ReviewOfLenderService {
 
 	@Autowired
 	private ReviewOfLenderRepository lendReviewRepo;
-	@Autowired 
-	private ToolRentalRepository toolRentalRepo;
 	@Autowired
 	private ToolRentalService toolRentalSvc;
-	
+
 	@Override
-	public ReviewOfLender findById(int id) {
-		Optional<ReviewOfLender> reviewOfLenderOpt = lendReviewRepo.findById(id);
-		ReviewOfLender reviewOfLender = null;
-		if (reviewOfLenderOpt.isPresent()) {
-			reviewOfLender = reviewOfLenderOpt.get();
-		}
+	public ReviewOfLender findById(Integer TRid, Integer ROLid) {
+		ReviewOfLender reviewOfLender = lendReviewRepo.findByToolRentalIdAndId(TRid, ROLid);
 		return reviewOfLender;
 	}
 
 	@Override
-	public List<ReviewOfLender> findAllLendersReviews() {
-		return lendReviewRepo.findAll();
+	public ReviewOfLender findLendersReview(Integer TRid) {
+		ReviewOfLender lendersReview = lendReviewRepo.findByToolRentalId(TRid);
+		return lendersReview;
 	}
 
 	@Override
-	public ReviewOfLender update(int id, ReviewOfLender reviewOfLender) {
-		ReviewOfLender editReviewOfLender = findById(id);
-		toolRentalRepo.saveAndFlush(reviewOfLender.getToolRental());
+	public ReviewOfLender create(ReviewOfLender reviewOfLender, Integer TRid) {
+		reviewOfLender.setToolRental(toolRentalSvc.findById(TRid));
+		return lendReviewRepo.saveAndFlush(reviewOfLender);
+	}
+
+	@Override
+	public ReviewOfLender update(Integer TRid, Integer ROLid, ReviewOfLender reviewOfLender) {
+		ReviewOfLender editReviewOfLender = findById(TRid, ROLid);
 		if (editReviewOfLender != null) {
+			reviewOfLender.setToolRental(editReviewOfLender.getToolRental());
 			editReviewOfLender.setRenterRating(reviewOfLender.getRenterRating());
 			editReviewOfLender.setRenterReview(reviewOfLender.getRenterReview());
 		}
@@ -47,18 +45,15 @@ public class ReviewOfLenderServiceImpl implements ReviewOfLenderService {
 	}
 
 	@Override
-	public ReviewOfLender create(ReviewOfLender reviewOfLender, Integer id) {
-		reviewOfLender.setToolRental(toolRentalSvc.findById(id));
-		return lendReviewRepo.saveAndFlush(reviewOfLender);
-	}
-
-	@Override
-	public Boolean delete(int id) {
+	public Boolean delete(Integer TRid, Integer ROLid) {
 		Boolean deleted = false;
-		if (lendReviewRepo.existsById(id)) {
-			lendReviewRepo.findById(id).get().setToolRental(null);
-			lendReviewRepo.deleteById(id);
-			deleted = true;
+		ToolRental toolRental = toolRentalSvc.findById(TRid);
+		if (toolRental.getLenderReview().getId() == ROLid) {
+			if (lendReviewRepo.existsById(ROLid)) {
+				lendReviewRepo.findById(ROLid).get().setToolRental(null);
+				lendReviewRepo.deleteById(ROLid);
+				deleted = true;
+			}
 		}
 		return deleted;
 	}

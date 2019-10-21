@@ -1,18 +1,16 @@
 package com.skilldistillery.tooldepotapp.services;
 
-import java.util.List;
-
 import com.skilldistillery.tooldepotapp.entities.ReviewOfRenter;
 
 public interface ReviewOfRenterService {
 
-	ReviewOfRenter findById(int id);
+	ReviewOfRenter findById(Integer TRid, Integer RORid);
 	
-	List<ReviewOfRenter> findAllRentersReviews();
+	ReviewOfRenter findRentersReview(Integer TRid);
 
-	ReviewOfRenter update(int id, ReviewOfRenter reviewOfRenter);
+	ReviewOfRenter update(Integer TRid, Integer RORid, ReviewOfRenter reviewOfRenter);
 
-	ReviewOfRenter create(ReviewOfRenter reviewOfRenter, Integer id);
+	ReviewOfRenter create(ReviewOfRenter reviewOfRenter, Integer TRid);
 
-	Boolean delete(int id);
+	Boolean delete(Integer TRid, Integer RORid);
 }

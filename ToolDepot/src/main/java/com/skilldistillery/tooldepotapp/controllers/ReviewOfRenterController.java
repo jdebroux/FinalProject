@@ -1,7 +1,6 @@
 package com.skilldistillery.tooldepotapp.controllers;
 
 import java.security.Principal;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,22 +27,22 @@ public class ReviewOfRenterController {
 	@Autowired
 	private ReviewOfRenterService reviewOfRenterSvc;
 
-	@GetMapping("reviewOfRenter")
-	public List<ReviewOfRenter> rentersReviewlist(HttpServletResponse resp) {
-		List<ReviewOfRenter> rentersReview = reviewOfRenterSvc.findAllRentersReviews();
+	@GetMapping("toolRental/{TRid}/reviewOfRenter")
+	public ReviewOfRenter rentersReviewlist(@PathVariable("TRid") Integer TRid, HttpServletResponse resp) {
+		ReviewOfRenter rentersReview = reviewOfRenterSvc.findRentersReview(TRid);
 		return rentersReview;
 	}
 	
-	@GetMapping("reviewOfRenter/{id}")
-	public ReviewOfRenter getRentersReview(@PathVariable("id") int id, HttpServletResponse resp) {
-		ReviewOfRenter renterReview = reviewOfRenterSvc.findById(id);
+	@GetMapping("toolRental/{TRid}/reviewOfRenter/{RORid}")
+	public ReviewOfRenter getRentersReview(@PathVariable("TRid") Integer TRid, @PathVariable("RORid") Integer RORid, HttpServletResponse resp) {
+		ReviewOfRenter renterReview = reviewOfRenterSvc.findById(TRid, RORid);
 		return renterReview;
 	}
 	
-	@PostMapping("reviewOfRenter/toolRental/{id}")
-	public ReviewOfRenter addRenterReview(Principal principal, @PathVariable("id") Integer id, @RequestBody ReviewOfRenter renterReview, HttpServletResponse resp, HttpServletRequest req) {
+	@PostMapping("toolRental/{TRid}/reviewOfRenter")
+	public ReviewOfRenter addRenterReview(Principal principal, @PathVariable("TRid") Integer TRid, @RequestBody ReviewOfRenter renterReview, HttpServletResponse resp, HttpServletRequest req) {
 		try {
-			renterReview = reviewOfRenterSvc.create(renterReview, id);
+			renterReview = reviewOfRenterSvc.create(renterReview, TRid);
 			if (renterReview == null) {
 				resp.setStatus(404);
 			} else {
@@ -62,11 +61,11 @@ public class ReviewOfRenterController {
 		return renterReview;
 	}
 	
-	@PutMapping("reviewOfRenter/{id}")
-	public ReviewOfRenter editRenterReview(@PathVariable("id") Integer id, @RequestBody ReviewOfRenter reviewOfRenter, HttpServletResponse resp,
+	@PutMapping("toolRental/{TRid}/reviewOfRenter/{RORid}")
+	public ReviewOfRenter editRenterReview(@PathVariable("TRid") Integer TRid, @PathVariable("RORid") Integer RORid, @RequestBody ReviewOfRenter reviewOfRenter, HttpServletResponse resp,
 			HttpServletResponse req) {
 		try {
-			reviewOfRenter = reviewOfRenterSvc.update(id, reviewOfRenter);
+			reviewOfRenter = reviewOfRenterSvc.update(TRid, RORid, reviewOfRenter);
 			if (reviewOfRenter == null) {
 				resp.setStatus(404);
 			} else {
@@ -80,9 +79,9 @@ public class ReviewOfRenterController {
 		return reviewOfRenter;
 	}
 	
-	@DeleteMapping("reviewOfRenter/{id}")
-	public boolean destroyRenterReview(@PathVariable("id") Integer id, HttpServletResponse resp) {
-		Boolean success = reviewOfRenterSvc.delete(id);
+	@DeleteMapping("toolRental/{TRid}/reviewOfRenter/{RORid}")
+	public boolean destroyRenterReview(@PathVariable("TRid") Integer TRid, @PathVariable("RORid") Integer RORid, HttpServletResponse resp) {
+		Boolean success = reviewOfRenterSvc.delete(TRid, RORid);
 		try {
 			if (success) {
 				resp.setStatus(204);
