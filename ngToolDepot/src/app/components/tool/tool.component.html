@@ -1,4 +1,4 @@
-<div class="toolpage row display-flex" id="listTools" *ngIf="!selected">
+<div class="toolpage row display-flex col-sm-12" id="listTools" *ngIf="!selected">
   <div class="card-deck col-lg-4 mb-3 h-100 " *ngFor="let tool of tools">
     <div class="card text-center flex-fill ">
       <!-- NEED TO CONNECT tool_photo TABLE -->
@@ -9,7 +9,7 @@
           </h5>
           <div var="image">
           <div>
-              <img class="img-thumbnail card-img-top img-responsive" [src]="tool.toolPhotos">
+              <img class="img-thumbnail card-img-top img-responsive" [src]="tool.photos[0].photoUrl">
             </div>
           <p class="card-text">{{tool.type}}</p>
           <p class="card-text">{{tool.condition}}</p>
