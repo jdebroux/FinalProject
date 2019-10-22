@@ -92,11 +92,12 @@ export class ToolService {
     }
     const httpOptions = {
       headers: new HttpHeaders({
+        'Content-Type': 'application/json',
         Authorization: `Basic ` + this.authService.getCredentials(),
         'X-Requested-With': 'XMLHttpRequest'
       })
     };
-    return this.http.get<Tool[]>(this.url + '/' + username, httpOptions).pipe(
+    return this.http.get<Tool[]>(this.url + '/user/' + username, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error in tool service - getToolListBy User');

@@ -31,7 +31,7 @@ export class UserComponent implements OnInit {
 
   editUser = null;
   selected = null;
-  loggedInUser= null;
+  loggedInUser = null;
   showComplete = false;
   urlUserId: string;
   users: User[] = [];
@@ -44,13 +44,20 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     // this.urlUserId = this.getCommandLineParameter();
     // this.reloadUsers();
+
     if (localStorage.getItem('role') === 'admin') {
       this.reloadUsers();
       this.getLoggedInUserTransactions();
+      this.getLoggedInUserTools();
     } else if (localStorage.getItem('role') === 'user') {
+      console.log(this.myTools);
+      console.log(Array.isArray(this.myTools));
+
       this.getLoggedInUserTransactions();
+      this.getLoggedInUserTools();
 
     }
+
   }
 
   getAllUsers() {
@@ -59,37 +66,41 @@ export class UserComponent implements OnInit {
   }
 
   getLoggedInUserTransactions() {
-    console.log(this.authService.user);
-    this.toolRentalService.getToolTransactionsByUserName(this.authService.getUsername()).subscribe(
+    const userName = this.authService.getUsername();
+    console.log(userName);
+    this.toolRentalService.getToolTransactionsByUserName(userName).subscribe(
       data => {
         this.toolTransactions = data;
+        console.error(this.toolTransactions);
       },
       err => {
         console.error(err);
       }
-    );
-  }
-  setLoggedInUser() {
-    this.userService.getUserByUsername().subscribe(
-      data => {
-        this.loggedInUser = data;
-      },
-      err => {
-        console.error(err);
-        console.error('error in user component.setLoggedInUser');
+      );
+    }
+    setLoggedInUser() {
+      this.userService.getUserByUsername().subscribe(
+        data => {
+          this.loggedInUser = data;
+        },
+        err => {
+          console.error(err);
+          console.error('error in user component.setLoggedInUser');
+        }
+        );
       }
-    );
-  }
 
-  getLoggedInUserTools() {
-    this.toolService.getToolListByUserName(this.authService.getUsername()).subscribe(
-      data => {
-        this.myTools = data;
-      },
+      getLoggedInUserTools() {
+        const userName = this.authService.getUsername();
+        console.log(userName);
+        this.toolService.getToolListByUserName(userName).subscribe(
+        data => {
+          this.myTools = data;
+        },
       err => {
         console.error(err);
       }
-    )
+    );
 
   }
   getCommandLineParameter(): string {

@@ -13,4 +13,6 @@ public interface ToolRepository extends JpaRepository<Tool, Integer>{
     List<Tool> findToolsContainingSearchTerm(@Param("searchterm") String searchterm);
 	@Query("select t from Tool t where t.user = :id")
 	List<Tool> findByUser(@Param(value = "id") int id);
+	
+	List<Tool> findByUserUsername(String username);
 }
