@@ -1,3 +1,4 @@
+import { ReviewOfRenter } from './../models/review-of-renter';
 import { AuthService } from "./auth.service";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
