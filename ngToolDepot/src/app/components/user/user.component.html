@@ -1,38 +1,10 @@
-<!-- <div class="" mdbCollapse #MyTransactions="bs-collapse">
-    <div id="listToolRentals" *ngIf="!selected">
-      <table *ngIf="!selected" class="table table-striped">
-        <thead class="thead thead-dark">
-          <tr>
-            <td align="left">Checked out</td>
-            <td align="left">Returned</td>
-            <td align="left">Total Cost</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let toolTransaction of toolTransactions">
-            <td>{{ toolTransaction.checkout }}</td>
-            <td>{{ toolTransaction.returned }}</td>
-            <td>{{ toolTransaction.totalCost }}</td>
-            <app-update-tool-rental
-              [toolRental]="toolTransaction"
-            ></app-update-tool-rental>
-            <app-delete-tool-rental
-              [toolRental]="toolTransaction"
-            ></app-delete-tool-rental>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div> -->
 <div class="container-fluid">
   <div class="row">
     <div class="col-fluid">
       <div class="card">
         <!-- badge for total lent/rented out/money -->
-
         <h3 class="card-header text-white bg-warning">
-          <span class="badge badge-pill badge-dark m-2">{{loggedInUser.username}}</span>User
-          Name
+          <span class="badge badge-pill badge-dark m-2">User Name</span>
           <span class="badge badge-pill badge-dark float-right m-2"
             >Tool Count/Money Earned
           </span>
@@ -43,10 +15,12 @@
           </div>
           <div class="card-body">
             <h4 class="card-title"></h4>
-            {{loggedInUser.firstname}}
+            <!-- {{loggedInUser.username  }} -->
+            <!-- {{loggedInUser.firstname}} -->
             <!-- {{selected.lastname}} -->
             <!-- {{selected.firstname}} -->
             <p class="card-text ">
+
               Some quick example text to build on the card title andfkjsdhfkdhsfhsdjkfhsdakljfhsdkjfhsdkjfhsklfhsld make up the
               bulk the card's content. fdadsffsdfffsdsdfNeeds to have enough
               text to fill screen
@@ -106,19 +80,19 @@
     </table>
   </div>
 </div>
-<div class="" mdbCollapse #MyTools="bs-collapse"></div>
 <button
   mdbBtn
   class="btn btn-elegant btn-block"
   type="button"
-  (click)="myTools.toggle(); getLoggedInUserTools()"
+  (click)="toolListDiv.toggle(); getLoggedInUserTools(authService.getUsername())"
   mdbWavesEffect
 >
   My Toolbox
 </button>
-<div class="" mdbCollapse #myTools="bs-collapse">
-  <div id="listToolRentals" *ngIf="!selected">
-    <table *ngIf="!selected" class="table table-striped">
+<div class="" mdbCollapse #toolListDiv="bs-collapse">
+  <div id="listMyTools" >
+
+    <table class="table table-striped">
       <thead class="thead thead-dark">
         <tr>
           <td align="left">Name</td>
@@ -127,19 +101,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let tool of myTools">
-          <td>{{ tool.name }}</td>
-          <td>{{ tool.type }}</td>
-          <td>{{ tool.condition }}</td>
-          <app-update-tool-rental
-            [toolRental]="tool"
-          ></app-update-tool-rental>
-          <app-delete-tool-rental
-            [toolRental]="tool"
-          ></app-delete-tool-rental>
+        <tr *ngFor="let myTool of myTools">
+
+          <td>{{ myTool.name }}</td>
+          <td>{{ myTool.type }}</td>
+          <td>{{ myTool.condition }}</td>
+
         </tr>
       </tbody>
     </table>
   </div>
 </div>
 
+<!-- *ngIf="!selected">  *ngIf="!selected" -->

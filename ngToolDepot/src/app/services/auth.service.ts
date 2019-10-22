@@ -40,7 +40,7 @@ export class AuthService {
         err => {
           console.error(err);
         }
-      )
+      );
 
         return res;
 
@@ -63,9 +63,10 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('credentials');
-    localStorage.removeItem('role');
-    localStorage.removeItem('user');
+    // localStorage.removeItem('credentials');
+    // localStorage.removeItem('role');
+    localStorage.clear();
+    // localStorage.removeItem('user');
   }
 
   checkLogin() {
@@ -84,6 +85,6 @@ export class AuthService {
   }
 
   getUsername(): string {
-    return this.user;
+    return localStorage.getItem('user');
   }
 }
