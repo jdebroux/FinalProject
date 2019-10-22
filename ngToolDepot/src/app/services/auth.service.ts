@@ -1,3 +1,4 @@
+import { UserComponent } from './../components/user/user.component';
 import { Router } from '@angular/router';
 import { environment } from './../../environments/environment';
 import { catchError, tap } from 'rxjs/operators';
@@ -40,6 +41,7 @@ export class AuthService {
                 this.user = userData;
                 localStorage.setItem('role', data);
                 localStorage.setItem('user', username);
+                localStorage.setItem('Object', JSON.stringify(this.user));
                 this.router.navigateByUrl('/user');
               },
               catchError((err: any) => {
@@ -77,6 +79,7 @@ export class AuthService {
     // localStorage.removeItem('role');
     localStorage.clear();
     // localStorage.removeItem('user');
+    this.user = new User();
   }
 
   checkLogin() {

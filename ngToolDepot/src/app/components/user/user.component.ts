@@ -1,3 +1,4 @@
+import { NavigationComponent } from './../navigation/navigation.component';
 import { ToolRentalService } from 'src/app/services/tool-rental.service';
 import { AuthService } from './../../services/auth.service';
 import { ToolTransactionComponent } from './../tool-transaction/tool-transaction.component';
@@ -26,7 +27,7 @@ export class UserComponent implements OnInit, AfterContentInit {
               private toolService: ToolService,
               private router: Router,
               private authService: AuthService,
-              private toolRentalService: ToolRentalService
+              private toolRentalService: ToolRentalService,
               ) {}
 
   editUser = null;
@@ -44,14 +45,13 @@ export class UserComponent implements OnInit, AfterContentInit {
   ngOnInit() {
     // this.urlUserId = this.getCommandLineParameter();
     // this.reloadUsers();
-    this.loggedInUser = this.authService.returnUser();
-    console.log(this.authService.returnUser());
-    console.log(this.loggedInUser.firstName + '   THIS IS LOGGED IN USER FIRST NAME ONINIT');
+
+    // this.loggedInUser = this.authService.returnUser();
+    this.loggedInUser = JSON.parse(localStorage.getItem('Object'));
   }
 
   ngAfterContentInit() {
     // this.setLoggedInUser();
-    console.log(localStorage.getItem('role') + '   THIS IS ROLE');
     if (localStorage.getItem('role') === 'admin') {
       this.reloadUsers();
       this.getLoggedInUserTransactions();
@@ -61,7 +61,7 @@ export class UserComponent implements OnInit, AfterContentInit {
       this.getLoggedInUserTools();
 
     }
-
+    this.loggedInUser = JSON.parse(localStorage.getItem('Object'));
   }
 
   getAllUsers() {
@@ -212,10 +212,8 @@ export class UserComponent implements OnInit, AfterContentInit {
     );
   }
 
-  getUser() {
-
-
-
+  removeUser() {
+    this.loggedInUser = new User();
   }
 
   // TODO we dont need this but could utilize in a different way.
