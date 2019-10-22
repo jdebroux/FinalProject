@@ -1,28 +1,30 @@
-<div class="container-fluid">
+ <div class="container-fluid" >
     <div class="row">
       <div class="col-fluid">
         <div class="card">
-          <!-- badge for total lent/rented out/money -->
-            <h3 class="card-header text-dark bg-warning"><span class="badge badge-pill badge-dark m-2"
-              >Tool Name</span></h3>
+          badge for total lent/rented out/money
+            <h3 class="card-header text-dark bg-warning">
+              <span>{{display.name}}</span>
+              <span class="cost">{{display.costPerDay | currency}}/day</span></h3>
             <div class="card-horizontal">
               <div class="img-square-wrapper">
-                <img class="" src="http://bit.ly/31r6agx" class="img-thumbnail" alt="Cinque Terre" width="250" height="250"alt="Card image cap" />
+                <img class="" [src]="display.photos[0].photoUrl" class="" alt="Cinque Terre" width="250" height="250"alt="Card image cap" />
               </div>
               <div class="card-body">
-                <h4 class="card-title"></h4>
+                <h4 class="card-title">{{display.type}}</h4>
                 <p class="card-text ">
-                  30 cc 4-cycle engine is cleaner and produces less noise.  Eliminate the need to mix oil and gas Troy-Bilt's 4-cycle engines take regular gas. Quick change cutting head option makes it easy to refill without disassembling the cutting head, simply feed the line through the eyelets and then twist the head to wind the line in seconds                  </p>
+                  {{display.description}}
+                </p>
               </div>
             </div>
             <div class="card-footer text-dark bg-warning">Footer Footer</div>
           </div>
         </div>
       </div>
-  </div>
+    </div>
 
-<div id="listToolRentals" *ngIf="!selected">
-  <table *ngIf="!selected" class='table table-striped'>
+<div id="listToolRentals">
+  <table class='table table-striped'>
     <thead class='thead thead-dark'>
       <tr>
         <td align='left'>Checked out</td>

@@ -2,17 +2,15 @@
   <div class="card-deck col-lg-4 mb-3 h-100 " *ngFor="let tool of tools">
     <div class="card text-center bg-dark flex-fill ">
       <!-- NEED TO CONNECT tool_photo TABLE -->
-      <h4 class="card-header text-white bg-dark"><a [routerLink]="['/toolTransaction']">
-        {{tool.name}}
-      </a></h4>
-
-        <div class="card-body mt-auto display-flex flex-column  text-center">
-          <h5 class="card-title">
-          </h5>
-          <div var="image">
+      <div class="card-body mt-auto display-flex flex-column  text-center">
+        <h5 class="card-title">
+          <!-- <a (click)="asignTool(tool)" [routerLink]="['/toolTransaction']">{{tool.name}}</a> -->
+          <a [routerLink]="['/toolTransaction']" [queryParams]="{id: tool.id}">{{tool.name}}</a>
+        </h5>
+        <div var="image">
           <div>
-              <img class="img-thumbnail card-img-top img-responsive" [src]="tool.photos[0].photoUrl">
-            </div>
+            <img class="img-thumbnail card-img-top img-responsive" [src]="tool.photos[0].photoUrl">
+          </div>
           <p class="card-text">{{tool.type}}</p>
           <p class="card-text">{{tool.condition}}</p>
           <p>${{tool.costPerDay}}/day</p>

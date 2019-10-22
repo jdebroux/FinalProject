@@ -112,5 +112,12 @@ export class ToolService {
       })
     );
   }
-
+  findById(toolId: string) {
+    return this.http.get<Tool>(this.url + '/' + toolId).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError("Error searching for tools in tool.service.ts.findById()");
+      })
+    );
+  }
 }
