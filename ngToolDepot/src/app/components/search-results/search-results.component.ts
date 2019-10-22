@@ -18,9 +18,9 @@ export class SearchResultsComponent implements OnInit {
   lat: number = 39.7392;
   lng: number = -104.9903;
   location: Location = new Location();
-  savedCoordinates: Location[] = [];
+  savedCoordinatesMap: Map<string, Location> = new Map();
+  savedCoordinatesList: Location[] = [];
   coordinates: Location[] = []
-  coordinateMap = new Map();
   openInfo: boolean = false;
   hoveredTool: Tool = new Tool();
   address: Address = new Address();
@@ -31,6 +31,7 @@ export class SearchResultsComponent implements OnInit {
     ) {}
 
   ngOnInit() {
+    this.savedCoordinatesMap = new Map();
   }
 
   ngAfterViewInit() {
@@ -38,17 +39,15 @@ export class SearchResultsComponent implements OnInit {
     this.redraw();
   }
   ngOnChanges() {
-    var i = 0;
     for (let tool of this.searchResults) {
-      this.coordinates = [];
+      this.savedCoordinatesList = [];
       this.addrService.getAddressOfToolOwner(tool.id).subscribe(
         data => {
           this.geoService.geocodeAddress(this.generateApiAddressString(data)).subscribe(
 
             data => {
-              this.parseForCoordinates(data, this.savedCoordinates);
-              this.coordinateMap.set(tool.name, i);
-              i++;
+              this.parseForCoordinates(data, tool, this.savedCoordinatesMap);
+
             },
             err => {
               console.error(err);
@@ -65,10 +64,9 @@ export class SearchResultsComponent implements OnInit {
 
   mouseEnter(tool: Tool) {
     this.coordinates = [];
-    var locationIndex = this.coordinateMap.get(tool.name);
-    this.location = this.savedCoordinates[locationIndex];
+    this.location = this.savedCoordinatesMap.get(tool.name);
     this.coordinates.push(this.location);
-    this.hoveredTool = this.searchResults[locationIndex];
+    this.hoveredTool = tool;
     for (let prop in this.hoveredTool) {
       if (prop === 'user') {
         this.owner = this.hoveredTool[prop];
@@ -84,11 +82,12 @@ export class SearchResultsComponent implements OnInit {
     this.openInfo = true;
   }
 
-  parseForCoordinates(data, locationArray: Location[]) {
+  parseForCoordinates(data, tool, locationMap: Map<String, Location>) {
     for (let i = 0; i < data.results.length; i++) {
       this.location.lat = data.results[i].geometry.location.lat;
       this.location.lng = data.results[i].geometry.location.lng;
-      locationArray.push(this.location);
+      locationMap.set(tool.name, this.location);
+      this.savedCoordinatesList.push(this.location);
       this.location = new Location();
     }
   }
@@ -105,6 +104,6 @@ export class SearchResultsComponent implements OnInit {
 
   redraw(){
     this.openInfo = false;
-    this.coordinates = this.savedCoordinates;
+    this.coordinates = this.savedCoordinatesList;
   }
 }
