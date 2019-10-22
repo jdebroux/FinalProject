@@ -35,6 +35,7 @@ export class SearchResultsComponent implements OnInit {
 
   ngAfterViewInit() {
     this.agmMap.triggerResize();
+    this.redraw();
   }
   ngOnChanges() {
     var i = 0;
@@ -46,7 +47,7 @@ export class SearchResultsComponent implements OnInit {
 
             data => {
               this.parseForCoordinates(data, this.savedCoordinates);
-              this.coordinateMap.set(tool.id, i);
+              this.coordinateMap.set(tool.name, i);
               i++;
             },
             err => {
@@ -64,7 +65,7 @@ export class SearchResultsComponent implements OnInit {
 
   mouseEnter(tool: Tool) {
     this.coordinates = [];
-    var locationIndex = this.coordinateMap.get(tool.id);
+    var locationIndex = this.coordinateMap.get(tool.name);
     this.location = this.savedCoordinates[locationIndex];
     this.coordinates.push(this.location);
     this.hoveredTool = this.searchResults[locationIndex];
