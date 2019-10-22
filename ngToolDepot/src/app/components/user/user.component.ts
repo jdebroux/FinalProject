@@ -45,6 +45,8 @@ export class UserComponent implements OnInit, AfterContentInit {
     // this.urlUserId = this.getCommandLineParameter();
     // this.reloadUsers();
     this.loggedInUser = this.authService.returnUser();
+    console.log(this.authService.returnUser());
+    console.log(this.loggedInUser.firstName + '   THIS IS LOGGED IN USER FIRST NAME ONINIT');
   }
 
   ngAfterContentInit() {
@@ -80,19 +82,19 @@ export class UserComponent implements OnInit, AfterContentInit {
       );
     }
 
-    setLoggedInUser() {
-      this.userService.getUserByUsername().subscribe(
-        data => {
-          console.error(data + '   ******************** DATA IN USER COMP');
-          this.loggedInUser = data;
-          console.error(this.loggedInUser + '   ******************** loggedInUser IN USER COMP');
-        },
-        err => {
-          console.error(err);
-          console.error('error in user component.setLoggedInUser');
-        }
-        );
-      }
+  //   setLoggedInUser() {
+  //     this.userService.getUserByUsername().subscribe(
+  //       data => {
+  //         console.error(data + '   ******************** DATA IN USER COMP');
+  //         this.loggedInUser = data;
+  //         console.error(this.loggedInUser + '   ******************** loggedInUser IN USER COMP');
+  //       },
+  //       err => {
+  //         console.error(err);
+  //         console.error('error in user component.setLoggedInUser');
+  //       }
+  //       );
+  //     }
 
       getLoggedInUserTools() {
         const userName = this.authService.getUsername();
@@ -106,6 +108,7 @@ export class UserComponent implements OnInit, AfterContentInit {
     );
 
   }
+
   getCommandLineParameter(): string {
     let idString = '';
     if (this.currentRoute.snapshot.paramMap.get('id')) {
