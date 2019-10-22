@@ -4,7 +4,8 @@ import { Address } from './../../models/address';
 import { GeocodeService } from './../../services/geocode.service';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Tool } from 'src/app/models/tool';
-import { AgmMap } from '@agm/core';
+import { AgmMap, InfoWindowManager } from '@agm/core';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-search-results',
@@ -17,7 +18,13 @@ export class SearchResultsComponent implements OnInit {
   lat: number = 39.7392;
   lng: number = -104.9903;
   location: Location = new Location();
-  coordinates: Location[] = [];
+  savedCoordinates: Location[] = [];
+  coordinates: Location[] = []
+  coordinateMap = new Map();
+  openInfo: boolean = false;
+  hoveredTool: Tool = new Tool();
+  address: Address = new Address();
+  owner: User = new User();
   constructor(
     private geoService: GeocodeService,
     private addrService: AddressService
@@ -30,13 +37,17 @@ export class SearchResultsComponent implements OnInit {
     this.agmMap.triggerResize();
   }
   ngOnChanges() {
+    var i = 0;
     for (let tool of this.searchResults) {
       this.coordinates = [];
       this.addrService.getAddressOfToolOwner(tool.id).subscribe(
         data => {
           this.geoService.geocodeAddress(this.generateApiAddressString(data)).subscribe(
+
             data => {
-              this.parseForCoordinates(data);
+              this.parseForCoordinates(data, this.savedCoordinates);
+              this.coordinateMap.set(tool.id, i);
+              i++;
             },
             err => {
               console.error(err);
@@ -51,11 +62,32 @@ export class SearchResultsComponent implements OnInit {
 
   }
 
-  parseForCoordinates(data) {
+  mouseEnter(tool: Tool) {
+    this.coordinates = [];
+    var locationIndex = this.coordinateMap.get(tool.id);
+    this.location = this.savedCoordinates[locationIndex];
+    this.coordinates.push(this.location);
+    this.hoveredTool = this.searchResults[locationIndex];
+    for (let prop in this.hoveredTool) {
+      if (prop === 'user') {
+        this.owner = this.hoveredTool[prop];
+        for (let property in this.owner) {
+          if (property === 'address') {
+            this.address = this.owner[property];
+            break;
+          }
+        }
+        break;
+      }
+    }
+    this.openInfo = true;
+  }
+
+  parseForCoordinates(data, locationArray: Location[]) {
     for (let i = 0; i < data.results.length; i++) {
       this.location.lat = data.results[i].geometry.location.lat;
       this.location.lng = data.results[i].geometry.location.lng;
-      this.coordinates.push(this.location);
+      locationArray.push(this.location);
       this.location = new Location();
     }
   }
@@ -68,5 +100,10 @@ export class SearchResultsComponent implements OnInit {
     formattedString += '+' + addr.city.split(' ').join('+');
     formattedString += '+' + addr.state;
     return formattedString;
+  }
+
+  redraw(){
+    this.openInfo = false;
+    this.coordinates = this.savedCoordinates;
   }
 }
