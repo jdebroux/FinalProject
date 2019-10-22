@@ -26,7 +26,6 @@ button:hover {
 }
 a:hover {
   color: #F9d31a;
-  font-weight: bold;
 }
 a {
   color:  #dfa000;
@@ -38,6 +37,26 @@ a {
 .row.display-flex > [class*='col-'] {
   display: flex;
   flex-direction: column;
+}
+.card-header {
+  background-color: #3D3B3D;
+}
+.card-body {
+  background-color: #f2ebe4;
+  color: #3D3B3D;
+  font-weight: bold;
+}
+.card-footer {
+  background-color: #dfa000;
+}
+.footer {
+  color: #f2ebe4 !important;
+}
+.footer:hover {
+  color: #646264 !important;
+}
+.card {
+  border-color: #3D3B3D;
 }
 
 

@@ -39,7 +39,7 @@ public class UserController {
 
 	@GetMapping("user/{username}")
 	public User getUser(@PathVariable("username") String username, HttpServletResponse resp, Principal principal) {
-		User user = svc.findByUsername(principal.getName());
+		User user = svc.findByUsername(username);
 		return user;
 	}
 	
