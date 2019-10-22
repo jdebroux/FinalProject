@@ -1,6 +1,6 @@
 <div class="toolpage row display-flex col-sm-12" id="listTools" *ngIf="!selected">
   <div class="card-deck col-lg-4 mb-3 h-100 " *ngFor="let tool of tools">
-    <div class="card text-center flex-fill ">
+    <div class="card text-center bg-dark flex-fill ">
       <!-- NEED TO CONNECT tool_photo TABLE -->
       <div class="card-body mt-auto display-flex flex-column  text-center">
         <h5 class="card-title">
@@ -16,9 +16,9 @@
           <p>${{tool.costPerDay}}/day</p>
           <!-- <p class="card-text">{{ (tool.description.length>35)? (tool.description | slice:0:35)+'...':(tool.description) }}</p> -->
         </div>
-        <div class="card-footer mt-auto">
-          <h5>{{tool.available | toolAvailable}}</h5>
-        </div>
+        <h5><div class="card-footer text-dark bg-warning mt-auto">
+          <strong>{{tool.available | toolAvailable}}</strong>
+        </div></h5>
       </div>
     </div>
   </div>
