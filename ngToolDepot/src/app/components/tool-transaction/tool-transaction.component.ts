@@ -1,3 +1,4 @@
+import { User } from 'src/app/models/user';
 import { ToolService } from 'src/app/services/tool.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -25,7 +26,8 @@ export class ToolTransactionComponent implements OnInit {
   constructor(private toolRentalService: ToolRentalService,
               private datePipe: DatePipe,
               private currentRoute: ActivatedRoute,
-              private router: Router, private toolService: ToolService) {}
+              private router: Router,
+              private toolService: ToolService) {}
 
   ngOnInit() {
     console.log('ToolTransactionComponent.ngOnInit');
@@ -37,7 +39,7 @@ export class ToolTransactionComponent implements OnInit {
     this.toolService.findById(this.urlToolTransactionId).subscribe(
       lifeIsGood => {
         this.display = lifeIsGood;
-        console.log(this.display);
+        console.log(this.display.owner);
       },
       lifeIsBad => {
         console.error('Error in ngOnInit.toolService.findById()');

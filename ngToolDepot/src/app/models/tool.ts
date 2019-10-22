@@ -11,6 +11,7 @@ export class Tool {
   manufactureYear: string;
   condition: string;
   owner: User;
+  user: User;
   photos: ToolPhoto[];
 
   constructor(
@@ -23,6 +24,7 @@ export class Tool {
     manufactureYear?: string,
     condition?: string,
     owner?: User,
+    user?: User,
     photos?: ToolPhoto[]
   ) {
     this.id = id;
@@ -34,6 +36,7 @@ export class Tool {
     this.manufactureYear = manufactureYear;
     this.condition = condition;
     this.owner = owner;
+    this.user = user;
     this.photos = photos;
   }
 }

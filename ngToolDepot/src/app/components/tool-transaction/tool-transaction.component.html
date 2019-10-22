@@ -1,27 +1,31 @@
- <div class="container-fluid" >
-    <div class="row">
-      <div class="col-fluid">
-        <div class="card">
-          badge for total lent/rented out/money
-            <h3 class="card-header text-dark bg-warning">
-              <span>{{display.name}}</span>
-              <span class="cost">{{display.costPerDay | currency}}/day</span></h3>
-            <div class="card-horizontal">
-              <div class="img-square-wrapper">
-                <img class="" [src]="display.photos[0].photoUrl" class="" alt="Cinque Terre" width="250" height="250"alt="Card image cap" />
-              </div>
-              <div class="card-body">
-                <h4 class="card-title">{{display.type}}</h4>
-                <p class="card-text ">
-                  {{display.description}}
-                </p>
-              </div>
-            </div>
-            <div class="card-footer text-dark bg-warning">Footer Footer</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-fluid">
+      <div class="card">
+        badge for total lent/rented out/money
+        <h3 class="card-header text-dark bg-warning">
+          <span class="tool-name">{{display.name}}</span>
+          <span class="cost">{{display.costPerDay | currency}}/day</span></h3>
+        <div class="card-horizontal">
+          <div class="img-square-wrapper">
+            <img class="" [src]="display.photos[0].photoUrl" class="" alt="Cinque Terre" width="250" height="250"
+              alt="Card image cap" />
           </div>
+          <div class="card-body">
+            <h3><span class="condition">{{display.condition}} Condition</span>
+              <span class="year-made">Year Manufactured: {{display.manufactureYear}}</span></h3>
+            <p class="card-text ">
+              {{display.description}}
+            </p>
+          </div>
+        </div>
+        <div class="card-footer text-dark bg-warning">
+          <span class="owner">Tool Owner: {{display.user.username}}</span>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
 <div id="listToolRentals">
   <table class='table table-striped'>
