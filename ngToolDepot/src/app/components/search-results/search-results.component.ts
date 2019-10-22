@@ -40,7 +40,7 @@ export class SearchResultsComponent implements OnInit {
   }
   ngOnChanges() {
     for (let tool of this.searchResults) {
-      this.coordinates = [];
+      this.savedCoordinatesList = [];
       this.addrService.getAddressOfToolOwner(tool.id).subscribe(
         data => {
           this.geoService.geocodeAddress(this.generateApiAddressString(data)).subscribe(
