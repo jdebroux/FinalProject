@@ -108,9 +108,16 @@ export class ToolService {
     return this.http.get<Tool[]>(this.url + '/search/' + searchTerm).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError("Error searching for tools in tool.service.ts.search()");
+        return throwError('Error searching for tools in tool.service.ts.search()');
       })
     );
   }
-
+  findById(toolId: string) {
+    return this.http.get<Tool>(this.url + '/' + toolId).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError("Error searching for tools in tool.service.ts.findById()");
+      })
+    );
+  }
 }

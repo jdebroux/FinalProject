@@ -1,45 +1,26 @@
 <div class="toolpage row display-flex col-sm-12" id="listTools" *ngIf="!selected">
   <div class="card-deck col-lg-4 mb-3 h-100 " *ngFor="let tool of tools">
-    <div class="card text-center bg-dark flex-fill ">
-      <!-- NEED TO CONNECT tool_photo TABLE -->
-      <h4 class="card-header text-white bg-dark"><a [routerLink]="['/toolTransaction']">
-        {{tool.name}}
+    <div class="card text-center flex-fill ">
+      <h4 class="card-header"><a [routerLink]="['/toolTransaction']" [queryParams]="{id: tool.id}">{{tool.name}}
       </a></h4>
-
         <div class="card-body mt-auto display-flex flex-column  text-center">
-          <h5 class="card-title">
-          </h5>
+          <!-- <h5 class="card-title">
+            <a [routerLink]="['/toolTransaction']" [queryParams]="{id: tool.id}">{{tool.name}}</a>
+          </h5> -->
           <div var="image">
           <div>
-              <img class="img-thumbnail card-img-top img-responsive" [src]="tool.photos[0].photoUrl">
-            </div>
+            <img class="img-thumbnail card-img-top img-responsive" [src]="tool.photos[0].photoUrl">
+          </div>
           <p class="card-text">{{tool.type}}</p>
-          <p class="card-text">{{tool.condition}}</p>
-          <p>${{tool.costPerDay}}/day</p>
-          <!-- <p class="card-text">{{ (tool.description.length>35)? (tool.description | slice:0:35)+'...':(tool.description) }}</p> -->
+          <p class="card-text">{{tool.condition}} Condition &nbsp;&nbsp;{{tool.costPerDay | currency}}/day</p>
+          <p></p>
         </div>
-        <h5><div class="card-footer text-dark bg-warning mt-auto">
-          <strong>{{tool.available | toolAvailable}}</strong>
+        <h5><div class="card-footer mt-auto">
+          <a class='footer'[routerLink]="['/toolTransaction']"><strong>{{tool.available | toolAvailable}}</strong></a>
         </div></h5>
       </div>
     </div>
   </div>
 </div>
-<!-- add photo here -->
-<!-- <td>{{ tool.name }}</td>
-        <td>{{ tool.type }}</td>
-        <td>{{ tool.description }}</td>
-        <td>{{ tool.costPerDay | currency }}</td>
-        <td>{{ tool.condition }}</td>
-        <td>{{ tool.manufactureYear }}</td>
-        <app-update-tool [tool]="tool"></app-update-tool>
-        <app-delete-tool [tool]="tool"></app-delete-tool>
-        <app-add-tool-rental [tool]="tool"></app-add-tool-rental>
-        <td><button *ngIf="loggedIn" (click)="displayTool(tool.id)"
-            class='btn btn-sm btn-outline-secondary'>Rent</button></td>
-        <td><button *ngIf="!loggedIn" (click)="displayRegister()" class='btn btn-sm btn-outline-secondary'>Sign
-            In</button></td> -->
-<!-- </tr>
-    </tbody>
-  </table> -->
-<app-add-tool></app-add-tool>
+
+<!-- <app-add-tool></app-add-tool> -->

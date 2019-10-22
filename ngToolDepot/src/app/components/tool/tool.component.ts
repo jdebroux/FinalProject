@@ -1,3 +1,4 @@
+import { ToolTransactionComponent } from './../tool-transaction/tool-transaction.component';
 import { ToolPhotoService } from './../../services/tool-photo.service';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -20,6 +21,7 @@ export class ToolComponent implements OnInit {
   urlToolId: string;
   tools: Tool[] = [];
   toolPhotos: ToolPhoto[] = [];
+  display: Tool = null;
 
   newTool = new Tool();
 
@@ -28,13 +30,11 @@ export class ToolComponent implements OnInit {
               private currentRoute: ActivatedRoute,
               private router: Router,
               private authService: AuthService,
-              private photoService: ToolPhotoService) {}
+              private photoService: ToolPhotoService,
+              private transaction: ToolTransactionComponent) {}
 
   ngOnInit() {
     this.urlToolId = this.getCommandLineParameter();
-    // this.photoService.getToolPhotos().subscribe(photos => {
-    //   this.toolPhotos = photos;
-    // });
     this.reloadTools();
   }
 
@@ -67,7 +67,6 @@ export class ToolComponent implements OnInit {
   displayTable() {
     this.selected = null;
   }
-
   switchCompleted(id: number, tool: Tool) {
     if (tool.available === true) {
       tool.available = false;

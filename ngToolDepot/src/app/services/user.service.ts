@@ -12,7 +12,7 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class UserService {
-  private url = environment.baseUrl + '/api/user';
+  private url = environment.baseUrl + 'api/user';
 
   constructor(private http: HttpClient, private authService: AuthService, private router: Router) {}
 
@@ -22,7 +22,7 @@ export class UserService {
     }
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': `Basic ` + this.authService.getCredentials(),
+        Authorization: `Basic ` + this.authService.getCredentials(),
         'X-Requested-With': 'XMLHttpRequest'
       })
     };
@@ -40,7 +40,7 @@ export class UserService {
       }
       const httpOptions = {
         headers: new HttpHeaders({
-          'Authorization': `Basic ` + this.authService.getCredentials(),
+          Authorization: `Basic ` + this.authService.getCredentials(),
           'Content-Type': 'application/json',
           'X-Requested-With': 'XMLHttpRequest'
         })
@@ -59,7 +59,7 @@ export class UserService {
       }
       const httpOptions = {
         headers: new HttpHeaders({
-          'Authorization': `Basic ` + this.authService.getCredentials(),
+          Authorization: `Basic ` + this.authService.getCredentials(),
           'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest'
         // Authorization: 'my-auth-token'
@@ -72,25 +72,28 @@ export class UserService {
       })
       );
   }
-  getUserByUsername() {
-    if (localStorage.length === 0) {
-      this.router.navigateByUrl("/login");
-    }
-    const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Authorization': `Basic ` + this.authService.getCredentials(),
-          'X-Requested-With': 'XMLHttpRequest'
-          // Authorization: 'my-auth-token'
-        })
-      };
-    return this.http.get<User>(this.url + '/' + localStorage.getItem('user'), httpOptions).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError('Error in user service -- getUserbyUsername');
-      })
-    );
-  }
+  // getUserByUsername() {
+  //   if (localStorage.length === 0) {
+  //     this.router.navigateByUrl('/login');
+  //   }
+  //   const httpOptions = {
+  //       headers: new HttpHeaders({
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Basic ` + this.authService.getCredentials(),
+  //         'X-Requested-With': 'XMLHttpRequest'
+  //         // Authorization: 'my-auth-token'
+  //       })
+  //     };
+
+  //   console.log(localStorage.getItem('user') + '   SECOND ()()()()()()()()()())()^^&');
+    // return this.http.get<User>(this.url + '/' + localStorage.getItem('user'), httpOptions).pipe(
+    //   catchError((err: any) => {
+    //     console.log(err);
+    //     return throwError('Error in user service -- getUserbyUsername');
+    //   })
+    // );
+  // }
+
   destroy(id: number) {
     if (localStorage.length === 0) {
       this.router.navigateByUrl('/login');
@@ -98,7 +101,7 @@ export class UserService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Basic ` + this.authService.getCredentials(),
+        Authorization: `Basic ` + this.authService.getCredentials(),
         'X-Requested-With': 'XMLHttpRequest'
         // Authorization: 'my-auth-token'
       })

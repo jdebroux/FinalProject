@@ -1,24 +1,22 @@
-<div class="container-fluid">
+<div class="userpage container-fluid">
   <div class="row">
     <div class="col-fluid">
       <div class="card">
         <!-- badge for total lent/rented out/money -->
         <h3 class="card-header text-white bg-warning">
-          <span class="badge badge-pill badge-dark m-2">User Name</span>
+          <span class="badge badge-pill badge-dark m-2">{{loggedInUser.firstName}}</span>
           <span class="badge badge-pill badge-dark float-right m-2"
             >Tool Count/Money Earned
           </span>
         </h3>
         <div class="card-horizontal">
-          <div class="img-square-wrapper">
-            <img class="" src="https://bit.ly/2MpfRrz" alt="Card image cap" />
-          </div>
+            <div class="img-square-wrapper">
+              <img class="img-thumbnail" [src]="loggedInUser.photo" alt="Cinque Terre" width="300" height="300"alt="Card image cap"/>
+            </div>
           <div class="card-body">
             <h4 class="card-title"></h4>
-            <!-- {{loggedInUser.username  }} -->
-            <!-- {{loggedInUser.firstname}} -->
-            <!-- {{selected.lastname}} -->
-            <!-- {{selected.firstname}} -->
+            {{loggedInUser.username  }}
+            {{loggedInUser.firstName}}
             <p class="card-text ">
               Some quick example text to build on the card title
               andfkjsdhfkdhsfhsdjkfhsdakljfhsdkjfhsdkjfhsklfhsld make up the
@@ -47,18 +45,21 @@
 </div> -->
 <button
   mdbBtn
-  class="btn btn-elegant btn-block"
+  class=" btn btn-elegant btn-block"
   type="button"
   (click)="MyTransactions.toggle(); getLoggedInUserTransactions()"
   mdbWavesEffect
 >
   My Transaction History
 </button>
-<div class="" mdbCollapse #MyTransactions="bs-collapse">
+<div class="userpage" mdbCollapse #MyTransactions="bs-collapse">
   <div id="listToolRentals" *ngIf="!selected">
     <table *ngIf="!selected" class="table table-striped table-dark">
       <thead class="thead thead-dark">
         <tr>
+          <td align="left">Tool Name</td>
+          <td align="left">Tool Owner</td>
+          <td align="left">Tool Something</td>
           <td align="left">Checked out</td>
           <td align="left">Returned</td>
           <td align="left">Total Cost</td>
@@ -66,6 +67,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let toolTransaction of toolTransactions">
+          <!-- <td>{{ toolTransaction.toolName }}</td> -->
+          <td></td>
+          <td></td>
+          <td></td>
           <td>{{ toolTransaction.checkout }}</td>
           <td>{{ toolTransaction.returned }}</td>
           <td>{{ toolTransaction.totalCost }}</td>
@@ -91,7 +96,7 @@
 >
   My Toolbox
 </button>
-<div class="" mdbCollapse #toolListDiv="bs-collapse">
+<div class="userpage" mdbCollapse #toolListDiv="bs-collapse">
   <div id="listMyTools">
     <table class="table table-striped table-dark">
         <thead class="dark text-warning">

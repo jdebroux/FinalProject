@@ -1,3 +1,6 @@
+import { User } from 'src/app/models/user';
+import { Tool } from './tool';
+
 export class ToolRental {
   id: number;
   checkout: Date;
