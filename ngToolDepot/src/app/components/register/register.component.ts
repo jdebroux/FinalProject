@@ -25,7 +25,8 @@ export class RegisterComponent implements OnInit {
       lifeIsGood => {
         this.authService.login(user.username, user.password).subscribe(
           next => {
-            this.router.navigateByUrl('/todo');
+            this.router.navigateByUrl('/user');
+            form.reset();
           },
            error => {
             console.error('Error in RegisterComponent.register.login()');

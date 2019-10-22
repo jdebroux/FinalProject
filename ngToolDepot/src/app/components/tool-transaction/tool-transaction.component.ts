@@ -1,9 +1,11 @@
+import { ToolService } from 'src/app/services/tool.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToolRental } from 'src/app/models/tool-rental';
 import { ToolRentalService } from 'src/app/services/tool-rental.service';
+import { Tool } from 'src/app/models/tool';
 
 @Component({
   selector: 'app-tool-transaction',
@@ -16,16 +18,32 @@ export class ToolTransactionComponent implements OnInit {
   showComplete = false;
   urlToolTransactionId: string;
   toolTransactions: ToolRental[] = [];
-
+  tool: Tool = null;
+  display: Tool = null;
   newToolTransaction = new ToolRental();
 
   constructor(private toolRentalService: ToolRentalService,
               private datePipe: DatePipe,
               private currentRoute: ActivatedRoute,
-              private router: Router) {}
+              private router: Router, private toolService: ToolService) {}
 
   ngOnInit() {
+    console.log('ToolTransactionComponent.ngOnInit');
     this.urlToolTransactionId = this.getCommandLineParameter();
+    this.currentRoute.queryParams.subscribe(params => {
+      this.urlToolTransactionId = params['id'];
+  });
+    console.error('transaction id ' + this.urlToolTransactionId);
+    this.toolService.findById(this.urlToolTransactionId).subscribe(
+      lifeIsGood => {
+        this.display = lifeIsGood;
+        console.log(this.display);
+      },
+      lifeIsBad => {
+        console.error('Error in ngOnInit.toolService.findById()');
+        console.error(lifeIsBad);
+      }
+    );
     this.reloadToolTransactions();
   }
 
@@ -33,6 +51,7 @@ export class ToolTransactionComponent implements OnInit {
     let idString = '';
     if (this.currentRoute.snapshot.paramMap.get('id')) {
       idString =  this.currentRoute.snapshot.paramMap.get('id');
+      console.log(idString);
     }
     return idString;
   }
@@ -49,7 +68,6 @@ export class ToolTransactionComponent implements OnInit {
   displayTable() {
     this.selected = null;
   }
-
 
   addToolTransaction(toolRental: ToolRental, toolId: number) {
 
@@ -104,6 +122,7 @@ export class ToolTransactionComponent implements OnInit {
   }
 
   reloadToolTransactions() {
+    // this.displayTool(this.toolComp);
     this.toolRentalService.index().subscribe(
       lifeIsGood => {
         this.toolTransactions = lifeIsGood;

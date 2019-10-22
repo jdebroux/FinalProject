@@ -14,7 +14,9 @@ export class AuthService {
   // private baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient, private router: Router) {}
-  user = '';
+
+  user: User = new User();
+
   login(username, password) {
     // Make credentials
     const credentials = this.generateBasicAuthCredentials(username, password);
@@ -26,27 +28,35 @@ export class AuthService {
       })
 
     };
-    this.user = username;
 
     // create request to authenticate credentials
     return this.http.get(this.baseUrl + 'authenticate', httpOptions).pipe(
       tap(res => {
         localStorage.setItem('credentials', credentials);
-        this.http.get(this.baseUrl + 'api/user/' + this.user + '/role', {responseType:'text'}).subscribe(
+        this.http.get(this.baseUrl + 'api/user/' + username + '/role', {responseType: 'text'}).subscribe(
           data => {
-            localStorage.setItem('role', data);
-            localStorage.setItem('user', username);
-        },
-        err => {
-          console.error(err);
-        }
-      );
+            return this.http.get<User>(this.baseUrl + 'api/user/' + username, httpOptions).subscribe(
+              userData => {
+                this.user = userData;
+                localStorage.setItem('role', data);
+                localStorage.setItem('user', username);
+                this.router.navigateByUrl('/user');
+              },
+              catchError((err: any) => {
+                console.log(err);
+                return throwError('Error in user service -- getUserbyUsername');
+              })
+              );
+            },
+            err => {
+              console.error(err);
+            }
+            );
 
         return res;
 
       }),
       catchError((err: any) => {
-        this.user = '';
         return throwError('AuthService.login(): Error logging in.');
       })
     );
@@ -86,5 +96,9 @@ export class AuthService {
 
   getUsername(): string {
     return localStorage.getItem('user');
+  }
+
+  returnUser() {
+    return this.user;
   }
 }

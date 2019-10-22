@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'user', component: UserComponent },
+  { path: 'toolTransaction/:id', component: ToolTransactionComponent },
   { path: 'toolTransaction', component: ToolTransactionComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
