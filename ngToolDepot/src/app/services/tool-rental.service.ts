@@ -124,12 +124,4 @@ export class ToolRentalService {
       })
     );
   }
-  // findRenterById(renterId: string) {
-  //   return this.http.get<ReviewOfRenter>(this.url + '/' + renterId).pipe(
-  //     catchError((err: any) => {
-  //       console.log(err);
-  //       return throwError("Error searching for tools in tool-rental.service.ts.findById()");
-  //     })
-  //   );
-  // }
 }

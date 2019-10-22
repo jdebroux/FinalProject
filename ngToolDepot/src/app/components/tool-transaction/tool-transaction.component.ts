@@ -29,8 +29,7 @@ export class ToolTransactionComponent implements OnInit {
               private datePipe: DatePipe,
               private currentRoute: ActivatedRoute,
               private router: Router,
-              private toolService: ToolService,
-              private lenderReview: ReviewOfRenterService) {}
+              private toolService: ToolService) {}
 
   ngOnInit() {
     console.log('ToolTransactionComponent.ngOnInit');
@@ -38,7 +37,7 @@ export class ToolTransactionComponent implements OnInit {
     this.currentRoute.queryParams.subscribe(params => {
       this.urlToolTransactionId = params['id'];
   });
-    console.error('transaction id ' + this.urlToolTransactionId);
+    // console.error('transaction id ' + this.urlToolTransactionId);
     this.toolService.findById(this.urlToolTransactionId).subscribe(
       lifeIsGood => {
         this.display = lifeIsGood;
