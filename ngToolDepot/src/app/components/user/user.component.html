@@ -20,8 +20,8 @@
             <!-- {{selected.lastname}} -->
             <!-- {{selected.firstname}} -->
             <p class="card-text ">
-
-              Some quick example text to build on the card title andfkjsdhfkdhsfhsdjkfhsdakljfhsdkjfhsdkjfhsklfhsld make up the
+              Some quick example text to build on the card title
+              andfkjsdhfkdhsfhsdjkfhsdakljfhsdkjfhsdkjfhsklfhsld make up the
               bulk the card's content. fdadsffsdfffsdsdfNeeds to have enough
               text to fill screen
             </p>
@@ -32,7 +32,7 @@
     </div>
   </div>
 </div>
-<button
+<!-- <button
   mdbBtn
   class="btn btn-elegant btn-block"
   type="button"
@@ -44,7 +44,7 @@
 <div class="" mdbCollapse #rentals="bs-collapse">
   <p>Tools I am currently renting</p>
   <p>A list of tools currently checked out</p>
-</div>
+</div> -->
 <button
   mdbBtn
   class="btn btn-elegant btn-block"
@@ -56,7 +56,7 @@
 </button>
 <div class="" mdbCollapse #MyTransactions="bs-collapse">
   <div id="listToolRentals" *ngIf="!selected">
-    <table *ngIf="!selected" class="table table-striped">
+    <table *ngIf="!selected" class="table table-striped table-dark">
       <thead class="thead thead-dark">
         <tr>
           <td align="left">Checked out</td>
@@ -84,29 +84,41 @@
   mdbBtn
   class="btn btn-elegant btn-block"
   type="button"
-  (click)="toolListDiv.toggle(); getLoggedInUserTools(authService.getUsername())"
+  (click)="
+    toolListDiv.toggle(); getLoggedInUserTools()
+  "
   mdbWavesEffect
 >
   My Toolbox
 </button>
 <div class="" mdbCollapse #toolListDiv="bs-collapse">
-  <div id="listMyTools" >
-
-    <table class="table table-striped">
-      <thead class="thead thead-dark">
-        <tr>
+  <div id="listMyTools">
+    <table class="table table-striped table-dark">
+        <thead class="dark text-warning">
+            <tr>
+           <td align="left"></td>
           <td align="left">Name</td>
           <td align="left">Type</td>
+          <td align="left">Description</td>
           <td align="left">Condition</td>
+          <td align="left">Cost Per Day</td>
+          <td align="left">Available For Rent</td>
+          <td align="left"></td>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let myTool of myTools">
-
+          <div class="img-square-wrapper">
+            <img class="img-thumbnail" [src]="myTool.photos[0].photoUrl" alt="Cinque Terre" width="300" height="300"alt="Card image cap"/>
+          </div>
           <td>{{ myTool.name }}</td>
           <td>{{ myTool.type }}</td>
+          <td>{{ myTool.description }}</td>
           <td>{{ myTool.condition }}</td>
-
+          <td>{{ myTool.costPerDay }}</td>
+          <td>{{ myTool.available }}</td>
+          <td><button class="btn btn-warning text-dark relative waves-light">Edit</button></td>
+          <!-- <td><button class="btn btn-amber relative waves-light">Edit</button></td> -->
         </tr>
       </tbody>
     </table>
