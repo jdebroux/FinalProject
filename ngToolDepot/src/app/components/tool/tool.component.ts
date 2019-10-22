@@ -35,9 +35,6 @@ export class ToolComponent implements OnInit {
 
   ngOnInit() {
     this.urlToolId = this.getCommandLineParameter();
-    // this.photoService.getToolPhotos().subscribe(photos => {
-    //   this.toolPhotos = photos;
-    // });
     this.reloadTools();
   }
 
@@ -69,11 +66,6 @@ export class ToolComponent implements OnInit {
 
   displayTable() {
     this.selected = null;
-  }
-  asignTool(tool: Tool) {
-    this.display = this.transaction.displayTool(tool);
-    // this.router.navigate(['/toolTransaction']);
-
   }
   switchCompleted(id: number, tool: Tool) {
     if (tool.available === true) {

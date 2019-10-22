@@ -3,14 +3,15 @@
       <div class="col-fluid">
         <div class="card">
           badge for total lent/rented out/money
-            <h3 class="card-header text-dark bg-warning"><span class="badge badge-pill badge-dark m-2"
-              >{{display.name}}</span></h3>
+            <h3 class="card-header text-dark bg-warning">
+              <span>{{display.name}}</span>
+              <span class="cost">{{display.costPerDay | currency}}/day</span></h3>
             <div class="card-horizontal">
               <div class="img-square-wrapper">
-                <img class="" [src]="display.photos[0].photoUrl" class="img-thumbnail" alt="Cinque Terre" width="250" height="250"alt="Card image cap" />
+                <img class="" [src]="display.photos[0].photoUrl" class="" alt="Cinque Terre" width="250" height="250"alt="Card image cap" />
               </div>
               <div class="card-body">
-                <h4 class="card-title"></h4>
+                <h4 class="card-title">{{display.type}}</h4>
                 <p class="card-text ">
                   {{display.description}}
                 </p>
@@ -22,10 +23,8 @@
       </div>
     </div>
 
-  {{display.name}}
-
-<div id="listToolRentals" *ngIf="!selected">
-  <table *ngIf="!selected" class='table table-striped'>
+<div id="listToolRentals">
+  <table class='table table-striped'>
     <thead class='thead thead-dark'>
       <tr>
         <td align='left'>Checked out</td>

@@ -1,3 +1,4 @@
+import { ToolService } from 'src/app/services/tool.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DatePipe } from '@angular/common';
@@ -24,18 +25,25 @@ export class ToolTransactionComponent implements OnInit {
   constructor(private toolRentalService: ToolRentalService,
               private datePipe: DatePipe,
               private currentRoute: ActivatedRoute,
-              private router: Router) {}
+              private router: Router, private toolService: ToolService) {}
 
   ngOnInit() {
     console.log('ToolTransactionComponent.ngOnInit');
-    console.log(this.display);
-
     this.urlToolTransactionId = this.getCommandLineParameter();
-    console.error('transaction id' + this.urlToolTransactionId);
-    // TODO get toolId from activated route.
-    // TODO retrieve tool from service using id
-    // TODO set display to new tool
-
+    this.currentRoute.queryParams.subscribe(params => {
+      this.urlToolTransactionId = params['id'];
+  });
+    console.error('transaction id ' + this.urlToolTransactionId);
+    this.toolService.findById(this.urlToolTransactionId).subscribe(
+      lifeIsGood => {
+        this.display = lifeIsGood;
+        console.log(this.display);
+      },
+      lifeIsBad => {
+        console.error('Error in ngOnInit.toolService.findById()');
+        console.error(lifeIsBad);
+      }
+    );
     this.reloadToolTransactions();
   }
 
@@ -43,6 +51,7 @@ export class ToolTransactionComponent implements OnInit {
     let idString = '';
     if (this.currentRoute.snapshot.paramMap.get('id')) {
       idString =  this.currentRoute.snapshot.paramMap.get('id');
+      console.log(idString);
     }
     return idString;
   }
@@ -58,13 +67,6 @@ export class ToolTransactionComponent implements OnInit {
 
   displayTable() {
     this.selected = null;
-  }
-
-  displayTool(displayTool: Tool): Tool {
-    console.log(displayTool);
-    this.display = displayTool;
-    console.log(this.display);
-    return displayTool;
   }
 
   addToolTransaction(toolRental: ToolRental, toolId: number) {
