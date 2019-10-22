@@ -48,6 +48,12 @@ public class ToolController {
 			resp.setStatus(400);
 			e.printStackTrace();
 		}
+		for (Tool tool : tools) {
+			System.out.println("******* in tool controller returning tools ******");
+			if (tool instanceof Tool) {
+				System.err.println(tool);
+			}
+		}
 		return tools;
 	}
 

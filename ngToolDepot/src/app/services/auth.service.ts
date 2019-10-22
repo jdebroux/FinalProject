@@ -85,6 +85,6 @@ export class AuthService {
   }
 
   getUsername(): string {
-    return this.user;
+    return localStorage.getItem('user');
   }
 }
