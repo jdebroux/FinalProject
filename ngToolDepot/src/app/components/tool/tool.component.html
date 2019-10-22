@@ -4,9 +4,6 @@
       <h4 class="card-header"><a [routerLink]="['/toolTransaction']" [queryParams]="{id: tool.id}">{{tool.name}}
       </a></h4>
         <div class="card-body mt-auto display-flex flex-column  text-center">
-          <!-- <h5 class="card-title">
-            <a [routerLink]="['/toolTransaction']" [queryParams]="{id: tool.id}">{{tool.name}}</a>
-          </h5> -->
           <div var="image">
           <div>
             <img class="img-thumbnail card-img-top img-responsive" [src]="tool.photos[0].photoUrl">
@@ -16,7 +13,7 @@
           <p></p>
         </div>
         <h5><div class="card-footer mt-auto">
-          <a class='footer'[routerLink]="['/toolTransaction']"><strong>{{tool.available | toolAvailable}}</strong></a>
+          <a class='footer'[routerLink]="['/toolTransaction']" [queryParams]="{id: tool.id}"><strong>{{tool.available | toolAvailable}}</strong></a>
         </div></h5>
       </div>
     </div>
