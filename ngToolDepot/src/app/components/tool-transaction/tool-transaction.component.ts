@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToolRental } from 'src/app/models/tool-rental';
 import { ToolRentalService } from 'src/app/services/tool-rental.service';
+import { Tool } from 'src/app/models/tool';
 
 @Component({
   selector: 'app-tool-transaction',
@@ -16,7 +17,8 @@ export class ToolTransactionComponent implements OnInit {
   showComplete = false;
   urlToolTransactionId: string;
   toolTransactions: ToolRental[] = [];
-
+  tool: Tool = null;
+  display: Tool = null;
   newToolTransaction = new ToolRental();
 
   constructor(private toolRentalService: ToolRentalService,
@@ -25,7 +27,15 @@ export class ToolTransactionComponent implements OnInit {
               private router: Router) {}
 
   ngOnInit() {
+    console.log('ToolTransactionComponent.ngOnInit');
+    console.log(this.display);
+
     this.urlToolTransactionId = this.getCommandLineParameter();
+    console.error('transaction id' + this.urlToolTransactionId);
+    // TODO get toolId from activated route.
+    // TODO retrieve tool from service using id
+    // TODO set display to new tool
+
     this.reloadToolTransactions();
   }
 
@@ -50,6 +60,12 @@ export class ToolTransactionComponent implements OnInit {
     this.selected = null;
   }
 
+  displayTool(displayTool: Tool): Tool {
+    console.log(displayTool);
+    this.display = displayTool;
+    console.log(this.display);
+    return displayTool;
+  }
 
   addToolTransaction(toolRental: ToolRental, toolId: number) {
 
@@ -104,6 +120,7 @@ export class ToolTransactionComponent implements OnInit {
   }
 
   reloadToolTransactions() {
+    // this.displayTool(this.toolComp);
     this.toolRentalService.index().subscribe(
       lifeIsGood => {
         this.toolTransactions = lifeIsGood;

@@ -31,7 +31,7 @@ export class UserComponent implements OnInit {
 
   editUser = null;
   selected = null;
-  loggedInUser= null;
+  loggedInUser = null;
   showComplete = false;
   urlUserId: string;
   users: User[] = [];

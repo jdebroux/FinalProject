@@ -115,7 +115,8 @@ import { ToolphotoComponent } from './components/toolphoto/toolphoto.component';
     GeocodeService,
     RegisterComponent,
     LoginComponent,
-    ToolAvailablePipe
+    ToolAvailablePipe,
+    ToolTransactionComponent
   ],
   bootstrap: [AppComponent]
 })

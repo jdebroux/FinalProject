@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'user', component: UserComponent },
   { path: 'toolTransaction', component: ToolTransactionComponent },
+  { path: 'toolTransaction/:toolId', component: ToolTransactionComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'admin', component: AdminComponent },
