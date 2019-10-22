@@ -2,8 +2,9 @@ import { LoginComponent } from './../login/login.component';
 import { RegisterComponent } from './../register/register.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-navigation',
@@ -12,9 +13,13 @@ import { NgForm } from '@angular/forms';
 })
 export class NavigationComponent implements OnInit {
   public navbarCollapse = true;
+
+  user: User = new User();
+
   constructor(private auth: AuthService,
               private registerComp: RegisterComponent,
               private loginComp: LoginComponent) { }
+
 
   ngOnInit() {
   }
@@ -23,8 +28,8 @@ export class NavigationComponent implements OnInit {
     return this.auth.checkLogin();
   }
 
-  getUsername(): string {
-    return localStorage.getItem('user');
+  getUsername(): User {
+    return JSON.parse(localStorage.getItem('Object'));
   }
 
   register(form: NgForm) {
