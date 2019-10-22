@@ -1,7 +1,6 @@
 import { ToolRentalService } from 'src/app/services/tool-rental.service';
 import { AuthService } from './../../services/auth.service';
 import { ToolTransactionComponent } from './../tool-transaction/tool-transaction.component';
-import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,13 +11,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { ToolService } from 'src/app/services/tool.service';
 import { ToolRental } from 'src/app/models/tool-rental';
 import { Tool } from 'src/app/models/tool';
+import { AfterViewInit, OnInit, Component, AfterContentInit } from '@angular/core';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, AfterContentInit {
 
   constructor(private userService: UserService,
               private datePipe: DatePipe,
@@ -31,7 +31,7 @@ export class UserComponent implements OnInit {
 
   editUser = null;
   selected = null;
-  loggedInUser = null;
+  loggedInUser: User = new User();
   showComplete = false;
   urlUserId: string;
   users: User[] = [];
@@ -44,15 +44,21 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     // this.urlUserId = this.getCommandLineParameter();
     // this.reloadUsers();
+    this.loggedInUser = this.authService.returnUser();
+    console.error(this.loggedInUser.firstName + '  THIS IS WHAT SHOULD BE IN LOGGED IN USER');
+    for (let prop in this.loggedInUser) {
+      console.log(this.authService.user[prop]);
+    }
+  }
 
+  ngAfterContentInit() {
+    // this.setLoggedInUser();
+    console.log(localStorage.getItem('role') + '   THIS IS ROLE');
     if (localStorage.getItem('role') === 'admin') {
       this.reloadUsers();
       this.getLoggedInUserTransactions();
       this.getLoggedInUserTools();
     } else if (localStorage.getItem('role') === 'user') {
-      console.log(this.myTools);
-      console.log(Array.isArray(this.myTools));
-
       this.getLoggedInUserTransactions();
       this.getLoggedInUserTools();
 
@@ -67,7 +73,6 @@ export class UserComponent implements OnInit {
 
   getLoggedInUserTransactions() {
     const userName = this.authService.getUsername();
-    console.log(userName);
     this.toolRentalService.getToolTransactionsByUserName(userName).subscribe(
       data => {
         this.toolTransactions = data;
@@ -78,10 +83,13 @@ export class UserComponent implements OnInit {
       }
       );
     }
+
     setLoggedInUser() {
       this.userService.getUserByUsername().subscribe(
         data => {
+          console.error(data + '   ******************** DATA IN USER COMP');
           this.loggedInUser = data;
+          console.error(this.loggedInUser + '   ******************** loggedInUser IN USER COMP');
         },
         err => {
           console.error(err);
@@ -92,7 +100,6 @@ export class UserComponent implements OnInit {
 
       getLoggedInUserTools() {
         const userName = this.authService.getUsername();
-        console.log(userName);
         this.toolService.getToolListByUserName(userName).subscribe(
         data => {
           this.myTools = data;
