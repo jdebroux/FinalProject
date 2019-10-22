@@ -45,10 +45,6 @@ export class UserComponent implements OnInit, AfterContentInit {
     // this.urlUserId = this.getCommandLineParameter();
     // this.reloadUsers();
     this.loggedInUser = this.authService.returnUser();
-    console.error(this.loggedInUser.firstName + '  THIS IS WHAT SHOULD BE IN LOGGED IN USER');
-    for (let prop in this.loggedInUser) {
-      console.log(this.authService.user[prop]);
-    }
   }
 
   ngAfterContentInit() {
