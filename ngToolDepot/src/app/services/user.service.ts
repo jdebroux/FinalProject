@@ -72,7 +72,25 @@ export class UserService {
       })
       );
   }
-
+  getUserByUsername() {
+    if (localStorage.length === 0) {
+      this.router.navigateByUrl("/login");
+    }
+    const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Basic ` + this.authService.getCredentials(),
+          'X-Requested-With': 'XMLHttpRequest'
+          // Authorization: 'my-auth-token'
+        })
+      };
+    return this.http.get<User>(this.url + '/' + localStorage.getItem('user'), httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error in user service -- getUserbyUsername');
+      })
+    );
+  }
   destroy(id: number) {
     if (localStorage.length === 0) {
       this.router.navigateByUrl('/login');

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.tooldepotapp.entities.Tool;
-import com.skilldistillery.tooldepotapp.entities.ToolPhoto;
 import com.skilldistillery.tooldepotapp.services.ToolService;
 
 @RestController
@@ -35,12 +34,35 @@ public class ToolController {
 		return allTools;
 	}
 
+	@GetMapping("tool/user/{username}")
+	public List<Tool> getUsersTools(@PathVariable("username") String username, HttpServletResponse resp) {
+		List<Tool> tools = toolSvc.findByUserUsername(username);
+		try {
+			if (tools == null || tools.size() <= 0) {
+				resp.setStatus(404);
+			} else {
+				resp.setStatus(200);
+			}
+		} catch (Exception e) {
+			tools = null;
+			resp.setStatus(400);
+			e.printStackTrace();
+		}
+		for (Tool tool : tools) {
+			System.out.println("******* in tool controller returning tools ******");
+			if (tool instanceof Tool) {
+				System.err.println(tool);
+			}
+		}
+		return tools;
+	}
+
 	@GetMapping("tool/{id}")
 	public Tool getTool(@PathVariable("id") int id, HttpServletResponse resp) {
 		Tool tool = toolSvc.findById(id);
 		return tool;
 	}
-	
+
 	@GetMapping("tool/search/{searchTerm}")
 	public List<Tool> getToolsBySearch(@PathVariable("searchTerm") String searchTerm, HttpServletResponse resp) {
 		return toolSvc.findToolsBySearchTerm(searchTerm);
@@ -54,7 +76,6 @@ public class ToolController {
 				resp.setStatus(404);
 			} else {
 				resp.setStatus(201);
-				resp.setStatus(201);
 				StringBuffer url = req.getRequestURL();
 				url.append(tool.getId());
 				resp.setHeader("Location", url.toString());
@@ -66,7 +87,7 @@ public class ToolController {
 		}
 		return tool;
 	}
-	
+
 	@PutMapping("tool/{id}")
 	public Tool editTool(@PathVariable("id") Integer id, @RequestBody Tool tool, HttpServletResponse resp,
 			HttpServletResponse req) {
@@ -83,6 +104,7 @@ public class ToolController {
 		}
 		return tool;
 	}
+
 	@DeleteMapping("tool/{id}")
 	public boolean destroyTool(@PathVariable("id") Integer id, HttpServletResponse resp) {
 		Boolean success = toolSvc.delete(id);
@@ -98,7 +120,5 @@ public class ToolController {
 		}
 		return true;
 	}
-	
-	
 
 }

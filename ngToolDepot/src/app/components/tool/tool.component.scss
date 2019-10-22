@@ -15,6 +15,14 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0px;
+  padding: 0px;
+  padding-top: 10px;
+
+}
+.accordion {
+  background-color: #646264;
+
 }
 a:hover {
   color: #F9d31a;
@@ -31,5 +39,6 @@ a {
   display: flex;
   flex-direction: column;
 }
+
 
 

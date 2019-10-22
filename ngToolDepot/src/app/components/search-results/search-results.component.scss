@@ -4,7 +4,7 @@
 }
 
 agm-map {
-  height: 100%;
+  height: 700px;
   width: 100%;
 }
 .row {
@@ -28,4 +28,21 @@ table {
 #map {
   padding: 0px;
   padding-left: 10px !important;
+}
+
+#toolImg {
+  text-align: center;
+}
+
+.card-body:hover {
+  background-color: lightgray;
+}
+
+.card {
+  border: none;
+}
+
+.scroll {
+  max-height: 700px;
+  overflow-y: auto;
 }

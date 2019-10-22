@@ -1,35 +1,54 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col" id="listOfSearchedTools">
-      <table *ngIf="!selected" class='table table-striped'>
-        <thead class='thead thead-dark'>
-          <tr>
-            <td align='left'>Name</td>
-            <td align='left'>Type</td>
-            <td align='left'>Cost</td>
-            <td align='left'>Condition</td>
-            <td align='left'>Year Manufactured</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let tool of searchResults">
-            <!-- add photo here -->
-            <td>{{ tool.name }}</td>
-            <td>{{ tool.type }}</td>
-            <td>{{ tool.costPerDay | currency }}</td>
-            <td>{{ tool.condition }}</td>
-            <td>{{ tool.manufactureYear }}</td>
-            <!-- <td><button *ngIf="loggedIn" (click)="displayTool(tool.id)"
-            class='btn btn-sm btn-outline-secondary'>Rent</button></td>
-            <td><button *ngIf="!loggedIn" (click)="displayRegister()" class='btn btn-sm btn-outline-secondary'>Sign
-              In</button></td> -->
-          </tr>
-        </tbody>
-      </table>
+    <div class="col scroll" id="listOfSearchedTools">
+      <!-- TRYING WITH CARD  -->
+
+      <!-- Card Light -->
+      <div *ngIf='!selected' class="card">
+        <div class="card-horizontal">
+          <!-- Card image -->
+          <div class="row" *ngFor="let tool of searchResults">
+            <div class="col-sm-4 img-square-right">
+              <div id="toolImg">
+                <img [src]="tool.photos[0].photoUrl" width="200" height="200" alt="Card image cap">
+              </div>
+            </div>
+
+            <!-- Card content -->
+            <div (mouseenter)="mouseEnter(tool) " (mouseleave)="redraw()" class="col-sm-8 card-body">
+
+              <!-- Title -->
+              <h5 class="card-title">{{ tool.name }}</h5>
+              <!-- Text -->
+              <p class="card-text">{{ tool.costPerDay | currency }} / day</p>
+              <!-- Link -->
+              <a href="#!" class="black-text d-flex justify-content-end">
+                <h5>Rent tool <i class="fas fa-angle-double-right"></i></h5>
+              </a>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+
     <div id="map" class="col">
-      <agm-map [latitude]="lat" [longitude]="lng">
-          <agm-marker *ngFor="let coordinate of coordinates; let i = index" [latitude]="coordinate.lat" [longitude]="coordinate.lng">
+      <agm-map #gm [latitude]="lat" [longitude]="lng">
+        <agm-marker *ngFor="let coordinate of coordinates; let i = index" [latitude]="coordinate.lat"
+          [longitude]="coordinate.lng">
+          <agm-info-window
+            [isOpen]="openInfo"
+            [latitude]="coordinate.lat"
+            [longitude]="coordinate.lng">
+            {{hoveredTool.name}}
+            <br>
+            {{owner.firstName}}
+            <br>
+            Condition: {{hoveredTool.condition}}
+            <br>
+            Location: {{address.city}}, {{address.state}} {{address.zip}}
+          </agm-info-window>>
         </agm-marker>
       </agm-map>
     </div>

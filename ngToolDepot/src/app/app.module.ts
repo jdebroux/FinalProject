@@ -46,6 +46,10 @@ import { DeleteUserComponent } from './components/adminCRUDonUser/delete-user/de
 import { ToolAvailablePipe } from './pipes/tool-available.pipe';
 import { AgmCoreModule } from '@agm/core';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { AddToolPhotoComponent } from './components/toolphotoCRUD/add-tool-photo/add-tool-photo.component';
+import { DeleteToolPhotoComponent } from './components/toolphotoCRUD/delete-tool-photo/delete-tool-photo.component';
+import { UpdateToolPhotoComponent } from './components/toolphotoCRUD/update-tool-photo/update-tool-photo.component';
+import { ToolphotoComponent } from './components/toolphoto/toolphoto.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +75,11 @@ import { SearchResultsComponent } from './components/search-results/search-resul
     UpdateUserComponent,
     DeleteUserComponent,
     ToolAvailablePipe,
-    SearchResultsComponent
+    SearchResultsComponent,
+    AddToolPhotoComponent,
+    DeleteToolPhotoComponent,
+    UpdateToolPhotoComponent,
+    ToolphotoComponent
   ],
   imports: [
     BrowserModule,
@@ -104,6 +112,9 @@ import { SearchResultsComponent } from './components/search-results/search-resul
     UserSkillService,
     UserService,
     DatePipe,
+    GeocodeService,
+    RegisterComponent,
+    LoginComponent,
     ToolAvailablePipe
   ],
   bootstrap: [AppComponent]

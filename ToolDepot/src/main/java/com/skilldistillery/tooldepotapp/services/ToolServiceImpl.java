@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.tooldepotapp.entities.Tool;
-import com.skilldistillery.tooldepotapp.entities.ToolPhoto;
 import com.skilldistillery.tooldepotapp.repositories.ToolRepository;
 import com.skilldistillery.tooldepotapp.repositories.UserRepository;
 
@@ -70,6 +69,11 @@ public class ToolServiceImpl implements ToolService {
 	@Override
 	public List<Tool> findToolsBySearchTerm(String searchTerm) {
 		return toolRepo.findToolsContainingSearchTerm(searchTerm);
+	}
+
+	@Override
+	public List<Tool> findByUserUsername(String username) {
+		return toolRepo.findByUserUsername(username);
 	}
 
 }

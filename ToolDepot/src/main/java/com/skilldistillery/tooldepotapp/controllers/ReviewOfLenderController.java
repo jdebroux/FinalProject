@@ -50,7 +50,6 @@ public class ReviewOfLenderController {
 				resp.setStatus(404);
 			} else {
 				resp.setStatus(201);
-				resp.setStatus(201);
 				StringBuffer url = req.getRequestURL();
 				url.append(lenderReview.getId());
 				resp.setHeader("Location", url.toString());
@@ -67,7 +66,6 @@ public class ReviewOfLenderController {
 	@PutMapping("toolRental/{TRid}/reviewOfLender/{ROLid}")
 	public ReviewOfLender editLenderReview(@PathVariable("TRid") Integer TRid, @PathVariable("ROLid") Integer ROLid, @RequestBody ReviewOfLender lenderReview, HttpServletResponse resp,
 			HttpServletResponse req) {
-		System.err.println(lenderReview + " ****************************************");
 		try {
 			lenderReview = reviewOfLenderSvc.update(TRid, ROLid, lenderReview);
 			if (lenderReview == null) {
@@ -84,19 +82,19 @@ public class ReviewOfLenderController {
 	}
 	
 	@DeleteMapping("toolRental/{TRid}/reviewOfLender/{ROLid}")
-	public boolean destroyLenderReview(@PathVariable("TRid") Integer TRid, @PathVariable("ROLid") Integer ROLid, HttpServletResponse resp) {
+	public Boolean destroyLenderReview(@PathVariable("TRid") Integer TRid, @PathVariable("ROLid") Integer ROLid, HttpServletResponse resp) {
 		Boolean success = reviewOfLenderSvc.delete(TRid, ROLid);
 		try {
 			if (success) {
 				resp.setStatus(204);
-				return true;
 			} else {
 				resp.setStatus(404);
 			}
 		} catch (Exception e) {
 			resp.setStatus(400);
+			e.printStackTrace();
 		}
-		return true;
+		return success;
 
 	}
 }
