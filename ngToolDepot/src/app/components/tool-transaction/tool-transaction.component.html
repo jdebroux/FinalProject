@@ -28,7 +28,9 @@
             <!-- <star-rating value="{{display.rentals[0].renterReview.lenderRating}}" checkedcolor="yellow"
               uncheckedcolor="black" size="flex" readonly="true"></star-rating> -->
           </span>
-          <span style="float: right;"><app-add-tool-rental></app-add-tool-rental></span>
+          <span style="float: right;">
+            <app-add-tool-rental></app-add-tool-rental>
+          </span>
           <!-- (rate)="onRate($event)" -->
         </div>
       </div>
@@ -36,26 +38,25 @@
   </div>
 
 
-  <div id="listToolRentals">
+  <div id="listToolRentals" *ngFor="let rental of display.rentals">
     <div class="row">
       <div class="col-fluid">
         <div class="card">
           <h3 class="card-header text-dark bg-dark">
-            <span class="reviewer-name">{{display.rentals[0].renter.username}}&nbsp;&nbsp;</span>
-            </h3>
+            <span class="reviewer-name">{{rental.renter.username}}</span>
+          </h3>
           <div class="card-horizontal">
-            <div class="img-square-wrapper">
-            </div>
-            <div class="card-body">
-              <h3><span class="condition"></span>
-                <span class="year-made"></span></h3><br>
-              <p class="card-text ">
-              </p>
+            <div class="card-body" >
+              <div class="card-text">
+                <p>Tool Review:</p>
+                <p>{{rental.renterReview.toolReview}}</p>
+                <p>Lender Review:</p>
+                <p>{{rental.renterReview.lenderReview}}</p>
+              </div>
             </div>
           </div>
           <div class="card-footer text-dark bg-warning">
-            <span class=""></span>
-            <!-- (rate)="onRate($event)" -->
+            <span></span>
           </div>
         </div>
       </div>

@@ -10,7 +10,8 @@ export class ToolRental {
   createDate: string;
   updateDate: string;
   tool: Tool;
-  renter: ReviewOfRenter;
+  renter: User;
+  renterReview: ReviewOfRenter;
 
   constructor(
     id?: number,
@@ -20,7 +21,8 @@ export class ToolRental {
     createDate?: string,
     updateDate?: string,
     tool?: Tool,
-    renter?: ReviewOfRenter
+    renter?: User,
+    renterReview?: ReviewOfRenter
   ) {
     this.id = id;
     this.checkout = checkout;
@@ -30,5 +32,6 @@ export class ToolRental {
     this.updateDate = updateDate;
     this.tool = tool;
     this.renter = renter;
+    this.renterReview = renterReview;
   }
 }
