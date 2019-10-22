@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="userpage container-fluid">
   <div class="row">
     <div class="col-fluid">
       <div class="card">
@@ -45,18 +45,21 @@
 </div> -->
 <button
   mdbBtn
-  class="btn btn-elegant btn-block"
+  class=" btn btn-elegant btn-block"
   type="button"
   (click)="MyTransactions.toggle(); getLoggedInUserTransactions()"
   mdbWavesEffect
 >
   My Transaction History
 </button>
-<div class="" mdbCollapse #MyTransactions="bs-collapse">
+<div class="userpage" mdbCollapse #MyTransactions="bs-collapse">
   <div id="listToolRentals" *ngIf="!selected">
     <table *ngIf="!selected" class="table table-striped table-dark">
       <thead class="thead thead-dark">
         <tr>
+          <td align="left">Tool Name</td>
+          <td align="left">Tool Owner</td>
+          <td align="left">Tool Something</td>
           <td align="left">Checked out</td>
           <td align="left">Returned</td>
           <td align="left">Total Cost</td>
@@ -64,6 +67,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let toolTransaction of toolTransactions">
+          <!-- <td>{{ toolTransaction.toolName }}</td> -->
+          <td></td>
+          <td></td>
+          <td></td>
           <td>{{ toolTransaction.checkout }}</td>
           <td>{{ toolTransaction.returned }}</td>
           <td>{{ toolTransaction.totalCost }}</td>
@@ -89,7 +96,7 @@
 >
   My Toolbox
 </button>
-<div class="" mdbCollapse #toolListDiv="bs-collapse">
+<div class="userpage" mdbCollapse #toolListDiv="bs-collapse">
   <div id="listMyTools">
     <table class="table table-striped table-dark">
         <thead class="dark text-warning">
