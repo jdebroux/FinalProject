@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-fluid">
       <div class="card">
-        badge for total lent/rented out/money
         <h3 class="card-header text-dark bg-warning">
-          <span class="tool-name">{{display.name}}</span>
+          <span class="tool-name">{{display.name}}&nbsp;&nbsp;</span>
+          <span class="stars"><star-rating value="{{display.rentals[0].renterReview.toolRating}}" checkedcolor="yellow" uncheckedcolor="black" size="flex" readonly="true"></star-rating></span>
           <span class="cost">{{display.costPerDay | currency}}/day</span></h3>
         <div class="card-horizontal">
           <div class="img-square-wrapper">
@@ -13,14 +13,16 @@
           </div>
           <div class="card-body">
             <h3><span class="condition">{{display.condition}} Condition</span>
-              <span class="year-made">Year Manufactured: {{display.manufactureYear}}</span></h3>
+              <span class="year-made">Year Manufactured: {{display.manufactureYear}}</span></h3><br>
             <p class="card-text ">
               {{display.description}}
             </p>
           </div>
         </div>
         <div class="card-footer text-dark bg-warning">
-          <span class="owner">Tool Owner: {{display.user.username}}</span>
+          <span class="owner">Lender: {{display.user.username}}&nbsp;&nbsp;</span>
+          <span class="stars"><star-rating value="{{display.rentals[0].renterReview.lenderRating}}" checkedcolor="yellow" uncheckedcolor="black" size="flex" readonly="true"></star-rating></span>
+          <!-- (rate)="onRate($event)" -->
         </div>
       </div>
     </div>
@@ -28,7 +30,9 @@
 </div>
 
 <div id="listToolRentals">
-  <table class='table table-striped'>
+
+</div>
+ <!-- <table class='table table-striped'>
     <thead class='thead thead-dark'>
       <tr>
         <td align='left'>Checked out</td>
@@ -45,5 +49,4 @@
         <app-delete-tool-rental [toolRental]="toolTransaction"></app-delete-tool-rental>
       </tr>
     </tbody>
-  </table>
-</div>
+ </table> -->

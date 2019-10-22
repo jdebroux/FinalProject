@@ -6,13 +6,20 @@ span {
   color: #3D3B3D;
   font-weight: bold;
 }
+span.tool-name {
+  float: left;
+}
+.stars {
+  float: left;
+  vertical-align: top;
+}
 .cost {
   float: right;
 }
 .year-made {
   float: right;
 }
-// .tool-name {
-//   float: middle;
-// }
+.owner {
+  float: left;
+}
 

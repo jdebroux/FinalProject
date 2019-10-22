@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToolRental } from 'src/app/models/tool-rental';
 import { ToolRentalService } from 'src/app/services/tool-rental.service';
 import { Tool } from 'src/app/models/tool';
+import { ReviewOfRenterService } from 'src/app/services/review-of-renter.service';
 
 @Component({
   selector: 'app-tool-transaction',
@@ -22,12 +23,14 @@ export class ToolTransactionComponent implements OnInit {
   tool: Tool = null;
   display: Tool = null;
   newToolTransaction = new ToolRental();
+  lender: ToolRental;
 
   constructor(private toolRentalService: ToolRentalService,
               private datePipe: DatePipe,
               private currentRoute: ActivatedRoute,
               private router: Router,
-              private toolService: ToolService) {}
+              private toolService: ToolService,
+              private lenderReview: ReviewOfRenterService) {}
 
   ngOnInit() {
     console.log('ToolTransactionComponent.ngOnInit');
@@ -39,7 +42,7 @@ export class ToolTransactionComponent implements OnInit {
     this.toolService.findById(this.urlToolTransactionId).subscribe(
       lifeIsGood => {
         this.display = lifeIsGood;
-        console.log(this.display.owner);
+        console.log(this.display);
       },
       lifeIsBad => {
         console.error('Error in ngOnInit.toolService.findById()');
@@ -141,7 +144,6 @@ export class ToolTransactionComponent implements OnInit {
       }
     );
   }
-
 
   // TODO we dont need this but could utilize in a different way.
 

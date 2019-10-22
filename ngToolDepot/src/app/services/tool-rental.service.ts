@@ -1,3 +1,4 @@
+import { ReviewOfRenter } from './../models/review-of-renter';
 import { AuthService } from "./auth.service";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
@@ -123,4 +124,12 @@ export class ToolRentalService {
       })
     );
   }
+  // findRenterById(renterId: string) {
+  //   return this.http.get<ReviewOfRenter>(this.url + '/' + renterId).pipe(
+  //     catchError((err: any) => {
+  //       console.log(err);
+  //       return throwError("Error searching for tools in tool-rental.service.ts.findById()");
+  //     })
+  //   );
+  // }
 }

@@ -50,6 +50,7 @@ import { AddToolPhotoComponent } from './components/toolphotoCRUD/add-tool-photo
 import { DeleteToolPhotoComponent } from './components/toolphotoCRUD/delete-tool-photo/delete-tool-photo.component';
 import { UpdateToolPhotoComponent } from './components/toolphotoCRUD/update-tool-photo/update-tool-photo.component';
 import { ToolphotoComponent } from './components/toolphoto/toolphoto.component';
+import { RatingModule } from 'ng-starrating';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { ToolphotoComponent } from './components/toolphoto/toolphoto.component';
     MatGridListModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAQWXrkW5JByvZhl8kjGHaCwSUMongsLng'
-    })
+    }),
+    RatingModule
   ],
   providers: [
     AuthService,

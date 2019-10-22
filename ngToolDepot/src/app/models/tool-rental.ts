@@ -1,3 +1,4 @@
+import { ReviewOfRenter } from './review-of-renter';
 import { User } from 'src/app/models/user';
 import { Tool } from './tool';
 
@@ -8,8 +9,8 @@ export class ToolRental {
   totalCost: number;
   createDate: string;
   updateDate: string;
-  tool: object;
-  renter: object;
+  tool: Tool;
+  renter: ReviewOfRenter;
 
   constructor(
     id?: number,
@@ -18,8 +19,8 @@ export class ToolRental {
     totalCost?: number,
     createDate?: string,
     updateDate?: string,
-    tool?: object,
-    renter?: object
+    tool?: Tool,
+    renter?: ReviewOfRenter
   ) {
     this.id = id;
     this.checkout = checkout;
