@@ -59,6 +59,7 @@ import { AddReviewRenterComponent } from './components/reviewOfRenter/add-review
 import { EditReviewRenterComponent } from './components/reviewOfRenter/edit-review-renter/edit-review-renter.component';
 import { DeleteReviewRenterComponent } from './components/reviewOfRenter/delete-review-renter/delete-review-renter.component';
 import { RatingModule } from 'ng-starrating';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { RatingModule } from 'ng-starrating';
     DeleteToolPhotoComponent,
     UpdateToolPhotoComponent,
     ToolphotoComponent,
+    ConfirmationComponent,
     AddReviewLenderComponent,
     EditReviewLenderComponent,
     DeleteReviewLenderComponent,

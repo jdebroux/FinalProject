@@ -10,6 +10,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { ToolComponent } from './components/tool/tool.component';
 import { SkillComponent } from './components/skill/skill.component';
 import { SkillTransactionComponent } from './components/skill-transaction/skill-transaction.component';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 
 const routes: Routes = [
@@ -24,7 +25,9 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'tool', component: ToolComponent },
   { path: 'skill', component: SkillComponent },
-  { path: 'skillTransaction', component: SkillTransactionComponent }
+  { path: 'skillTransaction', component: SkillTransactionComponent },
+  { path: 'confirmation/:id', component: ConfirmationComponent },
+  { path: 'confirmation', component: ConfirmationComponent }
 ];
 
 @NgModule({
