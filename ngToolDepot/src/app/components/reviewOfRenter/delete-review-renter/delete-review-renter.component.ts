@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ReviewOfRenter } from 'src/app/models/review-of-renter';
 import { ReviewOfRenterService } from 'src/app/services/review-of-renter.service';
 import { ToolTransactionComponent } from '../../tool-transaction/tool-transaction.component';
+import { ToolRental } from 'src/app/models/tool-rental';
 
 @Component({
   selector: 'app-delete-review-renter',
@@ -9,6 +10,8 @@ import { ToolTransactionComponent } from '../../tool-transaction/tool-transactio
   styleUrls: ['./delete-review-renter.component.scss']
 })
 export class DeleteReviewRenterComponent implements OnInit {
+  @Input() toolTransaction: ToolRental;
+
   @Input() reviewOfRenter: ReviewOfRenter;
 
   constructor(private reviewOfLenderSvc: ReviewOfRenterService, private toolTransactionComp: ToolTransactionComponent) { }
@@ -17,7 +20,7 @@ export class DeleteReviewRenterComponent implements OnInit {
   }
 
   delete() {
-    this.reviewOfLenderSvc.destroy(+this.toolTransactionComp.urlToolTransactionId, this.reviewOfRenter.id).subscribe(
+    this.reviewOfLenderSvc.destroy(this.toolTransaction.id, this.reviewOfRenter.id).subscribe(
       () => {
         console.log('Success deleting IN DELETE REVIEW RENTER');
         location.reload();

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ReviewOfRenter } from 'src/app/models/review-of-renter';
 import { ReviewOfRenterService } from 'src/app/services/review-of-renter.service';
 import { ToolTransactionComponent } from '../../tool-transaction/tool-transaction.component';
+import { ToolRental } from 'src/app/models/tool-rental';
 
 @Component({
   selector: 'app-edit-review-renter',
@@ -9,6 +10,7 @@ import { ToolTransactionComponent } from '../../tool-transaction/tool-transactio
   styleUrls: ['./edit-review-renter.component.scss']
 })
 export class EditReviewRenterComponent implements OnInit {
+  @Input() toolTransaction: ToolRental;
 
   @Input() reviewOfRenter: ReviewOfRenter;
 
@@ -25,7 +27,7 @@ export class EditReviewRenterComponent implements OnInit {
     }
 
     getReviewOfRenter() {
-      this.reviewOfLenderSvc.index(+this.toolTransactionComp.urlToolTransactionId).subscribe(
+      this.reviewOfLenderSvc.index(this.toolTransaction.id).subscribe(
         data => {
           this.reviewToBeUpdated = data;
           this.currentRatingForLender = this.reviewToBeUpdated.lenderRating;
@@ -42,7 +44,7 @@ export class EditReviewRenterComponent implements OnInit {
       this.reviewToBeUpdated.lenderRating = this.currentRatingForLender;
       this.reviewToBeUpdated.toolRating = this.currentRatingForTool;
 
-      this.reviewOfLenderSvc.update(+this.toolTransactionComp.urlToolTransactionId,
+      this.reviewOfLenderSvc.update(this.toolTransaction.id,
         this.reviewOfRenter.id, this.reviewToBeUpdated).subscribe(
         () => {
           console.log('review of Renter successful edit');

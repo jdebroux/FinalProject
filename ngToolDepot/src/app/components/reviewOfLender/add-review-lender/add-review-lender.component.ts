@@ -1,6 +1,8 @@
+import { ToolRental } from 'src/app/models/tool-rental';
+import { UserComponent } from './../../user/user.component';
 import { ToolTransactionComponent } from './../../tool-transaction/tool-transaction.component';
 import { ReviewOfLenderService } from './../../../services/review-of-lender.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ReviewOfLender } from 'src/app/models/review-of-lender';
 
@@ -10,6 +12,7 @@ import { ReviewOfLender } from 'src/app/models/review-of-lender';
   styleUrls: ['./add-review-lender.component.scss']
 })
 export class AddReviewLenderComponent implements OnInit {
+  @Input() toolTransaction: ToolRental;
 
   reviewOfLender: ReviewOfLender = new ReviewOfLender();
 
@@ -17,7 +20,7 @@ export class AddReviewLenderComponent implements OnInit {
 
   currentRate = 0;
 
-  constructor(private reviewOfLenderSvc: ReviewOfLenderService, private toolTransComp: ToolTransactionComponent) {}
+  constructor(private reviewOfLenderSvc: ReviewOfLenderService, private userComp: UserComponent) {}
 
   ngOnInit() {
   }
@@ -36,7 +39,7 @@ export class AddReviewLenderComponent implements OnInit {
       || this.reviewOfLender.renterReview === '') {
         this.failedToEnterData = 'Something';
       } else {
-        this.reviewOfLenderSvc.create(+this.toolTransComp.urlToolTransactionId, this.reviewOfLender).subscribe(
+        this.reviewOfLenderSvc.create(this.toolTransaction.id, this.reviewOfLender).subscribe(
           () => {
             location.reload();
           },
