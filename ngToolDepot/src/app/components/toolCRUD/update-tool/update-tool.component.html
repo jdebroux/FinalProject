@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary relative waves-light" (click)="getTool();basicModal.show()" mdbRippleRadius>Update</button>
+<button type="button" class="btn" (click)="getTool();basicModal.show()" mdbRippleRadius>Update</button>
 
   <div mdbModal #basicModal="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
@@ -8,37 +8,17 @@
           <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
             <span aria-hidden="true">×</span>
           </button>
-          <h4 class="modal-title w-100" id="myModalLabel">Update User</h4>
+          <h4 class="modal-title w-100" id="myModalLabel">Update Tool Info</h4>
         </div>
         <div class="modal-body">
-          <form>
-            <label>
-              Name <input type="text" name="toolname" value="{{toolToBeUpdated.name}}" [(ngModel)]="toolToBeUpdated.name">
-            </label>
-            <br>
-            <label>
-              Description <textarea rows="4" cols="35" name="description" value="{{toolToBeUpdated.description}}" [(ngModel)]="toolToBeUpdated.description"></textarea>
-            </label>
-            <br>
-            <label>
-              Type of tool  <input type="text" name="type" value="{{toolToBeUpdated.type}}" [(ngModel)]="toolToBeUpdated.type">
-            </label>
-            <br>
-            <label>
-               Year Manufactured <input type="text" name="manufactureYear" value="{{toolToBeUpdated.manufactureYear}}" [(ngModel)]="toolToBeUpdated.manufactureYear">
-            </label>
-            <br>
-            <label>
-               Condition <input type="text" name="condition" value="{{toolToBeUpdated.condition}}" [(ngModel)]="toolToBeUpdated.condition">
-            </label>
-            <br>
-            <label>
-               Cost <input type="number" name="costPerDay" value="{{toolToBeUpdated.costPerDay}}" [(ngModel)]="toolToBeUpdated.costPerDay">
-            </label>
-            <br>
-            <button type="button" class="btn btn-secondary waves-light" aria-label="Close" (click)="basicModal.hide()"
-              mdbRippleRadius>Close</button>
-            <button type="button" class="btn btn-primary relative waves-light" (click)="updateTool();basicModal.hide();" mdbRippleRadius>Update</button>
+          <form >
+              Name <input class='form-control' type="text" name="toolname" value="{{toolToBeUpdated.name}}" [(ngModel)]="toolToBeUpdated.name">
+              Description <textarea class='form-control' rows="4" cols="35" name="description" value="{{toolToBeUpdated.description}}" [(ngModel)]="toolToBeUpdated.description"></textarea>
+              Type of tool  <input class='form-control' type="text" name="type" value="{{toolToBeUpdated.type}}" [(ngModel)]="toolToBeUpdated.type">
+              Year Manufactured <input class='form-control' type="text" name="manufactureYear" value="{{toolToBeUpdated.manufactureYear}}" [(ngModel)]="toolToBeUpdated.manufactureYear">
+              Condition <input class='form-control' type="text" name="condition" value="{{toolToBeUpdated.condition}}" [(ngModel)]="toolToBeUpdated.condition">
+              Cost <input class='form-control'type="number" name="costPerDay" value="{{toolToBeUpdated.costPerDay}}" [(ngModel)]="toolToBeUpdated.costPerDay">
+            <button type="button" class="btn" (click)="updateTool();basicModal.hide();" mdbRippleRadius>Update</button>
           </form>
         </div>
       </div>

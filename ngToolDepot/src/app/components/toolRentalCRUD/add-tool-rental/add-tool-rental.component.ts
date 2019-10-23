@@ -1,5 +1,4 @@
 import { Router } from '@angular/router';
-import { ToolTransactionComponent } from './../../tool-transaction/tool-transaction.component';
 import { ToolRentalService } from 'src/app/services/tool-rental.service';
 import { ToolRental } from './../../../models/tool-rental';
 import { Component, OnInit, Input } from '@angular/core';
@@ -38,6 +37,7 @@ export class AddToolRentalComponent implements OnInit {
       },
       err => {
         console.error('Error in update-tool - getTool()');
+        console.log(this.tool);
         console.error(err);
       }
     );
@@ -49,10 +49,11 @@ export class AddToolRentalComponent implements OnInit {
     this.trService.create(this.newToolRental, this.tool.id).subscribe(
       () => {
         console.log("Success adding");
+        this.router.navigateByUrl('/toolTransaction?rented=true');
       },
       err => {
         console.log(err);
       }
-    )
+    );
   }
 }

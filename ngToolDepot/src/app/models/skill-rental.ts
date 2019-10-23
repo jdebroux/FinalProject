@@ -1,3 +1,5 @@
+import { User } from './user';
+
 export class SkillRental {
   id: number;
   startDate: string;
@@ -6,7 +8,7 @@ export class SkillRental {
   hours: number;
   createDate: string;
   updateDate: string;
-  renter: object;
+  renter: User;
   userSkill: object;
 
   constructor(
@@ -17,7 +19,7 @@ export class SkillRental {
     hours?: number,
     createDate?: string,
     updateDate?: string,
-    renter?: object,
+    renter?: User,
     userSkill?: object
   ) {
     this.id = id;

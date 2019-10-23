@@ -1,3 +1,5 @@
+import { MatFormFieldModule, MatSelectModule } from '@angular/material';
+import { AddressFormComponent } from './components/address-form/address-form.component';
 import { GeocodeService } from './services/geocode.service';
 import { FooterComponent } from './components/footer/footer.component';
 import { MDBBootstrapModule, ButtonsModule, InputsModule} from 'angular-bootstrap-md';
@@ -56,9 +58,11 @@ import { DeleteReviewLenderComponent } from './components/reviewOfLender/delete-
 import { AddReviewRenterComponent } from './components/reviewOfRenter/add-review-renter/add-review-renter.component';
 import { EditReviewRenterComponent } from './components/reviewOfRenter/edit-review-renter/edit-review-renter.component';
 import { DeleteReviewRenterComponent } from './components/reviewOfRenter/delete-review-renter/delete-review-renter.component';
+import { RatingModule } from 'ng-starrating';
 
 @NgModule({
   declarations: [
+    AddressFormComponent,
     AppComponent,
     NavigationComponent,
     HomeComponent,
@@ -106,7 +110,10 @@ import { DeleteReviewRenterComponent } from './components/reviewOfRenter/delete-
     MatGridListModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAQWXrkW5JByvZhl8kjGHaCwSUMongsLng'
-    })
+    }),
+    RatingModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [
     AuthService,
@@ -128,7 +135,8 @@ import { DeleteReviewRenterComponent } from './components/reviewOfRenter/delete-
     RegisterComponent,
     LoginComponent,
     ToolAvailablePipe,
-    ToolTransactionComponent
+    ToolTransactionComponent,
+    RatingModule
   ],
   bootstrap: [AppComponent]
 })

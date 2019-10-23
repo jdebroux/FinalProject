@@ -1,3 +1,4 @@
+import { ReviewOfRenter } from './../models/review-of-renter';
 import { AuthService } from "./auth.service";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
@@ -37,9 +38,6 @@ export class ToolRentalService {
     );
   }
   getToolTransactionsByUserName(username: string) {
-    if (localStorage.length === 0) {
-      this.router.navigateByUrl("/login");
-    }
     const httpOptions = {
       headers: new HttpHeaders({
         Authorization: `Basic ` + this.authService.getCredentials(),
@@ -52,6 +50,22 @@ export class ToolRentalService {
         return throwError('Error in toolRentalService - getToolTransactionsBy User');
       })
     )
+  }
+
+  getToolTransactionsByTool(toolId: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ` + this.authService.getCredentials(),
+        "X-Requested-With": "XMLHttpRequest"
+      })
+    };
+    return this.http.get<ToolRental[]>(environment.baseUrl + 'api/tool/' + toolId + '/toolRental', httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error in toolRentalService - getToolTransactionsBy User');
+      })
+    )
+
   }
   create(toolRental: ToolRental, toolId: number) {
     console.log("IN HERE");

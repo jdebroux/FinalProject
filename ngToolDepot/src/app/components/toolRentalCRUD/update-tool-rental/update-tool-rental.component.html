@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-warning text-dark relative waves-light" (click)="basicModal.show()" mdbRippleRadius>Update
+<button type="button" class="btn" (click)="basicModal.show()" mdbRippleRadius>Update
 </button>
 <!-- <button type="button" class="btn btn-amber text-dark relative waves-light" (click)="basicModal.show()" mdbRippleRadius>Update
   </button> -->
@@ -14,25 +14,14 @@
       </div>
       <div class="modal-body">
         <form>
-          <label>
             Pick up date and time
             <input class="form-control" name="checkout" type="datetime-local" [(ngModel)]="toolRental.checkout" value="Pick up date" >
-          </label>
-          <br>
-          <label>
             Return date
             <input class="form-control" name="return" type="datetime-local" [(ngModel)]="toolRental.returned" value="Pick up date" >
-          </label>
-          <br>
-          <label>
             Number of days:
-            <input type="number" name="numberOfDays" [(ngModel)]="numberOfDays">
-          </label>
-          <br>
+            <input class="form-control" type="number" name="numberOfDays" [(ngModel)]="numberOfDays">
 
-          <button type="button" class="btn btn-secondary waves-light" aria-label="Close" (click)="basicModal.hide()"
-            mdbRippleRadius>Close</button>
-          <button type="button" class="btn btn-primary relative waves-light" (click)="updateToolRental();basicModal.hide();" mdbRippleRadius>Rent</button>
+          <button type="button" class="btn" (click)="updateToolRental();basicModal.hide();" mdbRippleRadius>Save Changes</button>
         </form>
       </div>
     </div>

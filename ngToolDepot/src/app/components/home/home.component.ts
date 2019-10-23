@@ -1,6 +1,8 @@
 import { ToolService } from 'src/app/services/tool.service';
 import { Component, OnInit } from '@angular/core';
 import { Tool } from 'src/app/models/tool';
+import { RegisterComponent } from '../register/register.component';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,8 @@ export class HomeComponent implements OnInit {
   searchTerm: string = '';
   searchResults: Tool[] = [];
   constructor(
-    private toolService: ToolService
+    private toolService: ToolService,
+    private registerComp: RegisterComponent
   ) { }
 
   ngOnInit() {
@@ -28,6 +31,10 @@ export class HomeComponent implements OnInit {
         console.error(err);
       }
     )
+  }
+
+  register(form: NgForm) {
+    this.registerComp.register(form);
   }
 
 }

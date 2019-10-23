@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Tool {
@@ -45,7 +46,7 @@ public class Tool {
 	@Column(name="tool_condition")
 	private String condition;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties("tool")
 	@OneToMany(mappedBy = "tool")
 	private List<ToolRental> rentals;
 	
