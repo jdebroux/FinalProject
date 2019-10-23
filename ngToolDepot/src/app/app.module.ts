@@ -1,3 +1,5 @@
+import { MatFormFieldModule, MatSelectModule } from '@angular/material';
+import { AddressFormComponent } from './components/address-form/address-form.component';
 import { GeocodeService } from './services/geocode.service';
 import { FooterComponent } from './components/footer/footer.component';
 import { MDBBootstrapModule, ButtonsModule, InputsModule} from 'angular-bootstrap-md';
@@ -50,9 +52,11 @@ import { AddToolPhotoComponent } from './components/toolphotoCRUD/add-tool-photo
 import { DeleteToolPhotoComponent } from './components/toolphotoCRUD/delete-tool-photo/delete-tool-photo.component';
 import { UpdateToolPhotoComponent } from './components/toolphotoCRUD/update-tool-photo/update-tool-photo.component';
 import { ToolphotoComponent } from './components/toolphoto/toolphoto.component';
+import { RatingModule } from 'ng-starrating';
 
 @NgModule({
   declarations: [
+    AddressFormComponent,
     AppComponent,
     NavigationComponent,
     HomeComponent,
@@ -94,7 +98,10 @@ import { ToolphotoComponent } from './components/toolphoto/toolphoto.component';
     MatGridListModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAQWXrkW5JByvZhl8kjGHaCwSUMongsLng'
-    })
+    }),
+    RatingModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [
     AuthService,
@@ -116,7 +123,8 @@ import { ToolphotoComponent } from './components/toolphoto/toolphoto.component';
     RegisterComponent,
     LoginComponent,
     ToolAvailablePipe,
-    ToolTransactionComponent
+    ToolTransactionComponent,
+    RatingModule
   ],
   bootstrap: [AppComponent]
 })

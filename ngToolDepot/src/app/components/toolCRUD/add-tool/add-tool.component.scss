@@ -1,15 +1,17 @@
-button.btn {
-  background-color: #dfa000;
-  color: #f2ebe4;
+.modal-header {
+  background-color: #646264;
+  color: #DFA000;
 }
-button.close {
-  background-color: #dfa000;
-  color: #f2ebe4;
-}
-button:hover {
-  color: #F9d31a;
+
+.modal-body {
+  background-color: #F2EBE4;
   color: #646264;
 }
-.modal {
-  background-color: #646264;
+
+.btn {
+  display: block;
+  width: 100%;
+  background-color: #DFA000;
+  color: #3D3B3D;
+  font-weight: bold;
 }

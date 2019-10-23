@@ -1,3 +1,4 @@
+import { ReviewOfLenderService } from './../../services/review-of-lender.service';
 import { ToolTransactionComponent } from './../tool-transaction/tool-transaction.component';
 import { ToolPhotoService } from './../../services/tool-photo.service';
 import { AuthService } from './../../services/auth.service';

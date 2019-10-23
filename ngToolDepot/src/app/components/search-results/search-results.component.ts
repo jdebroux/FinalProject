@@ -1,16 +1,18 @@
-import { Location } from './../../models/location';
-import { AddressService } from './../../services/address.service';
-import { Address } from './../../models/address';
-import { GeocodeService } from './../../services/geocode.service';
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Tool } from 'src/app/models/tool';
-import { AgmMap, InfoWindowManager } from '@agm/core';
-import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
+import { Location } from "./../../models/location";
+import { AddressService } from "./../../services/address.service";
+import { Address } from "./../../models/address";
+import { GeocodeService } from "./../../services/geocode.service";
+import { Component, OnInit, Input, ViewChild } from "@angular/core";
+import { Tool } from "src/app/models/tool";
+import { AgmMap, InfoWindowManager, MapsAPILoader } from "@agm/core";
+import { User } from "src/app/models/user";
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-search-results',
-  templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.scss']
+  selector: "app-search-results",
+  templateUrl: "./search-results.component.html",
+  styleUrls: ["./search-results.component.scss"]
 })
 export class SearchResultsComponent implements OnInit {
   @Input() searchResults: Tool[];
@@ -20,15 +22,23 @@ export class SearchResultsComponent implements OnInit {
   location: Location = new Location();
   savedCoordinatesMap: Map<string, Location> = new Map();
   savedCoordinatesList: Location[] = [];
-  coordinates: Location[] = []
+  coordinates: Location[] = [];
   openInfo: boolean = false;
   hoveredTool: Tool = new Tool();
   address: Address = new Address();
   owner: User = new User();
   constructor(
     private geoService: GeocodeService,
-    private addrService: AddressService
-    ) {}
+    private addrService: AddressService,
+    private authService: AuthService,
+    private router: Router,
+    private mapsApiLoader: MapsAPILoader
+  ) {
+    this.mapsApiLoader.load().then(() => {
+      this.lat = 39.7392;
+      this.lng = -104.9903;
+    })
+  }
 
   ngOnInit() {
     this.savedCoordinatesMap = new Map();
@@ -43,23 +53,22 @@ export class SearchResultsComponent implements OnInit {
       this.savedCoordinatesList = [];
       this.addrService.getAddressOfToolOwner(tool.id).subscribe(
         data => {
-          this.geoService.geocodeAddress(this.generateApiAddressString(data)).subscribe(
-
-            data => {
-              this.parseForCoordinates(data, tool, this.savedCoordinatesMap);
-
-            },
-            err => {
-              console.error(err);
-            }
-          );
+          this.geoService
+            .geocodeAddress(this.generateApiAddressString(data))
+            .subscribe(
+              data => {
+                this.parseForCoordinates(data, tool, this.savedCoordinatesMap);
+              },
+              err => {
+                console.error(err);
+              }
+            );
         },
         err => {
           console.error(err);
         }
       );
     }
-
   }
 
   mouseEnter(tool: Tool) {
@@ -68,10 +77,10 @@ export class SearchResultsComponent implements OnInit {
     this.coordinates.push(this.location);
     this.hoveredTool = tool;
     for (let prop in this.hoveredTool) {
-      if (prop === 'user') {
+      if (prop === "user") {
         this.owner = this.hoveredTool[prop];
         for (let property in this.owner) {
-          if (property === 'address') {
+          if (property === "address") {
             this.address = this.owner[property];
             break;
           }
@@ -94,16 +103,34 @@ export class SearchResultsComponent implements OnInit {
 
   generateApiAddressString(addr: Address) {
     // 1600+Amphitheatre+Parkway,+Mountain+View,+CA
-    var formattedString = '';
-    formattedString += addr.street.split(' ').join('+');
-    formattedString += ',';
-    formattedString += '+' + addr.city.split(' ').join('+');
-    formattedString += '+' + addr.state;
+    var formattedString = "";
+    formattedString += addr.street.split(" ").join("+");
+    formattedString += ",";
+    formattedString += "+" + addr.city.split(" ").join("+");
+    formattedString += "+" + addr.state;
     return formattedString;
   }
 
-  redraw(){
+  redraw() {
     this.openInfo = false;
     this.coordinates = this.savedCoordinatesList;
+  }
+
+  checkLogin(): boolean {
+    if (this.authService.checkLogin()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  loginRedirect(tool: Tool) {
+    var str = '/login?toolId=' + tool.id;
+    this.router.navigateByUrl(str);
+  }
+
+  toolTransaction(tool) {
+    var str = '/toolTransaction?id=' + tool.id;
+    this.router.navigateByUrl(str);
   }
 }
