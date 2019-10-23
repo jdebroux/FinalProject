@@ -39,6 +39,7 @@ export class ToolComponent implements OnInit {
     this.reloadTools();
   }
 
+
   checkLogin(owner): boolean {
     if (this.authService.getUsername() === owner.name) {
       return true;

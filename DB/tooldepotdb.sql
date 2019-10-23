@@ -311,8 +311,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `tooldepotdb`;
-INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (1, '7755 E Quincy Ave', 'Denver', 'CO', '80237', 'US');
-INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (2, '7400 E Orchard Rd', 'Greenwood Village', 'CO', '88888', 'US');
+INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (1, '123 Tool St', 'Tool', 'TO', '99999', 'US');
+INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (2, '555 Admin Way', 'Admin', 'CO', '88888', 'US');
 INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (3, '6820 E 75th PL', 'Commerce City', 'CO', '80022', 'US');
 INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (4, '7567 Broadway ST', 'Denver', 'CO', '80022', 'US');
 INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (5, '6155 Logan Pl', 'Centennial', 'CO', '80121', 'US');
@@ -327,7 +327,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `tooldepotdb`;
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (1, 1, 'admin', '$2a$10$aNWARjmakD5DkADI851RbeGyuElJUMfAelfciTVP1/tUI5AiAunAe', 1, 'admin', 'admin', 'admin', 'admin@admin.com', '123-456-7890', 'none', NULL, NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (1, 1, 'admin', '$2a$10$aNWARjmakD5DkADI851RbeGyuElJUMfAelfciTVP1/tUI5AiAunAe', 1, 'admin', 'admin', 'admin', 'admin@admin.com', '123-456-7890', 'http://bit.ly/33QGafY', NULL, NULL);
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (2, 2, 'tool', '$2a$10$vcwvfqyX0CPHPYjKm9PpUepfBsCvF.TBmtY5NXcjIdLxK8W9ZGmVC', 1, 'admin', 'tool', 'tool', 'tool@tool.com', '123-456-9999', 'none', NULL, NULL);
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (3, 3, 'josh', '$2a$10$3VUQSFrQL8lyUloI1hUk.e4fBPPZrxP.7BrfDbB7i3Bo4Et0APMKa', 1, 'user', 'Josh', 'Howell', 'josh@tooldepot.com', '458-489-6253', 'https://bit.ly/2MpfRrz', '2019-10-14 21:19:52', '2019-10-14 21:19:53');
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (4, 4, 'alicia', '$2a$10$o8HY6CAEHkP5936ncklGau2DOwryTXJJM/8Mpv6zbuLQUal/Yeu5G', 1, 'user', 'Alicia', 'Glassmeyer', 'alicia@tooldepot.com', '254-896-3521', 'https://bit.ly/2pvn5kp', '2019-10-14 21:19:53', '2019-10-14 21:19:54');
