@@ -84,6 +84,8 @@ export class UserComponent implements OnInit, AfterContentInit {
         this.toolTransactions = data;
         this.toolTransactions.forEach(toolTransaction => {
           if (toolTransaction.id !== 0) {
+            console.log(toolTransaction.lenderReview + ' WHOLE TOOL TRANSACTION OBJECT IN USER COMP GLIUT   LENDER');
+            console.log(toolTransaction.renterReview + ' WHOLE TOOL TRANSACTION OBJECT IN USER COMP GLIUT   RENTER');
             console.log(toolTransaction.renter.id + ' THIS IS TOOL TRANSACTION RENTER ID');
             if (this.loggedInUser.id === toolTransaction.renter.id) {
               this.myToolRentals.push(toolTransaction);
