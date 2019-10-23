@@ -1,6 +1,6 @@
 <div class="userpage container-fluid">
   <div class="row">
-    <div class="col-fluid">
+    <div class="col-sm-12">
       <div class="card">
         <!-- badge for total lent/rented out/money -->
         <h2 class="card-header text-dark bg-warning"><span>{{loggedInUser.firstName}}</span>
@@ -15,14 +15,36 @@
               alt="Card image cap" />
           </div>
           <div class="card-body">
-            <h4 class="card-title"></h4>
-            <p class="card-text ">
-              Some quick example text to build on the card title
-              andfkjsdhfkdhsfhsdjkfhsdakljfhsdkjfhsdkjfhsklfhsld make up the
-              bulk the card's content. fdadsffsdfffsdsdfNeeds to have enough
-              text to fill screen
-            </p>
-          </div>
+              <!-- <p class="card-text "> -->
+                  <h5>Update Your Personal Information</h5>
+                  <form >
+                    First and Last Name:
+                      <div class="input-group">
+                          <input class="form-control" type="text" name="firstName"  placeholder="{{loggedInUser.firstName}}" [(ngModel)]="loggedInUser.firstName">
+                          <input class="form-control" type="text" name="lastName"  placeholder="{{loggedInUser.lastName}}"[(ngModel)]="loggedInUser.lastName">
+                        </div>
+                    Username:
+                    <div class="input-group">
+                      <input class='form-control' type="text" name="username" placeholder="{{loggedInUser.username}}"[(ngModel)]="loggedInUser.username">
+                    </div>
+                    Phone Number:
+                    <input class='form-control' type="text" name="phone" placeholder="{{loggedInUser.phone}}" [(ngModel)]="loggedInUser.phone">
+                    Street Address:
+                    <input class="form-control" name="street" placeholder='{{loggedInUser.address.street}}' [(ngModel)]="loggedInUser.address.street">
+                    City / Zip Code / State:
+                    <div class="input-group">
+                      <input class="form-control" placeholder="{{loggedInUser.address.city}}" name="city" [(ngModel)]="loggedInUser.address.city">
+                      <input class="form-control" placeholder="Zip Code" name="zip" [(ngModel)]="loggedInUser.address.zip">
+                      <select >
+                        <option *ngFor="let state of states" [(ngModel)]="loggedInUser.address.state" name=state>
+                          {{loggedInUser.address.state}}
+                        </option>
+                      </select>
+                    </div><br>
+                    <button type="button" class="btn-form" (click)="updateUser(loggedInUser.id)" mdbRippleRadius>Submit Changes</button>
+                  </form>
+              <!-- </p> -->
+            </div>
         </div>
         <div class="card-footer text-white bg-warning">Footer Footer</div>
       </div>
@@ -111,7 +133,7 @@
   </button>
   <div class="userpage" mdbCollapse #toolListDiv="bs-collapse">
     <div id="listMyTools">
-      <table class="table table-striped table-dark">
+      <table class="table table-striped">
         <thead class="dark text-warning">
           <tr>
             <td align="left"></td>
@@ -214,7 +236,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let tool of myTools">
+          <tr *ngFor="let tool of allTools">
 
             <div class="img-square-wrapper">
               <img class="img-thumbnail" [src]="tool.photos[0].photoUrl" alt="Cinque Terre" width="300" height="300"
