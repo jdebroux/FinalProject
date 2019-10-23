@@ -1,6 +1,7 @@
 import { ReviewOfRenter } from './review-of-renter';
 import { User } from 'src/app/models/user';
 import { Tool } from './tool';
+import { ReviewOfLender } from './review-of-lender';
 
 export class ToolRental {
   id: number;
@@ -12,6 +13,7 @@ export class ToolRental {
   tool: Tool;
   renter: User;
   renterReview: ReviewOfRenter;
+  lenderReview: ReviewOfLender;
 
   constructor(
     id?: number,
@@ -22,7 +24,8 @@ export class ToolRental {
     updateDate?: string,
     tool?: Tool,
     renter?: User,
-    renterReview?: ReviewOfRenter
+    renterReview?: ReviewOfRenter,
+    lenderReview?: ReviewOfLender
   ) {
     this.id = id;
     this.checkout = checkout;
@@ -33,5 +36,6 @@ export class ToolRental {
     this.tool = tool;
     this.renter = renter;
     this.renterReview = renterReview;
+    this.lenderReview = lenderReview;
   }
 }

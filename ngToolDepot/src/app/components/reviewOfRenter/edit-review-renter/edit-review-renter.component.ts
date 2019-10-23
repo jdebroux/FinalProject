@@ -12,7 +12,7 @@ import { ToolRental } from 'src/app/models/tool-rental';
 export class EditReviewRenterComponent implements OnInit {
   @Input() toolTransaction: ToolRental;
 
-  @Input() reviewOfRenter: ReviewOfRenter;
+  // @Input() reviewOfRenter: ReviewOfRenter;
 
   reviewToBeUpdated: ReviewOfRenter = new ReviewOfRenter();
 
@@ -45,7 +45,7 @@ export class EditReviewRenterComponent implements OnInit {
       this.reviewToBeUpdated.toolRating = this.currentRatingForTool;
 
       this.reviewOfLenderSvc.update(this.toolTransaction.id,
-        this.reviewOfRenter.id, this.reviewToBeUpdated).subscribe(
+        this.reviewToBeUpdated.id, this.reviewToBeUpdated).subscribe(
         () => {
           console.log('review of Renter successful edit');
           location.reload();

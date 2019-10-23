@@ -12,7 +12,7 @@ import { ToolRental } from 'src/app/models/tool-rental';
 export class DeleteReviewRenterComponent implements OnInit {
   @Input() toolTransaction: ToolRental;
 
-  @Input() reviewOfRenter: ReviewOfRenter;
+  @Input() reviewToBeDeleted: ReviewOfRenter;
 
   constructor(private reviewOfLenderSvc: ReviewOfRenterService, private toolTransactionComp: ToolTransactionComponent) { }
 
@@ -20,7 +20,7 @@ export class DeleteReviewRenterComponent implements OnInit {
   }
 
   delete() {
-    this.reviewOfLenderSvc.destroy(this.toolTransaction.id, this.reviewOfRenter.id).subscribe(
+    this.reviewOfLenderSvc.destroy(this.toolTransaction.id, this.reviewToBeDeleted.id).subscribe(
       () => {
         console.log('Success deleting IN DELETE REVIEW RENTER');
         location.reload();
