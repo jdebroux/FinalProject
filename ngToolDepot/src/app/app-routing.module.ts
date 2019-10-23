@@ -26,6 +26,7 @@ const routes: Routes = [
   { path: 'tool', component: ToolComponent },
   { path: 'skill', component: SkillComponent },
   { path: 'skillTransaction', component: SkillTransactionComponent },
+  { path: 'confirmation/:id', component: ConfirmationComponent },
   { path: 'confirmation', component: ConfirmationComponent }
 ];
 

@@ -13,7 +13,6 @@ import { ToolRentalService } from 'src/app/services/tool-rental.service';
 export class ConfirmationComponent implements OnInit {
   toolTransactions: ToolRental[] = [];
   urlToolTransactionId: string;
-  toolService: any;
   display: ToolRental;
   selected = null;
 
@@ -23,12 +22,13 @@ export class ConfirmationComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.urlToolTransactionId = this.getCommandLineParameter();
+    // this.urlToolTransactionId = this.currentRoute.snapshot.queryParamMap.get('id');
+    // console.log(this.currentRoute.snapshot.queryParamMap.get('id'));
     this.currentRoute.queryParams.subscribe(params => {
-      this.urlToolTransactionId = params.id;
+      this.urlToolTransactionId = params['id'];
     });
-    // console.error('transaction id ' + this.urlToolTransactionId);
-    this.toolService.findById(this.urlToolTransactionId).subscribe(
+    console.error('transaction id ' + this.urlToolTransactionId);
+    this.toolRentalService.findById(this.urlToolTransactionId).subscribe(
       lifeIsGood => {
         this.display = lifeIsGood;
         console.log(this.display);
@@ -50,7 +50,6 @@ export class ConfirmationComponent implements OnInit {
     return idString;
   }
   reloadPage() {
-    // this.displayTool(this.toolComp);
     this.toolRentalService.index().subscribe(
       lifeIsGood => {
         this.toolTransactions = lifeIsGood;
