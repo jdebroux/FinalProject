@@ -51,6 +51,7 @@ import { DeleteToolPhotoComponent } from './components/toolphotoCRUD/delete-tool
 import { UpdateToolPhotoComponent } from './components/toolphotoCRUD/update-tool-photo/update-tool-photo.component';
 import { ToolphotoComponent } from './components/toolphoto/toolphoto.component';
 import { RatingModule } from 'ng-starrating';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { RatingModule } from 'ng-starrating';
     AddToolPhotoComponent,
     DeleteToolPhotoComponent,
     UpdateToolPhotoComponent,
-    ToolphotoComponent
+    ToolphotoComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,
