@@ -1,34 +1,40 @@
-import { NavigationComponent } from './../navigation/navigation.component';
-import { ToolRentalService } from 'src/app/services/tool-rental.service';
-import { AuthService } from './../../services/auth.service';
-import { ToolTransactionComponent } from './../tool-transaction/tool-transaction.component';
-import { NgForm } from '@angular/forms';
-import { DatePipe } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
-import { User } from 'src/app/models/user';
-import { UserService } from 'src/app/services/user.service';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { ToolService } from 'src/app/services/tool.service';
-import { ToolRental } from 'src/app/models/tool-rental';
-import { Tool } from 'src/app/models/tool';
-import { AfterViewInit, OnInit, Component, AfterContentInit } from '@angular/core';
+import { NavigationComponent } from "./../navigation/navigation.component";
+import { ToolRentalService } from "src/app/services/tool-rental.service";
+import { AuthService } from "./../../services/auth.service";
+import { ToolTransactionComponent } from "./../tool-transaction/tool-transaction.component";
+import { NgForm } from "@angular/forms";
+import { DatePipe } from "@angular/common";
+import { ActivatedRoute, Router } from "@angular/router";
+import { User } from "src/app/models/user";
+import { UserService } from "src/app/services/user.service";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { ToolService } from "src/app/services/tool.service";
+import { ToolRental } from "src/app/models/tool-rental";
+import { Tool } from "src/app/models/tool";
+import {
+  AfterViewInit,
+  OnInit,
+  Component,
+  AfterContentInit
+} from "@angular/core";
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss'],
+  selector: "app-user",
+  templateUrl: "./user.component.html",
+  styleUrls: ["./user.component.scss"]
 })
 export class UserComponent implements OnInit, AfterContentInit {
-
-  constructor(private userService: UserService,
-              private datePipe: DatePipe,
-              private currentRoute: ActivatedRoute,
-              private toolService: ToolService,
-              private router: Router,
-              private authService: AuthService,
-              private toolRentalService: ToolRentalService,
-              ) {}
+  constructor(
+    private userService: UserService,
+    private datePipe: DatePipe,
+    private currentRoute: ActivatedRoute,
+    private toolService: ToolService,
+    private router: Router,
+    private authService: AuthService,
+    // private tool: Tool,
+    private toolRentalService: ToolRentalService
+  ) {}
 
   editUser = null;
   selected = null;
@@ -39,6 +45,7 @@ export class UserComponent implements OnInit, AfterContentInit {
   newUser = new User();
   toolTransactions: ToolRental[] = [];
   myTools: Tool[] = [];
+  allTools: Tool[] = [];
 
   // 'use strict';
 
@@ -47,21 +54,20 @@ export class UserComponent implements OnInit, AfterContentInit {
     // this.reloadUsers();
 
     // this.loggedInUser = this.authService.returnUser();
-    this.loggedInUser = JSON.parse(localStorage.getItem('Object'));
+    this.loggedInUser = JSON.parse(localStorage.getItem("Object"));
   }
 
   ngAfterContentInit() {
     // this.setLoggedInUser();
-    if (localStorage.getItem('role') === 'admin') {
+    if (localStorage.getItem("role") === "admin") {
       this.reloadUsers();
       this.getLoggedInUserTransactions();
       this.getLoggedInUserTools();
-    } else if (localStorage.getItem('role') === 'user') {
+    } else if (localStorage.getItem("role") === "user") {
       this.getLoggedInUserTransactions();
       this.getLoggedInUserTools();
-
     }
-    this.loggedInUser = JSON.parse(localStorage.getItem('Object'));
+    this.loggedInUser = JSON.parse(localStorage.getItem("Object"));
   }
 
   getAllUsers() {
@@ -79,8 +85,8 @@ export class UserComponent implements OnInit, AfterContentInit {
       err => {
         console.error(err);
       }
-      );
-    }
+    );
+  }
 
   //   setLoggedInUser() {
   //     this.userService.getUserByUsername().subscribe(
@@ -96,23 +102,33 @@ export class UserComponent implements OnInit, AfterContentInit {
   //       );
   //     }
 
-      getLoggedInUserTools() {
-        const userName = this.authService.getUsername();
-        this.toolService.getToolListByUserName(userName).subscribe(
-        data => {
-          this.myTools = data;
-        },
+  getAllTools() {
+    this.toolService.index().subscribe(
+      data => {
+        this.allTools = data;
+      },
       err => {
         console.error(err);
       }
     );
+  }
 
+  getLoggedInUserTools() {
+    const userName = this.authService.getUsername();
+    this.toolService.getToolListByUserName(userName).subscribe(
+      data => {
+        this.myTools = data;
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }
 
   getCommandLineParameter(): string {
-    let idString = '';
-    if (this.currentRoute.snapshot.paramMap.get('id')) {
-      idString =  this.currentRoute.snapshot.paramMap.get('id');
+    let idString = "";
+    if (this.currentRoute.snapshot.paramMap.get("id")) {
+      idString = this.currentRoute.snapshot.paramMap.get("id");
     }
     return idString;
   }
@@ -149,7 +165,7 @@ export class UserComponent implements OnInit, AfterContentInit {
         this.reloadUsers();
       },
       err => {
-        console.error('userComponent - addUser()');
+        console.error("userComponent - addUser()");
         console.error(err);
       }
     );
@@ -165,7 +181,6 @@ export class UserComponent implements OnInit, AfterContentInit {
   }
 
   updateUser(id: number, editedUser: User) {
-
     // TODO logic needs to be entered here
 
     this.userService.update(id, editedUser).subscribe(
@@ -173,7 +188,7 @@ export class UserComponent implements OnInit, AfterContentInit {
         this.reloadUsers();
       },
       err => {
-        console.error('userComponent - updateUser()');
+        console.error("userComponent - updateUser()");
         console.error(err);
       }
     );
@@ -187,7 +202,7 @@ export class UserComponent implements OnInit, AfterContentInit {
         this.reloadUsers();
       },
       err => {
-        console.error('userComponent - deleteUser()');
+        console.error("userComponent - deleteUser()");
         console.error(err);
       }
     );
@@ -199,14 +214,16 @@ export class UserComponent implements OnInit, AfterContentInit {
       lifeIsGood => {
         this.users = lifeIsGood;
         if (this.urlUserId) {
-          this.selected = this.users.find((data => data.id === Number(this.urlUserId)));
+          this.selected = this.users.find(
+            data => data.id === Number(this.urlUserId)
+          );
           if (!this.selected) {
-            this.router.navigateByUrl('**');
+            this.router.navigateByUrl("**");
           }
         }
       },
       lifeIsBad => {
-        console.error('Error in UserComponent.reloadUsers()');
+        console.error("Error in UserComponent.reloadUsers()");
         console.error(lifeIsBad);
       }
     );
