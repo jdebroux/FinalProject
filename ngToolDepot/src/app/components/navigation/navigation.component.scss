@@ -1,9 +1,7 @@
-#navbar-container {
-  margin-right: 0px;
-  margin-left: 0px;
-  padding-right: 0px;
-  padding-left: 0px;
+.navbar {
   background-color: #3D3B3D;
+  margin: 0px;
+  padding: 0px;
 }
 
 a {
@@ -14,6 +12,7 @@ a:hover {
   color: #F9d31a;
   font-weight: bold;
 }
+
 span {
   color: #dfa000;
 }
@@ -24,6 +23,15 @@ span {
   background-color: #DFA000;
   color: #3D3B3D;
   font-weight: bold;
+}
+
+.modal-header {
+  background-color: #646264;
+  color: #DFA000;
+}
+
+.modal-body {
+  background-color: #F2EBE4;
 }
 
 

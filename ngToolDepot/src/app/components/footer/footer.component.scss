@@ -76,3 +76,21 @@ transition: all 250ms ease-in-out 0s;
 mdb-icon {
  height: 30px;
 }
+
+.modal-header {
+  background-color: #646264;
+  color: #DFA000;
+}
+
+.modal-body {
+  background-color: #F2EBE4;
+  color: #646264;
+}
+
+.modalbtn {
+  display: block;
+  width: 100%;
+  background-color: #DFA000;
+  color: #3D3B3D;
+  font-weight: bold;
+}
