@@ -1,5 +1,5 @@
 <div style="text-align:center; background-color: #646264;">
-<button type="button" class="btn relative waves-light" (click)="basicModal.show()" mdbRippleRadius>Add
+<button type="button" class="btn" (click)="basicModal.show()" mdbRippleRadius>Add
   tool</button>
 </div>
 
@@ -15,33 +15,13 @@
       </div>
       <div class="modal-body">
         <form #newTool="ngForm">
-          <label>
             Name <input type="text" name="name" ngModel>
-          </label>
-          <br>
-          <label>
             Description <input type="text" name="description" ngModel>
-          </label>
-          <br>
-          <label>
             Type of tool  <input type="text" name="type" ngModel>
-          </label>
-          <br>
-          <label>
              Year Manufactured <input type="text" name="manufactureYear" ngModel>
-          </label>
-          <br>
-          <label>
              Condition <input type="text" name="condition" ngModel>
-          </label>
-          <br>
-          <label>
              Cost <input type="number" name="costPerDay" ngModel>
-          </label>
-          <br>
-          <button type="button" class="btn btn-secondary waves-light" aria-label="Close" (click)="basicModal.hide()"
-            mdbRippleRadius>Close</button>
-          <button type="button" class="btn relative waves-light" (click)="addTool(newTool); basicModal.hide();" mdbRippleRadius>Save</button>
+          <button type="button" class="btn" (click)="addTool(newTool); basicModal.hide();" mdbRippleRadius>Save</button>
         </form>
       </div>
     </div>

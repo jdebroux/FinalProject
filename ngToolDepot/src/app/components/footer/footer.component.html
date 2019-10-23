@@ -75,6 +75,11 @@
         </div>
         <div id="regForm" class="modal-body">
           <form #newAccount="ngForm">
+              <div class="input-group">
+                  <input class="form-control" type="text" name="firstName" ngModel placeholder="First Name">
+                  <input class="form-control" type="text" name="lastName" ngModel placeholder="Last Name">
+                </div>
+            <br>
             <input class='form-control' type="text" name="username" ngModel placeholder="Username">
             <br>
             <input class='form-control' type="password" name="password" ngModel placeholder="Password">
@@ -82,7 +87,7 @@
             <input class='form-control' type="email" name="email" ngModel placeholder="Email">
             <br>
             <br>
-            <button type="button" class="btn" (click)="register(newAccount);registerModal.hide();" mdbRippleRadius>Create Account</button>
+            <button type="button" class="btn modalbtn" (click)="register(newAccount);registerModal.hide();" mdbRippleRadius>Create Account</button>
           </form>
         </div>
       </div>

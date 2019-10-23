@@ -1,3 +1,4 @@
+<div class="navbar sticky-top">
 <div id="navbar-container" style="width: 100%;">
 
   <mdb-navbar id="navbar" SideClass="navbar navbar-expand-lg navbar-dark">
@@ -14,12 +15,16 @@
         <li class="nav-item">
           <a class="nav-link waves-light" [routerLink]="['/home']" routerLinkActive="router-link-active"
             mdbWavesEffect><span>Home</span></a>
+          </li>
+        <li>
+            <a class="nav-link waves-light" [routerLink]="['/tool']"
+              routerLinkActive="router-link-active"See All Tools><span>See All Tools</span></a>
         </li>
         <li *ngIf="!checkIfLoggedInUser()">
           <a class="nav-link waves-light " mdbWavesEffect (click)="registerModal.show()"><span>Register</span></a>
         </li>
         <li *ngIf="checkIfLoggedInUser()">
-          <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/user']">{{getUsername().firstName}}</a>
+          <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/user']">{{getUserFName()}}</a>
         </li>
 
         <li *ngIf="!checkIfLoggedInUser()">
@@ -38,6 +43,7 @@
   </mdb-navbar>
 
 </div>
+</div>
 <div mdbModal #registerModal="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
     <div class="modal-dialog" role="document">
@@ -50,6 +56,11 @@
         </div>
         <div id="regForm" class="modal-body">
           <form #newAccount="ngForm">
+              <div class="input-group">
+                  <input class="form-control" type="text" name="firstName" ngModel placeholder="First Name">
+                  <input class="form-control" type="text" name="lastName" ngModel placeholder="Last Name">
+                </div>
+            <br>
             <input class='form-control' type="text" name="username" ngModel placeholder="Username">
             <br>
             <input class='form-control' type="password" name="password" ngModel placeholder="Password">

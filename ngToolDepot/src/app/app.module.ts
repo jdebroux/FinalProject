@@ -1,3 +1,5 @@
+import { MatFormFieldModule, MatSelectModule } from '@angular/material';
+import { AddressFormComponent } from './components/address-form/address-form.component';
 import { GeocodeService } from './services/geocode.service';
 import { FooterComponent } from './components/footer/footer.component';
 import { MDBBootstrapModule, ButtonsModule, InputsModule} from 'angular-bootstrap-md';
@@ -55,6 +57,7 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
 
 @NgModule({
   declarations: [
+    AddressFormComponent,
     AppComponent,
     NavigationComponent,
     HomeComponent,
@@ -98,7 +101,9 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAQWXrkW5JByvZhl8kjGHaCwSUMongsLng'
     }),
-    RatingModule
+    RatingModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [
     AuthService,
@@ -120,7 +125,8 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
     RegisterComponent,
     LoginComponent,
     ToolAvailablePipe,
-    ToolTransactionComponent
+    ToolTransactionComponent,
+    RatingModule
   ],
   bootstrap: [AppComponent]
 })

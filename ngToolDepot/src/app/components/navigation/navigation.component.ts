@@ -28,8 +28,11 @@ export class NavigationComponent implements OnInit {
     return this.auth.checkLogin();
   }
 
-  getUsername(): User {
-    return JSON.parse(localStorage.getItem('Object'));
+  // getUsername(): User {
+  //   return JSON.parse(localStorage.getItem('Object'));
+  // }
+  getUserFName(): string {
+    return localStorage.getItem('userFName');
   }
 
   register(form: NgForm) {

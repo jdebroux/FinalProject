@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-danger relative waves-light" (click)="getTool();basicModal.show()" mdbRippleRadius>Rent
+<button type="button" class="btn" (click)="getTool();basicModal.show()" mdbRippleRadius>Rent
 </button>
 
 <div mdbModal #basicModal="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
@@ -13,20 +13,12 @@
       </div>
       <div class="modal-body">
         <form>
-          <label>
             Pick up date and time
             <input class="form-control" name="checkout" type="datetime-local" [(ngModel)]="pickUpDate" value="Pick up date" >
-          </label>
-          <br>
-          <label>
             Number of days:
-            <input type="number" name="numberOfDays" [(ngModel)]="numberOfDays">
-          </label>
-          <br>
+            <input class="form-control" type="number" name="numberOfDays" [(ngModel)]="numberOfDays">
 
-          <button type="button" class="btn btn-secondary waves-light" aria-label="Close" (click)="basicModal.hide()"
-            mdbRippleRadius>Close</button>
-          <button type="button" class="btn btn-primary relative waves-light" (click)="createToolRental();basicModal.hide();" mdbRippleRadius>Rent</button>
+          <button type="button" class="btn" (click)="createToolRental();basicModal.hide();" mdbRippleRadius>Rent</button>
         </form>
       </div>
     </div>
