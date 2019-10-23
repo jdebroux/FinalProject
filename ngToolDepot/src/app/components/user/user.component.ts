@@ -46,6 +46,8 @@ export class UserComponent implements OnInit, AfterContentInit {
   toolTransactions: ToolRental[] = [];
   myTools: Tool[] = [];
   allTools: Tool[] = [];
+  myToolRentals: ToolRental[] = [];
+  myToolLoans: ToolRental[] = [];
 
   // 'use strict';
 
@@ -80,6 +82,17 @@ export class UserComponent implements OnInit, AfterContentInit {
     this.toolRentalService.getToolTransactionsByUserName(userName).subscribe(
       data => {
         this.toolTransactions = data;
+        this.toolTransactions.forEach(toolTransaction => {
+          if (toolTransaction.id !== 0 || toolTransaction.id !== null) {
+            if (this.loggedInUser.id === toolTransaction.renter.id) {
+              this.myToolRentals.push(toolTransaction);
+            } else {
+              this.myToolLoans.push(toolTransaction);
+            }
+          }
+          });
+        console.log(this.myToolRentals.length + ' myToolRentals LENGTH');
+        console.log(this.myToolLoans.length + ' myToolLoans LENGTH');
         console.error(this.toolTransactions);
       },
       err => {
