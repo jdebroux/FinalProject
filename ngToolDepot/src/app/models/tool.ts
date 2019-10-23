@@ -11,7 +11,6 @@ export class Tool {
   available: boolean;
   manufactureYear: string;
   condition: string;
-  owner: User;
   user: User;
   photos: ToolPhoto[];
   rentals: ToolRental[];
@@ -25,7 +24,6 @@ export class Tool {
     available?: boolean,
     manufactureYear?: string,
     condition?: string,
-    owner?: User,
     user?: User,
     photos?: ToolPhoto[],
     rentals?: ToolRental[]
@@ -39,7 +37,6 @@ export class Tool {
     this.available = available;
     this.manufactureYear = manufactureYear;
     this.condition = condition;
-    this.owner = owner;
     this.user = user;
     this.photos = photos;
     this.rentals = rentals;

@@ -100,7 +100,7 @@ export class ToolService {
     return this.http.get<Tool[]>(this.url + '/user/' + username, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('Error in tool service - getToolListBy User');
+        return throwError('Error in tool service - getToolListByUser');
       })
     );
   }

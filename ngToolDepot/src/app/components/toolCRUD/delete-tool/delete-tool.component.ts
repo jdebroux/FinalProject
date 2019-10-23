@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Tool } from 'src/app/models/tool';
 import { HttpClient } from '@angular/common/http';
 import { ToolService } from 'src/app/services/tool.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-delete-tool',
@@ -11,6 +12,8 @@ import { ToolService } from 'src/app/services/tool.service';
   styleUrls: ['./delete-tool.component.scss']
 })
 export class DeleteToolComponent implements OnInit {
+  @Input() user: User;
+
   @Input() tool: Tool;
   private url = environment.baseUrl + 'api/tool';
   toolToBeDeleted: Tool = new Tool();

@@ -12,11 +12,11 @@ import { ReviewOfLender } from '../models/review-of-lender';
   providedIn: 'root'
 })
 export class ReviewOfLenderService {
-  private url = environment.baseUrl + 'api/reviewOfLender';
+  private url = environment.baseUrl + 'api/toolRental/';
 
   constructor(private http: HttpClient, private authService: AuthService, private router: Router) {}
 
-  index() {
+  index(TRid: number) {
     if (localStorage.length === 0) {
       this.router.navigateByUrl('/login');
     }
@@ -26,7 +26,7 @@ export class ReviewOfLenderService {
         'X-Requested-With': 'XMLHttpRequest'
       })
     };
-    return this.http.get<ReviewOfLender[]>(this.url, httpOptions).pipe(
+    return this.http.get<ReviewOfLender>(this.url + TRid + '/reviewOfLender', httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error in ReviewOfLenderService.index()');
@@ -34,7 +34,7 @@ export class ReviewOfLenderService {
       );
     }
 
-  create(reviewOfLender: ReviewOfLender) {
+  create(TRid: number, reviewOfLender: ReviewOfLender) {
       if (localStorage.length === 0) {
         this.router.navigateByUrl('/login');
       }
@@ -45,7 +45,7 @@ export class ReviewOfLenderService {
           'X-Requested-With': 'XMLHttpRequest'
         })
     };
-      return this.http.post(this.url, reviewOfLender, httpOptions).pipe(
+      return this.http.post(this.url + TRid + '/reviewOfLender', reviewOfLender, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error posting new review of lender in reviewOfLender.create()');
@@ -53,7 +53,7 @@ export class ReviewOfLenderService {
       );
     }
 
-    update(id: number, reviewOfLender: ReviewOfLender) {
+    update(TRid: number, ROLid: number, reviewOfLender: ReviewOfLender) {
       if (localStorage.length === 0) {
         this.router.navigateByUrl('/login');
       }
@@ -65,7 +65,7 @@ export class ReviewOfLenderService {
         // Authorization: 'my-auth-token'
       })
     };
-      return this.http.put(this.url + '/' + id, reviewOfLender, httpOptions).pipe(
+      return this.http.put(this.url + TRid + '/reviewOfLender/' + ROLid, reviewOfLender, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error editing a review of lender');
@@ -73,7 +73,7 @@ export class ReviewOfLenderService {
       );
   }
 
-  destroy(id: number) {
+  destroy(TRid: number, ROLid: number) {
     if (localStorage.length === 0) {
       this.router.navigateByUrl('/login');
     }
@@ -85,7 +85,7 @@ export class ReviewOfLenderService {
         // Authorization: 'my-auth-token'
       })
     };
-    return this.http.delete(this.url + '/' + id, httpOptions).pipe(
+    return this.http.delete(this.url + TRid + '/reviewOfLender/' + ROLid, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error deleting a review of lender in ReviewOfLender.service.ts');

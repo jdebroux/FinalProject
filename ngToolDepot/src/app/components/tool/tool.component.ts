@@ -39,6 +39,7 @@ export class ToolComponent implements OnInit {
     this.reloadTools();
   }
 
+
   checkLogin(owner): boolean {
     if (this.authService.getUsername() === owner.name) {
       return true;
@@ -80,6 +81,7 @@ export class ToolComponent implements OnInit {
   addTool(form: NgForm) {
     this.newTool = new Tool();
     this.newTool = form.value;
+    this.newTool.user = JSON.parse(localStorage.getItem('Object'));
     // tslint:disable-next-line: no-string-literal
     this.newTool['photos'] = [];
     this.toolService.create(this.newTool).subscribe(

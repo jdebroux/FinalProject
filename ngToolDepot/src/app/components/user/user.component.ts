@@ -7,28 +7,34 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { ToolService } from 'src/app/services/tool.service';
 import { ToolRental } from 'src/app/models/tool-rental';
 import { Tool } from 'src/app/models/tool';
-import { AfterViewInit, OnInit, Component, AfterContentInit } from '@angular/core';
+import {
+  AfterViewInit,
+  OnInit,
+  Component,
+  AfterContentInit
+} from '@angular/core';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss'],
+  styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit, AfterContentInit {
-
-  constructor(private userService: UserService,
-              private datePipe: DatePipe,
-              private currentRoute: ActivatedRoute,
-              private toolService: ToolService,
-              private router: Router,
-              private authService: AuthService,
-              private toolRentalService: ToolRentalService,
-              ) {}
+  constructor(
+    private userService: UserService,
+    private datePipe: DatePipe,
+    private currentRoute: ActivatedRoute,
+    private toolService: ToolService,
+    private router: Router,
+    private authService: AuthService,
+    // private tool: Tool,
+    private toolRentalService: ToolRentalService
+  ) {}
 
   editUser = null;
   selected = null;
@@ -39,6 +45,9 @@ export class UserComponent implements OnInit, AfterContentInit {
   newUser = new User();
   toolTransactions: ToolRental[] = [];
   myTools: Tool[] = [];
+  allTools: Tool[] = [];
+  myToolRentals: ToolRental[] = [];
+  myToolLoans: ToolRental[] = [];
 
   // 'use strict';
 
@@ -54,12 +63,11 @@ export class UserComponent implements OnInit, AfterContentInit {
     // this.setLoggedInUser();
     if (localStorage.getItem('role') === 'admin') {
       this.reloadUsers();
-      this.getLoggedInUserTransactions();
+      // this.getLoggedInUserTransactions();
       this.getLoggedInUserTools();
     } else if (localStorage.getItem('role') === 'user') {
-      this.getLoggedInUserTransactions();
-      this.getLoggedInUserTools();
-
+      // this.getLoggedInUserTransactions();
+      // this.getLoggedInUserTools();
     }
     this.loggedInUser = JSON.parse(localStorage.getItem('Object'));
   }
@@ -74,13 +82,27 @@ export class UserComponent implements OnInit, AfterContentInit {
     this.toolRentalService.getToolTransactionsByUserName(userName).subscribe(
       data => {
         this.toolTransactions = data;
+        this.toolTransactions.forEach(toolTransaction => {
+          if (toolTransaction.id !== 0) {
+            console.log(toolTransaction.lenderReview + ' WHOLE TOOL TRANSACTION OBJECT IN USER COMP GLIUT   LENDER');
+            console.log(toolTransaction.renterReview + ' WHOLE TOOL TRANSACTION OBJECT IN USER COMP GLIUT   RENTER');
+            console.log(toolTransaction.renter.id + ' THIS IS TOOL TRANSACTION RENTER ID');
+            if (this.loggedInUser.id === toolTransaction.renter.id) {
+              this.myToolRentals.push(toolTransaction);
+            } else {
+              this.myToolLoans.push(toolTransaction);
+            }
+          }
+          });
+        console.log(this.myToolRentals.length + ' myToolRentals LENGTH');
+        console.log(this.myToolLoans.length + ' myToolLoans LENGTH');
         console.error(this.toolTransactions);
       },
       err => {
         console.error(err);
       }
-      );
-    }
+    );
+  }
 
   //   setLoggedInUser() {
   //     this.userService.getUserByUsername().subscribe(
@@ -96,23 +118,33 @@ export class UserComponent implements OnInit, AfterContentInit {
   //       );
   //     }
 
-      getLoggedInUserTools() {
-        const userName = this.authService.getUsername();
-        this.toolService.getToolListByUserName(userName).subscribe(
-        data => {
-          this.myTools = data;
-        },
+  getAllTools() {
+    this.toolService.index().subscribe(
+      data => {
+        this.allTools = data;
+      },
       err => {
         console.error(err);
       }
     );
+  }
 
+  getLoggedInUserTools() {
+    const userName = this.authService.getUsername();
+    this.toolService.getToolListByUserName(userName).subscribe(
+      data => {
+        this.myTools = data;
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }
 
   getCommandLineParameter(): string {
     let idString = '';
     if (this.currentRoute.snapshot.paramMap.get('id')) {
-      idString =  this.currentRoute.snapshot.paramMap.get('id');
+      idString = this.currentRoute.snapshot.paramMap.get('id');
     }
     return idString;
   }
@@ -165,7 +197,6 @@ export class UserComponent implements OnInit, AfterContentInit {
   }
 
   updateUser(id: number, editedUser: User) {
-
     // TODO logic needs to be entered here
 
     this.userService.update(id, editedUser).subscribe(
@@ -199,7 +230,9 @@ export class UserComponent implements OnInit, AfterContentInit {
       lifeIsGood => {
         this.users = lifeIsGood;
         if (this.urlUserId) {
-          this.selected = this.users.find((data => data.id === Number(this.urlUserId)));
+          this.selected = this.users.find(
+            data => data.id === Number(this.urlUserId)
+          );
           if (!this.selected) {
             this.router.navigateByUrl('**');
           }
