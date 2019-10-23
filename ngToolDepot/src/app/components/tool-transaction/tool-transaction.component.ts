@@ -1,3 +1,4 @@
+import { User } from 'src/app/models/user';
 import { ToolService } from 'src/app/services/tool.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -6,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToolRental } from 'src/app/models/tool-rental';
 import { ToolRentalService } from 'src/app/services/tool-rental.service';
 import { Tool } from 'src/app/models/tool';
+import { ReviewOfRenterService } from 'src/app/services/review-of-renter.service';
 
 @Component({
   selector: 'app-tool-transaction',
@@ -21,11 +23,13 @@ export class ToolTransactionComponent implements OnInit {
   tool: Tool = null;
   display: Tool = null;
   newToolTransaction = new ToolRental();
+  lender: ToolRental;
 
   constructor(private toolRentalService: ToolRentalService,
               private datePipe: DatePipe,
               private currentRoute: ActivatedRoute,
-              private router: Router, private toolService: ToolService) {}
+              private router: Router,
+              private toolService: ToolService) {}
 
   ngOnInit() {
     console.log('ToolTransactionComponent.ngOnInit');
@@ -33,7 +37,7 @@ export class ToolTransactionComponent implements OnInit {
     this.currentRoute.queryParams.subscribe(params => {
       this.urlToolTransactionId = params['id'];
   });
-    console.error('transaction id ' + this.urlToolTransactionId);
+    // console.error('transaction id ' + this.urlToolTransactionId);
     this.toolService.findById(this.urlToolTransactionId).subscribe(
       lifeIsGood => {
         this.display = lifeIsGood;
@@ -139,7 +143,6 @@ export class ToolTransactionComponent implements OnInit {
       }
     );
   }
-
 
   // TODO we dont need this but could utilize in a different way.
 
