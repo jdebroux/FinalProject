@@ -1,3 +1,5 @@
+import { MatFormFieldModule, MatSelectModule } from '@angular/material';
+import { AddressFormComponent } from './components/address-form/address-form.component';
 import { GeocodeService } from './services/geocode.service';
 import { FooterComponent } from './components/footer/footer.component';
 import { MDBBootstrapModule, ButtonsModule, InputsModule} from 'angular-bootstrap-md';
@@ -54,6 +56,7 @@ import { RatingModule } from 'ng-starrating';
 
 @NgModule({
   declarations: [
+    AddressFormComponent,
     AppComponent,
     NavigationComponent,
     HomeComponent,
@@ -96,7 +99,9 @@ import { RatingModule } from 'ng-starrating';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAQWXrkW5JByvZhl8kjGHaCwSUMongsLng'
     }),
-    RatingModule
+    RatingModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [
     AuthService,
@@ -118,7 +123,8 @@ import { RatingModule } from 'ng-starrating';
     RegisterComponent,
     LoginComponent,
     ToolAvailablePipe,
-    ToolTransactionComponent
+    ToolTransactionComponent,
+    RatingModule
   ],
   bootstrap: [AppComponent]
 })

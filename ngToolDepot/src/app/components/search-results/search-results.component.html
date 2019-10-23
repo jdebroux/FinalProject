@@ -25,13 +25,36 @@
                 <hr>
               </div>
             </div>
+
+            <!-- Card content -->
+            <div (mouseenter)="mouseEnter(tool) " (mouseleave)="redraw()" class="col-sm-8 card-body">
+
+              <!-- Title -->
+              <h5 class="card-title">{{ tool.name }}</h5>
+              <!-- Text -->
+              <p class="card-text">{{ tool.costPerDay | currency }} / day</p>
+              <!-- Link -->
+              <!-- <a href="#!" class="black-text d-flex justify-content-end">
+                <h5>Rent tool <i class="fas fa-angle-double-right"></i></h5>
+              </a> -->
+              <a *ngIf="!checkLogin()" (click)="loginRedirect(tool)" class="black-text d-flex justify-content-end">
+                <h5>Login to rent <i class="fas fa-angle-double-right"></i></h5>
+              </a>
+              <a *ngIf="checkLogin()" (click)="toolTransaction(tool)" routerLinkActive="router-link-active"  class="black-text d-flex justify-content-end">
+                <h5>Rent <i class="fas fa-angle-double-right"></i></h5>
+              </a>
+              <hr>
+            </div>
           </div>
         </div>
       </div>
-      <div id="map" class="col">
-        <agm-map #gm [latitude]="lat" [longitude]="lng">
-          <agm-marker *ngFor="let coordinate of coordinates; let i = index" [latitude]="coordinate.lat"
-            [longitude]="coordinate.lng">
+    </div>
+
+
+    <div id="map" class="col" >
+      <agm-map #gm [latitude]="lat" [longitude]="lng" [zoomControl]="false" [zoom]=10 [scrollwheel]="false">
+        <agm-marker *ngFor="let coordinate of coordinates; let i = index" [latitude]="coordinate.lat"
+          [longitude]="coordinate.lng">
             <agm-info-window
               [isOpen]="openInfo"
               [latitude]="coordinate.lat"
@@ -48,4 +71,3 @@
         </agm-map>
       </div>
     </div>
-  </div>
