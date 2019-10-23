@@ -3,33 +3,33 @@
     <div class="col-fluid">
       <div class="card">
         <h3 class="card-header text-dark bg-warning">
-          <span class="tool-name">{{display.name}}&nbsp;&nbsp;</span>
+          <span class="tool-name">{{displayTool.name}}&nbsp;&nbsp;</span>
           <span class="stars">
-            <!-- <star-rating value="{{display.rentals[0].renterReview.toolRating}}" checkedcolor="yellow"
-              uncheckedcolor="black" size="flex" readonly="true"></star-rating> -->
+            <star-rating value="5" checkedcolor="yellow"
+              uncheckedcolor="black" size="flex" readonly="true"></star-rating>
           </span>
-          <span class="cost">{{display.costPerDay | currency}}/day</span></h3>
+          <span class="cost">{{displayTool.costPerDay | currency}}/day</span></h3>
         <div class="card-horizontal">
           <div class="img-square-wrapper">
-            <img class="" [src]="display.photos[0].photoUrl" class="" alt="Cinque Terre" width="250" height="250"
+            <img class="" [src]="displayTool.photos[0].photoUrl" class="" alt="Cinque Terre" width="250" height="250"
               alt="Card image cap" />
           </div>
           <div class="card-body">
-            <h3><span class="condition">{{display.condition}} Condition</span>
-              <span class="year-made">Year Manufactured: {{display.manufactureYear}}</span></h3><br>
+            <h3><span class="condition">{{displayTool.condition}} Condition</span>
+              <span class="year-made">Year Manufactured: {{displayTool.manufactureYear}}</span></h3><br>
             <p class="card-text ">
-              {{display.description}}
+              {{displayTool.description}}
             </p>
           </div>
         </div>
         <div class="card-footer text-dark bg-warning">
-          <span class="owner">Lender: {{display.user.username}}&nbsp;&nbsp;</span>
+          <span class="owner">Lender: {{displayTool.user.username}}&nbsp;&nbsp;</span>
           <span class="stars">
-            <!-- <star-rating value="{{display.rentals[0].renterReview.lenderRating}}" checkedcolor="yellow"
-              uncheckedcolor="black" size="flex" readonly="true"></star-rating> -->
+            <star-rating value="4" checkedcolor="yellow"
+              uncheckedcolor="black" size="flex" readonly="true"></star-rating>
           </span>
           <span style="float: right;">
-            <app-add-tool-rental></app-add-tool-rental>
+            <app-add-tool-rental [tool]="displayTool"></app-add-tool-rental>
           </span>
           <!-- (rate)="onRate($event)" -->
         </div>
@@ -38,12 +38,12 @@
   </div>
 
 
-  <div id="listToolRentals" *ngFor="let rental of display.rentals">
+  <div id="listToolRentals" *ngFor="let rental of listOfToolRentalsContainingTool">
     <div class="row">
       <div class="col-fluid">
         <div class="card">
           <h3 class="card-header text-dark bg-dark">
-            <span class="reviewer-name">{{rental.renter.username}}</span>
+            <span class="reviewer-name">{{rental.renter.firstName}}'s Review</span>
           </h3>
           <div class="card-horizontal">
             <div class="card-body" >
@@ -63,21 +63,3 @@
     </div>
   </div>
 </div>
-<!-- <table class='table table-striped'>
-    <thead class='thead thead-dark'>
-      <tr>
-        <td align='left'>Checked out</td>
-        <td align='left'>Returned</td>
-        <td align='left'>Total Cost</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let toolTransaction of toolTransactions">
-        <td>{{ toolTransaction.checkout }}</td>
-        <td>{{ toolTransaction.returned }}</td>
-        <td>{{ toolTransaction.totalCost }}</td>
-        <app-update-tool-rental [toolRental]="toolTransaction"></app-update-tool-rental>
-        <app-delete-tool-rental [toolRental]="toolTransaction"></app-delete-tool-rental>
-      </tr>
-    </tbody>
- </table> -->

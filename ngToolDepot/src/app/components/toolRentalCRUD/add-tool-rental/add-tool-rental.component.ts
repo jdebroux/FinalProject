@@ -49,6 +49,7 @@ export class AddToolRentalComponent implements OnInit {
     this.trService.create(this.newToolRental, this.tool.id).subscribe(
       () => {
         console.log("Success adding");
+        this.router.navigateByUrl('/toolTransaction?rented=true');
       },
       err => {
         console.log(err);

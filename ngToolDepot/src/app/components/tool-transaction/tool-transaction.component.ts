@@ -1,3 +1,4 @@
+import { ReviewOfLenderService } from './../../services/review-of-lender.service';
 import { User } from 'src/app/models/user';
 import { ToolService } from 'src/app/services/tool.service';
 import { Component, OnInit } from '@angular/core';
@@ -8,6 +9,7 @@ import { ToolRental } from 'src/app/models/tool-rental';
 import { ToolRentalService } from 'src/app/services/tool-rental.service';
 import { Tool } from 'src/app/models/tool';
 import { ReviewOfRenterService } from 'src/app/services/review-of-renter.service';
+import { ReviewOfLender } from 'src/app/models/review-of-lender';
 
 @Component({
   selector: 'app-tool-transaction',
@@ -15,146 +17,109 @@ import { ReviewOfRenterService } from 'src/app/services/review-of-renter.service
   styleUrls: ['./tool-transaction.component.scss']
 })
 export class ToolTransactionComponent implements OnInit {
-  editToolTransaction = null;
-  selected = null;
-  showComplete = false;
-  urlToolTransactionId: string;
-  toolTransactions: ToolRental[] = [];
+  toolId: number;
   tool: Tool = null;
-  display: Tool = null;
-  newToolTransaction = new ToolRental();
-  lender: ToolRental;
+  displayTool: Tool = null;
+  listOfToolRentalsContainingTool: ToolRental[] = [];
+  listOfLenderReviews: ReviewOfLender[] = [];
+  averageLenderRating: number;
+  averageToolRating: number;
+
 
   constructor(private toolRentalService: ToolRentalService,
               private datePipe: DatePipe,
               private currentRoute: ActivatedRoute,
               private router: Router,
-              private toolService: ToolService) {}
+              private toolService: ToolService,
+              private route: ActivatedRoute
+              ) {}
 
   ngOnInit() {
-    console.log('ToolTransactionComponent.ngOnInit');
-    this.urlToolTransactionId = this.getCommandLineParameter();
-    this.currentRoute.queryParams.subscribe(params => {
-      this.urlToolTransactionId = params['id'];
-  });
+    this.toolId = parseInt(this.route.snapshot.queryParamMap.get('id'));
     // console.error('transaction id ' + this.urlToolTransactionId);
-    this.toolService.findById(this.urlToolTransactionId).subscribe(
+    this.toolService.findById(this.toolId.toString()).subscribe(
       lifeIsGood => {
-        this.display = lifeIsGood;
-        console.log(this.display);
+        this.displayTool = lifeIsGood;
+        this.getListOfToolRentals();
       },
       lifeIsBad => {
         console.error('Error in ngOnInit.toolService.findById()');
         console.error(lifeIsBad);
       }
     );
-    this.reloadToolTransactions();
   }
 
-  getCommandLineParameter(): string {
-    let idString = '';
-    if (this.currentRoute.snapshot.paramMap.get('id')) {
-      idString =  this.currentRoute.snapshot.paramMap.get('id');
-      console.log(idString);
-    }
-    return idString;
-  }
+  // addToolTransaction(toolRental: ToolRental, toolId: number) {
 
-  showTotalToolTransactions(): number {
-    const total = this.toolTransactions.length;
-    return total;
-  }
+  //   this.toolRentalService.create(toolRental, toolId).subscribe(
+  //     () => {
+  //       this.reloadToolTransactions();
+  //     },
+  //     err => {
+  //       console.error('ToolTransactionComponent - addToolTransaction()');
+  //       console.error(err);
+  //     }
+  //   );
+  //   location.reload();
+  // }
 
-  displayToolTransactions(toolTransaction: ToolRental) {
-    this.selected = toolTransaction;
-  }
+  // setEditToolTransaction() {
+  //   this.editToolTransaction = Object.assign({}, this.selected);
+  // }
 
-  displayTable() {
-    this.selected = null;
-  }
+  // cancelEditToolTransaction() {
+  //   this.editToolTransaction = null;
+  // }
 
-  addToolTransaction(toolRental: ToolRental, toolId: number) {
+  // updateToolTransaction(id: number, editedToolTransaction: ToolRental) {
 
-    this.toolRentalService.create(toolRental, toolId).subscribe(
-      () => {
-        this.reloadToolTransactions();
+  //   // TODO logic needs to be entered here
+
+  //   this.toolRentalService.update(id, editedToolTransaction).subscribe(
+  //     () => {
+  //       this.reloadToolTransactions();
+  //     },
+  //     err => {
+  //       console.error('toolTransactionComponent - updateToolTransaction()');
+  //       console.error(err);
+  //     }
+  //   );
+  //   this.editToolTransaction = null;
+  //   this.selected = null;
+  // }
+
+  // deleteToolTransaction(id: number) {
+  //   this.toolRentalService.destroy(id).subscribe(
+  //     () => {
+  //       this.reloadToolTransactions();
+  //     },
+  //     err => {
+  //       console.error('toolTransactionComponent - deleteToolTransaction()');
+  //       console.error(err);
+  //     }
+  //   );
+  //   this.reloadToolTransactions();
+
+  getListOfToolRentals() {
+    this.toolRentalService.getToolTransactionsByTool(this.displayTool.id).subscribe(
+      data => {
+        this.listOfToolRentalsContainingTool = data;
+        console.log(data);
       },
       err => {
-        console.error('ToolTransactionComponent - addToolTransaction()');
-        console.error(err);
+        console.log(err);
+        console.log('error in getLenderRating()');
       }
-    );
-    location.reload();
+    )
   }
-
-  setEditToolTransaction() {
-    this.editToolTransaction = Object.assign({}, this.selected);
-  }
-
-  cancelEditToolTransaction() {
-    this.editToolTransaction = null;
-  }
-
-  updateToolTransaction(id: number, editedToolTransaction: ToolRental) {
-
-    // TODO logic needs to be entered here
-
-    this.toolRentalService.update(id, editedToolTransaction).subscribe(
-      () => {
-        this.reloadToolTransactions();
-      },
-      err => {
-        console.error('toolTransactionComponent - updateToolTransaction()');
-        console.error(err);
-      }
-    );
-    this.editToolTransaction = null;
-    this.selected = null;
-  }
-
-  deleteToolTransaction(id: number) {
-    this.toolRentalService.destroy(id).subscribe(
-      () => {
-        this.reloadToolTransactions();
-      },
-      err => {
-        console.error('toolTransactionComponent - deleteToolTransaction()');
-        console.error(err);
-      }
-    );
-    this.reloadToolTransactions();
-  }
-
-  reloadToolTransactions() {
-    // this.displayTool(this.toolComp);
-    this.toolRentalService.index().subscribe(
-      lifeIsGood => {
-        this.toolTransactions = lifeIsGood;
-        if (this.urlToolTransactionId) {
-          this.selected = this.toolTransactions.find((data => data.id === Number(this.urlToolTransactionId)));
-          if (!this.selected) {
-            this.router.navigateByUrl('**');
-          }
-        }
-      },
-      lifeIsBad => {
-        console.error('Error in toolTransactionComponent.reloadTransactions()');
-        console.error(lifeIsBad);
-      }
-    );
-  }
-
-  // TODO we dont need this but could utilize in a different way.
-
-  // checkTotalToolTransactions(): string {
-  //   let classColor = '';
-  //   if (this.showTotalToolTransactions() >= 10) {
-  //     classColor = 'badge badge-pill badge-danger';
-  //   } else if (this.showTotalToolTransactions() >= 5) {
-  //     classColor = 'badge badge-pill badge-warning';
-  //   } else if (this.showTotalToolTransactions() < 5) {
-  //     classColor = 'badge badge-pill badge-success';
+  //   var totalToolRating = 0;
+  //   var totalLenderRating = 0;
+  //   for (let toolRental of this.listOfToolRentalsContainingTool) {
+  //     console.log("HELLO");
+  //     console.log(toolRental.renterReview.toolRating);
+  //     console.log(toolRental.renterReview.lenderRating);
   //   }
-  //   return classColor;
+  //   this.averageLenderRating = totalLenderRating / this.listOfLenderReviews.length;
+  //   this.averageToolRating = totalToolRating / this.listOfLenderReviews.length;
   // }
 }
