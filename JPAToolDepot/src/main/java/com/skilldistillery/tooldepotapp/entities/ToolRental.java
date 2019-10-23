@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -27,7 +27,7 @@ public class ToolRental {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties("rentals")
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "tool_id")
 	private Tool tool;

@@ -47,9 +47,9 @@ export class AddToolRentalComponent implements OnInit {
     this.newToolRental.checkout = this.pickUpDate;
     this.newToolRental.totalCost = this.tool.costPerDay * this.numberOfDays;
     this.trService.create(this.newToolRental, this.tool.id).subscribe(
-      () => {
-        console.log("Success adding");
-        this.router.navigateByUrl('/toolTransaction?rented=true');
+      data => {
+        this.newToolRental = data;
+        this.router.navigateByUrl('/confirmation/?id=' + this.newToolRental.id);
       },
       err => {
         console.log(err);

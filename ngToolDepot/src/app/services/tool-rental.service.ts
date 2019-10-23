@@ -1,3 +1,4 @@
+import { ToolRental } from './../models/tool-rental';
 import { ReviewOfRenter } from './../models/review-of-renter';
 import { AuthService } from "./auth.service";
 import { Injectable } from "@angular/core";
@@ -6,7 +7,6 @@ import { throwError } from "rxjs/internal/observable/throwError";
 import { map, catchError } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
-import { ToolRental } from "../models/tool-rental";
 
 @Injectable({
   providedIn: "root"
@@ -83,7 +83,7 @@ export class ToolRentalService {
       })
     };
     return this.http
-      .post(this.url + "?toolId=" + toolId, toolRental, httpOptions)
+      .post<ToolRental>(this.url + "?toolId=" + toolId, toolRental, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
@@ -134,6 +134,14 @@ export class ToolRentalService {
         return throwError(
           "Error deleting a tool rental in toolRental.service.ts.destory()"
         );
+      })
+    );
+  }
+  findById(newToolRentalId: number) {
+    return this.http.get<ToolRental>(this.url + '/findId/' + newToolRentalId).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error searching for tools in tool-rental.service.ts.findById()');
       })
     );
   }

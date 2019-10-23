@@ -10,6 +10,7 @@ import { ToolRentalService } from 'src/app/services/tool-rental.service';
 import { Tool } from 'src/app/models/tool';
 import { ReviewOfRenterService } from 'src/app/services/review-of-renter.service';
 import { ReviewOfLender } from 'src/app/models/review-of-lender';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
 
 @Component({
   selector: 'app-tool-transaction',
@@ -32,9 +33,11 @@ export class ToolTransactionComponent implements OnInit {
               private router: Router,
               private toolService: ToolService,
               private route: ActivatedRoute
+              // private confirmation: ConfirmationComponent
               ) {}
 
   ngOnInit() {
+    // tslint:disable-next-line: radix
     this.toolId = parseInt(this.route.snapshot.queryParamMap.get('id'));
     // console.error('transaction id ' + this.urlToolTransactionId);
     this.toolService.findById(this.toolId.toString()).subscribe(
