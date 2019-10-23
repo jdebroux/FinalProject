@@ -18,6 +18,7 @@ import {
   Component,
   AfterContentInit
 } from '@angular/core';
+import { Address } from 'src/app/models/address';
 
 @Component({
   selector: 'app-user',
@@ -48,8 +49,9 @@ export class UserComponent implements OnInit, AfterContentInit {
   allTools: Tool[] = [];
   myToolRentals: ToolRental[] = [];
   myToolLoans: ToolRental[] = [];
-
   // 'use strict';
+  // tslint:disable-next-line: max-line-length
+  states = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
 
   ngOnInit() {
     // this.urlUserId = this.getCommandLineParameter();
@@ -84,9 +86,6 @@ export class UserComponent implements OnInit, AfterContentInit {
         this.toolTransactions = data;
         this.toolTransactions.forEach(toolTransaction => {
           if (toolTransaction.id !== 0) {
-            console.log(toolTransaction.lenderReview + ' WHOLE TOOL TRANSACTION OBJECT IN USER COMP GLIUT   LENDER');
-            console.log(toolTransaction.renterReview + ' WHOLE TOOL TRANSACTION OBJECT IN USER COMP GLIUT   RENTER');
-            console.log(toolTransaction.renter.id + ' THIS IS TOOL TRANSACTION RENTER ID');
             if (this.loggedInUser.id === toolTransaction.renter.id) {
               this.myToolRentals.push(toolTransaction);
             } else {
@@ -94,9 +93,6 @@ export class UserComponent implements OnInit, AfterContentInit {
             }
           }
           });
-        console.log(this.myToolRentals.length + ' myToolRentals LENGTH');
-        console.log(this.myToolLoans.length + ' myToolLoans LENGTH');
-        console.error(this.toolTransactions);
       },
       err => {
         console.error(err);
@@ -168,7 +164,7 @@ export class UserComponent implements OnInit, AfterContentInit {
     } else if (user.enabled === false) {
       user.enabled = true;
     }
-    this.updateUser(id, user);
+    this.updateUser(id);
   }
 
   addUser(form: NgForm) {
@@ -196,12 +192,11 @@ export class UserComponent implements OnInit, AfterContentInit {
     this.editUser = null;
   }
 
-  updateUser(id: number, editedUser: User) {
+  updateUser(id: number) {
     // TODO logic needs to be entered here
 
-    this.userService.update(id, editedUser).subscribe(
+    this.userService.update(id, this.loggedInUser).subscribe(
       () => {
-        this.reloadUsers();
       },
       err => {
         console.error('userComponent - updateUser()');
