@@ -8,9 +8,10 @@
               <h2 class="card-header text-dark bg-warning"><span>{{loggedInUser.firstName}}</span>
                 <!-- <span class="badge badge-pill badge-dark m-2">{{loggedInUser.firstName}}</span> -->
                  <span>
+                   <div *ngIf="loggedInUser.role !== 'admin'">
                    <button mdbBtn class="btn btn-elegant btn-small float-right" type="button" (click)="
                    disableProfile();
-                 " mdbWavesEffect>Delete Profile</button>
+                 " mdbWavesEffect>Delete Profile</button></div>
                    <button mdbBtn class="btn btn-elegant btn-small float-right" type="button" (click)="
                  editProfile.toggle();
                " mdbWavesEffect>Edit Profile</button>
@@ -226,7 +227,6 @@
                   <td align="left">Last Name</td>
                   <td align="left">Phone</td>
                   <td align="left">Email</td>
-                  <td align="left">Address</td>
                   <td align="left">Creation Date</td>
                   <td align="left">Updated Date</td>
                   <td align="left">Rentals</td>
@@ -249,7 +249,6 @@
                   <td>{{ user.lastName }}</td>
                   <td>{{ user.phone }}</td>
                   <td>{{ user.email }}</td>
-                  <td>{{ user.address }}</td>
                   <td>{{ user.createDate }}</td>
                   <td>{{ user.updateDate }}</td>
                   <td>{{ user.toolRentals }}</td>

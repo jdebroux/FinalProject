@@ -52,7 +52,6 @@ export class SearchResultsComponent implements OnInit {
   ngOnChanges() {
     for (let tool of this.searchResults) {
       this.savedCoordinatesList = [];
-      console.log(tool);
       this.addrService.getAddressOfToolOwner(tool.id).subscribe(
         data => {
           this.geoService
@@ -60,7 +59,6 @@ export class SearchResultsComponent implements OnInit {
             .subscribe(
               data => {
                 this.parseForCoordinates(data, tool, this.savedCoordinatesMap);
-                console.log(this.savedCoordinatesMap);
               },
               err => {
                 console.error(err);

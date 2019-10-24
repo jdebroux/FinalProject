@@ -48,7 +48,6 @@ export class EditReviewRenterComponent implements OnInit {
         this.reviewToBeUpdated.id, this.reviewToBeUpdated).subscribe(
         () => {
           console.log('review of Renter successful edit');
-          location.reload();
         },
         err => {
           console.error('error updating review of Renter in comp');
