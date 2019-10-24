@@ -8,7 +8,7 @@
       </form>
     </mat-grid-tile>
     <mat-grid-tile>
-      <form class="form-inline ">
+      <form *ngIf="!checkLoggedInUser()">
         <div class="mr-3 w-100">
           <h3 style="font-size:3vw;">Lend A Tool</h3>
           <a><button (click)="registerModal.show()" style="font-size:1vw;" type="button" class="btn btn-sm mr-3 w-100 signUp" >Sign Up</button></a>

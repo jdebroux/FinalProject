@@ -139,7 +139,8 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
     LoginComponent,
     ToolAvailablePipe,
     ToolTransactionComponent,
-    RatingModule
+    RatingModule,
+    AddToolComponent
   ],
   bootstrap: [AppComponent]
 })

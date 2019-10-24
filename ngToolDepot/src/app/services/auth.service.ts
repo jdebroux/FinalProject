@@ -11,8 +11,8 @@ import { User } from "../models/user";
   providedIn: "root"
 })
 export class AuthService {
-  private baseUrl = "http://localhost:8089/";
-  // private baseUrl = environment.baseUrl;
+  // private baseUrl = "http://localhost:8089/";
+  private baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient, private router: Router) {}
 

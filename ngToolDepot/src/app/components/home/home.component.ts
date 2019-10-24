@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { ToolService } from 'src/app/services/tool.service';
 import { Component, OnInit } from '@angular/core';
 import { Tool } from 'src/app/models/tool';
@@ -15,7 +16,8 @@ export class HomeComponent implements OnInit {
   searchResults: Tool[] = [];
   constructor(
     private toolService: ToolService,
-    private registerComp: RegisterComponent
+    private registerComp: RegisterComponent,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -35,6 +37,14 @@ export class HomeComponent implements OnInit {
 
   register(form: NgForm) {
     this.registerComp.register(form);
+  }
+
+  checkLoggedInUser(): boolean {
+    if (this.authService.checkLogin()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }

@@ -35,7 +35,8 @@ export class ToolPhotoService {
       );
     }
 
-  create(toolPhoto: ToolPhoto) {
+  create(toolPhoto: ToolPhoto, tool: Tool) {
+      console.log(tool.id);
       if (localStorage.length === 0) {
         this.router.navigateByUrl('/login');
       }
@@ -46,7 +47,7 @@ export class ToolPhotoService {
           'X-Requested-With': 'XMLHttpRequest'
         })
     };
-      return this.http.post(this.url, toolPhoto, httpOptions).pipe(
+      return this.http.post(this.url + '/' + tool.id + '/toolPhoto' , toolPhoto, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error posting new tool photo in ToolPhotoService.create()');

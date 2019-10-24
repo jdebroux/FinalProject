@@ -38,6 +38,7 @@ public class ToolPhotoServiceImpl implements ToolPhotoService {
 	@Override
 	public ToolPhoto create(ToolPhoto toolPhoto, Integer Tid) {
 		toolPhoto.setTool(toolSvc.findById(Tid));
+		toolSvc.findById(Tid).getPhotos().add(toolPhoto);
 		return photoRepo.saveAndFlush(toolPhoto);
 	}
 	@Override

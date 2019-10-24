@@ -1,3 +1,4 @@
+import { AuthService } from './../../../services/auth.service';
 import { Router } from '@angular/router';
 import { ToolRentalService } from 'src/app/services/tool-rental.service';
 import { ToolRental } from './../../../models/tool-rental';
@@ -24,7 +25,8 @@ export class AddToolRentalComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private trService: ToolRentalService
+    private trService: ToolRentalService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -55,5 +57,13 @@ export class AddToolRentalComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  checkLoggedInUser(): boolean {
+    if (this.authService.checkLogin()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

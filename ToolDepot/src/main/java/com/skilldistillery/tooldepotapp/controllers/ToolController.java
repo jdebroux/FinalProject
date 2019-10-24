@@ -1,6 +1,7 @@
 package com.skilldistillery.tooldepotapp.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,23 +38,7 @@ public class ToolController {
 	@GetMapping("tool/user/{username}")
 	public List<Tool> getUsersTools(@PathVariable("username") String username, HttpServletResponse resp) {
 		List<Tool> tools = toolSvc.findByUserUsername(username);
-		try {
-			if (tools == null || tools.size() <= 0) {
-				resp.setStatus(404);
-			} else {
-				resp.setStatus(200);
-			}
-		} catch (Exception e) {
-			tools = null;
-			resp.setStatus(400);
-			e.printStackTrace();
-		}
-		for (Tool tool : tools) {
-			System.out.println("******* in tool controller returning tools ******");
-			if (tool instanceof Tool) {
-				System.err.println(tool);
-			}
-		}
+		resp.setStatus(200);
 		return tools;
 	}
 
@@ -65,7 +50,14 @@ public class ToolController {
 
 	@GetMapping("tool/search/{searchTerm}")
 	public List<Tool> getToolsBySearch(@PathVariable("searchTerm") String searchTerm, HttpServletResponse resp) {
-		return toolSvc.findToolsBySearchTerm(searchTerm);
+		List<Tool> allToolsBySearchTerm = toolSvc.findToolsBySearchTerm(searchTerm);
+		List<Tool> availableTools = new ArrayList<>();
+		for (Tool tool : allToolsBySearchTerm) {
+			if (tool.isAvailable()) {
+				availableTools.add(tool);
+			}
+		}
+		return availableTools;
 	}
 
 	@PostMapping("tool")

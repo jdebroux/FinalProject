@@ -5,7 +5,8 @@ import { TemplateBindingParseResult } from '@angular/compiler';
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:8089/'
+  baseUrl: 'http://localhost:8089/',
+  background: '/assets/color_tools.jpg'
 };
 
 /*

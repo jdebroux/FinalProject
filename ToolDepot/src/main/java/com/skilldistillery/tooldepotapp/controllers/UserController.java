@@ -49,18 +49,14 @@ public class UserController {
 	}
 
 	@PostMapping("user")
-	public User addUser(@RequestBody User user, HttpServletResponse resp, HttpServletRequest req, Principal principal) {
+	public User addUser(@RequestBody User user, HttpServletResponse resp, HttpServletRequest req) {
 		try {
-			svc.create(principal.getName(), user);
-			if (user == null) {
-				resp.setStatus(400);
-			}else {
+			svc.create(user);
 			resp.setStatus(201);
 			StringBuffer url = req.getRequestURL();
 			url.append("/");
 			url.append(user.getId());
 			resp.setHeader("Location", url.toString());
-			}
 		} catch (Exception e) {
 			resp.setStatus(400);
 			e.printStackTrace();

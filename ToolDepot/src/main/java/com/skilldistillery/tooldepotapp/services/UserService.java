@@ -14,7 +14,7 @@ public interface UserService {
 
 	User update(String username, int id, User user);
 
-	User create(String username, User user);
+	User create(User user);
 
 	Boolean delete(int id);
 

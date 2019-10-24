@@ -16,14 +16,20 @@
       <div class="modal-body">
         <form #newTool="ngForm">
             Name <input type="text" name="name" ngModel>
+            <br>
             Description <input type="text" name="description" ngModel>
+            <br>
             Type of tool  <input type="text" name="type" ngModel>
+            <br>
              Year Manufactured <input type="text" name="manufactureYear" ngModel>
+             <br>
              Condition <input type="text" name="condition" ngModel>
+             <br>
              Cost <input type="number" name="costPerDay" ngModel>
+             <br>
+             Picture <input type="text" name="photo" [(ngModel)]="photoUrl">
           <button type="button" class="btn" (click)="addTool(newTool); basicModal.hide();"
-          [routerLink]="['/confirmation']" [queryParams]="{id: newToolRental.id}"
-          mdbRippleRadius>Save</button>
+          >Save</button>
         </form>
       </div>
     </div>
