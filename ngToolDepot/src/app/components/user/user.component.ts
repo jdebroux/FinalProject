@@ -244,6 +244,24 @@ export class UserComponent implements OnInit, AfterContentInit {
     this.loggedInUser = new User();
   }
 
+  disableUser(user: User) {
+    if ( user.enabled === false) {
+      user.enabled = true;
+    } else if ( user.enabled === true) {
+      user.enabled = false;
+    }
+    this.userService.update(user.id, user).subscribe(
+      () => {
+        console.log('SUCCESS IN USER COMPONENT DISABLE USER');
+      },
+      err => {
+        console.error('ERROR IN USER COMPONENET DISABLE USER');
+        console.error(err);
+      }
+
+    );
+  }
+
   // TODO we dont need this but could utilize in a different way.
 
   // checkTotalUsers(): string {

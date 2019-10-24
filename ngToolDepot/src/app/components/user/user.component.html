@@ -187,6 +187,8 @@
               <td align="left">Creation Date</td>
               <td align="left">Updated Date</td>
               <td align="left">Rentals</td>
+              <td align="left">Enabled</td>
+              <td></td>
             </tr>
           </thead>
           <tbody>
@@ -208,6 +210,8 @@
               <td>{{ user.createDate }}</td>
               <td>{{ user.updateDate }}</td>
               <td>{{ user.toolRentals }}</td>
+              <td>{{ user.enabled}}</td>
+              <td><button class="btn btn-dark relative waves-light" (click)="disableUser(user)">Switch Enabled</button></td>
             </tr>
           </tbody>
         </table>
@@ -249,7 +253,7 @@
               <td>{{ tool.costPerDay }}</td>
               <td>{{ tool.available }}</td>
               <app-update-tool [tool]="tool"></app-update-tool>
-              <td><button class="btn btn-dark relative waves-light">Delete</button></td>
+              <!-- <td><button class="btn btn-dark relative waves-light">Delete</button></td> -->
             </tr>
           </tbody>
         </table>
