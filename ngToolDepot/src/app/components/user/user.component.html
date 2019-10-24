@@ -211,7 +211,9 @@
               <td>{{ user.updateDate }}</td>
               <td>{{ user.toolRentals }}</td>
               <td>{{ user.enabled}}</td>
-              <td><button class="btn btn-dark relative waves-light" (click)="disableUser(user)">Switch Enabled</button></td>
+              <div *ngIf="user.role !== 'admin'">
+                <td><button class="btn btn-dark relative waves-light" (click)="disableUser(user)">Switch Enabled</button></td>
+              </div>
             </tr>
           </tbody>
         </table>
