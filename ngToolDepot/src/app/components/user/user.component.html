@@ -10,7 +10,8 @@
             <!-- </span> -->
           </h2>
           <div class="card-horizontal">
-            <div class="img-square-wrapper">
+            <div class="img-square-wrapper bg-dark">
+            <!-- <div class="img-square-wrapper bg-dark"> -->
               <img class="img-thumbnail" [src]="loggedInUser.photo" alt="Cinque Terre" width="300" height="300"
                 alt="Card image cap" />
             </div>
@@ -37,7 +38,7 @@
                         <input class="form-control" placeholder="Zip Code" name="zip" [(ngModel)]="loggedInUser.address.zip">
                         <select >
                           <option *ngFor="let state of states" [(ngModel)]="loggedInUser.address.state" name=state>
-                            {{state}}
+                            {{loggedInUser.address.state}}
                           </option>
                         </select>
                       </div><br>
@@ -58,13 +59,12 @@
     </button>
     <div class="userpage" mdbCollapse #MyTransactions="bs-collapse">
       <div id="listToolRentals" *ngIf="!selected">
-        <table *ngIf="!selected && myToolLoans.length !== 0" class="table table-striped">
-          <thead class="thead thead-dark">
-            <tr>Your Tool Loans</tr>
+        <table *ngIf="!selected && myToolLoans.length !== 0" class="table table-striped table-dark">
+            <thead class="dark text-warning">
+                <!-- <tr>Your Tool Loans</tr> -->
             <tr>
               <td align="left">Tool Name</td>
               <td align="left">Tool Owner</td>
-              <td align="left">Tool Something</td>
               <td align="left">Checked out</td>
               <td align="left">Returned</td>
               <td align="left">Total Cost</td>
@@ -72,30 +72,28 @@
           </thead>
           <tbody>
             <tr *ngFor="let loan of myToolLoans">
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{{loan.tool.name}}</td>
+              <td>{{loan.tool.user.username}}</td>
               <td>{{ loan.checkout }}</td>
               <td>{{ loan.returned }}</td>
               <td>{{ loan.totalCost }}</td>
               <app-update-tool-rental [toolRental]="loan"></app-update-tool-rental>
               <app-delete-tool-rental [toolRental]="loan"></app-delete-tool-rental>
-              <div *ngIf="loan.renterReview === null">
-                  <app-add-review-renter [toolTransaction]="loan"></app-add-review-renter>
+              <div *ngIf="loan.lenderReview === null">
+                  <app-add-review-lender [toolTransaction]="loan"></app-add-review-lender>
                 </div>
-                <div *ngIf="loan.renterReview !== null">
-                  <app-edit-review-renter [toolTransaction]="loan"></app-edit-review-renter>
+                <div *ngIf="loan.lenderReview !== null">
+                  <app-edit-review-lender [toolTransaction]="loan"></app-edit-review-lender>
                 </div>
             </tr>
           </tbody>
         </table>
-        <table *ngIf="!selected && myToolRentals.length !== 0" class="table table-striped">
+        <table *ngIf="!selected && myToolRentals.length !== 0" class="table table-striped table-dark">
           <thead class="thead thead-dark">
             <tr>Your Tool Rentals</tr>
             <tr>
               <td align="left">Tool Name</td>
               <td align="left">Tool Owner</td>
-              <td align="left">Tool Something</td>
               <td align="left">Checked out</td>
               <td align="left">Returned</td>
               <td align="left">Total Cost</td>
@@ -103,20 +101,20 @@
           </thead>
           <tbody>
             <tr *ngFor="let rental of myToolRentals">
-              <td></td>
-              <td></td>
-              <td></td>
+                <td>{{rental.tool.name}}</td>
+                <td>{{rental.tool.user.username}}</td>
               <td>{{ rental.checkout }}</td>
               <td>{{ rental.returned }}</td>
               <td>{{ rental.totalCost }}</td>
               <app-update-tool-rental [toolRental]="rental"></app-update-tool-rental>
               <app-delete-tool-rental [toolRental]="rental"></app-delete-tool-rental>
-              <div *ngIf="rental.lenderReview === null">
-                  <app-add-review-lender [toolTransaction]="rental"></app-add-review-lender>
+              <div *ngIf="rental.renterReview === null">
+                  <app-add-review-renter [toolTransaction]="rental"></app-add-review-renter>
                 </div>
-                <div *ngIf="rental.lenderReview !== null">
-                  <app-edit-review-lender [toolTransaction]="rental"></app-edit-review-lender>
+                <div *ngIf="rental.renterReview !== null">
+                  <app-edit-review-renter [toolTransaction]="rental"></app-edit-review-renter>
                 </div>
+
             </tr>
           </tbody>
         </table>
@@ -132,7 +130,7 @@
     </button>
     <div class="userpage" mdbCollapse #toolListDiv="bs-collapse">
       <div id="listMyTools">
-        <table class="table table-striped">
+        <table class="table table-striped table-dark">
           <thead class="dark text-warning">
             <tr>
               <td align="left"></td>
@@ -171,7 +169,7 @@
     </button>
     <div class="" mdbCollapse #allUsers="bs-collapse">
       <div id="showAllUsers" *ngIf="!selected">
-        <table *ngIf="!selected" class="table table-striped">
+        <table *ngIf="!selected" class="table table-striped table-dark">
           <thead class="thead thead-dark">
             <tr>
               <td align="left">ID</td>
@@ -210,7 +208,9 @@
               <td>{{ user.updateDate }}</td>
               <td>{{ user.toolRentals }}</td>
               <td>{{ user.enabled}}</td>
-              <td><button class="btn btn-dark relative waves-light" (click)="disableUser(user)">Switch Enabled</button></td>
+              <div *ngIf="user.role !== 'admin'">
+                <td><button class="btn btn-dark relative waves-light" (click)="disableUser(user)">Switch Enabled</button></td>
+              </div>
             </tr>
           </tbody>
         </table>
@@ -225,7 +225,7 @@
     </button>
     <div class="" mdbCollapse #adminTools="bs-collapse">
       <div id="listAllUserTools">
-        <table class="table table-striped">
+        <table class="table table-striped table-dark">
           <thead class="dark text-warning">
             <tr>
               <td align="left"></td>
