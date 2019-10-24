@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.tooldepotapp.entities.Tool;
 import com.skilldistillery.tooldepotapp.entities.ToolRental;
 import com.skilldistillery.tooldepotapp.repositories.UserRepository;
 import com.skilldistillery.tooldepotapp.services.ToolRentalService;
@@ -48,6 +49,7 @@ public class ToolRentalController {
 		return new ArrayList<ToolRental>();
 	}
 	
+
 	@GetMapping("toolRental/findId/{id}")
 	public ToolRental getToolRentalsById(@PathVariable("id") Integer id,
 			HttpServletResponse resp) { 
