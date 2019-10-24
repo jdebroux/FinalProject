@@ -137,7 +137,7 @@ export class ToolRentalService {
       })
     );
   }
-  findById(newToolRentalId: string) {
+  findById(newToolRentalId: number) {
     return this.http.get<ToolRental>(this.url + '/findId/' + newToolRentalId).pipe(
       catchError((err: any) => {
         console.log(err);

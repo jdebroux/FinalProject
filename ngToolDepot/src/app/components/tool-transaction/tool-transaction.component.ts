@@ -37,6 +37,7 @@ export class ToolTransactionComponent implements OnInit {
               ) {}
 
   ngOnInit() {
+    // tslint:disable-next-line: radix
     this.toolId = parseInt(this.route.snapshot.queryParamMap.get('id'));
     // console.error('transaction id ' + this.urlToolTransactionId);
     this.toolService.findById(this.toolId.toString()).subscribe(

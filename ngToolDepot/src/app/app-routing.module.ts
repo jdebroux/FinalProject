@@ -1,3 +1,4 @@
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
@@ -26,8 +27,8 @@ const routes: Routes = [
   { path: 'tool', component: ToolComponent },
   { path: 'skill', component: SkillComponent },
   { path: 'skillTransaction', component: SkillTransactionComponent },
-  { path: 'confirmation/:id', component: ConfirmationComponent },
-  { path: 'confirmation', component: ConfirmationComponent }
+  { path: 'confirmation/:id', component: ConfirmationComponent},
+  { path: 'confirmation', component: ConfirmationComponent}
 ];
 
 @NgModule({

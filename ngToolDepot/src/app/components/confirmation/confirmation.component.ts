@@ -1,9 +1,9 @@
-import { ToolTransactionComponent } from './../tool-transaction/tool-transaction.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ToolRentalService } from 'src/app/services/tool-rental.service';
+import { ToolRental } from 'src/app/models/tool-rental';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToolRental } from 'src/app/models/tool-rental';
-import { ToolRentalService } from 'src/app/services/tool-rental.service';
+import { Tool } from 'src/app/models/tool';
 
 @Component({
   selector: 'app-confirmation',
@@ -24,11 +24,12 @@ export class ConfirmationComponent implements OnInit {
   ngOnInit() {
     // this.urlToolTransactionId = this.currentRoute.snapshot.queryParamMap.get('id');
     // console.log(this.currentRoute.snapshot.queryParamMap.get('id'));
-    this.currentRoute.queryParams.subscribe(params => {
-      this.urlToolTransactionId = params['id'];
-    });
-    console.error('transaction id ' + this.urlToolTransactionId);
-    this.toolRentalService.findById(this.urlToolTransactionId).subscribe(
+    // this.currentRoute.queryParams.subscribe(params => {
+    //   this.urlToolTransactionId = params['id'];
+    // });
+    this.urlToolTransactionId = this.currentRoute.snapshot.queryParamMap.get('id');
+    // console.error('transaction id ' + this.urlToolTransactionId);
+    this.toolRentalService.findById(+this.urlToolTransactionId).subscribe(
       lifeIsGood => {
         this.display = lifeIsGood;
         console.log(this.display);
@@ -66,5 +67,7 @@ export class ConfirmationComponent implements OnInit {
       }
     );
   }
+
+
 
 }

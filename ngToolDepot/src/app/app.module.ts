@@ -52,14 +52,14 @@ import { AddToolPhotoComponent } from './components/toolphotoCRUD/add-tool-photo
 import { DeleteToolPhotoComponent } from './components/toolphotoCRUD/delete-tool-photo/delete-tool-photo.component';
 import { UpdateToolPhotoComponent } from './components/toolphotoCRUD/update-tool-photo/update-tool-photo.component';
 import { ToolphotoComponent } from './components/toolphoto/toolphoto.component';
+import { RatingModule} from 'ng-starrating';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { AddReviewLenderComponent } from './components/reviewOfLender/add-review-lender/add-review-lender.component';
 import { EditReviewLenderComponent } from './components/reviewOfLender/edit-review-lender/edit-review-lender.component';
 import { DeleteReviewLenderComponent } from './components/reviewOfLender/delete-review-lender/delete-review-lender.component';
-import { AddReviewRenterComponent } from './components/reviewOfRenter/add-review-renter/add-review-renter.component';
-import { EditReviewRenterComponent } from './components/reviewOfRenter/edit-review-renter/edit-review-renter.component';
 import { DeleteReviewRenterComponent } from './components/reviewOfRenter/delete-review-renter/delete-review-renter.component';
-import { RatingModule } from 'ng-starrating';
-import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { EditReviewRenterComponent } from './components/reviewOfRenter/edit-review-renter/edit-review-renter.component';
+import { AddReviewRenterComponent } from './components/reviewOfRenter/add-review-renter/add-review-renter.component';
 
 @NgModule({
   declarations: [
@@ -95,9 +95,9 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
     AddReviewLenderComponent,
     EditReviewLenderComponent,
     DeleteReviewLenderComponent,
-    AddReviewRenterComponent,
+    DeleteReviewRenterComponent,
     EditReviewRenterComponent,
-    DeleteReviewRenterComponent
+    AddReviewRenterComponent
   ],
   imports: [
     BrowserModule,
@@ -115,7 +115,8 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
     }),
     RatingModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    RatingModule
   ],
   providers: [
     AuthService,

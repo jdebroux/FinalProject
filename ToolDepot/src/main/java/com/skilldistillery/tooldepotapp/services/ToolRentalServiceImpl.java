@@ -102,6 +102,8 @@ public class ToolRentalServiceImpl implements ToolRentalService {
 		if (trRepo.existsById(id)) {
 			ToolRental tr = trRepo.findById(id).get();
 			tr.setRenter(null);
+			tr.getLenderReview().setToolRental(null);
+			tr.getRenterReview().setToolRental(null);;
 			tr.setTool(null);
 			trRepo.deleteById(id);
 			deleted = true;

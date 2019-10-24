@@ -21,7 +21,9 @@
              Year Manufactured <input type="text" name="manufactureYear" ngModel>
              Condition <input type="text" name="condition" ngModel>
              Cost <input type="number" name="costPerDay" ngModel>
-          <button type="button" class="btn" (click)="addTool(newTool); basicModal.hide();" mdbRippleRadius>Save</button>
+          <button type="button" class="btn" (click)="addTool(newTool); basicModal.hide();"
+          [routerLink]="['/confirmation']" [queryParams]="{id: newToolRental.id}"
+          mdbRippleRadius>Save</button>
         </form>
       </div>
     </div>
