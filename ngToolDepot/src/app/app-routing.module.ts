@@ -11,7 +11,6 @@ import { AdminComponent } from './components/admin/admin.component';
 import { ToolComponent } from './components/tool/tool.component';
 import { SkillComponent } from './components/skill/skill.component';
 import { SkillTransactionComponent } from './components/skill-transaction/skill-transaction.component';
-import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 
 const routes: Routes = [
