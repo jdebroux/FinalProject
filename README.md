@@ -16,8 +16,8 @@ All users can see their tool rental transactions and list of tools, and update
 their profile information.
 ### Viewing the project
 Hosted live on AWS (18.222.90.180:8080/ToolDepot)
-* Login credentials for Admin: username: admin password: admin
-* Login credentials for User: username: joe password: joe
+* Login credentials for Admin- username: admin password: admin
+* Login credentials for User- username: joe password: joe
 ### Technologies Used
 * Java, JPA
 * Spring Boot, Spring Security, Spring Tool Suite
