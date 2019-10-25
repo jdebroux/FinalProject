@@ -29,7 +29,7 @@ public class AuthServiceImpl implements AuthService {
 		user.setAddress(address);
 		user.setPassword(encodedPw);
 		user.setEnabled(true);
-		user.setRole("standard");
+		user.setRole("user");
 		userRepo.saveAndFlush(user);
 		return user;
 	}

@@ -19,7 +19,9 @@ export class DeleteToolRentalComponent implements OnInit {
     private auth: AuthService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.toolRental.id);
+  }
 
   delete() {
     this.toolRentalService.destroy(this.toolRental.id).subscribe(

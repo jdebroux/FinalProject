@@ -41,7 +41,6 @@ export class AddReviewLenderComponent implements OnInit {
       } else {
         this.reviewOfLenderSvc.create(this.toolTransaction.id, this.reviewOfLender).subscribe(
           () => {
-            location.reload();
           },
           err => {
             console.error('ERROR IN ADD REVIEW LENDER - ADD REVIEW OF LENDER ()');

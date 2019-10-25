@@ -42,7 +42,6 @@ reviewToBeUpdated: ReviewOfLender = new ReviewOfLender();
       this.reviewOfLender.id, this.reviewToBeUpdated).subscribe(
       () => {
         console.log('review of lender successful edit');
-        location.reload();
       },
       err => {
         console.error('error updating review of lender in comp');

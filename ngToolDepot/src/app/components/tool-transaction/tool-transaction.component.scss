@@ -29,3 +29,11 @@ span.tool-name {
 .col-fluid {
   width: 100%;
 }
+
+.card-body {
+  background-color: rgb(52, 52, 52);
+}
+
+.card-text, .condition, .year-made {
+  color: white;
+}

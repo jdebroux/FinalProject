@@ -41,6 +41,7 @@ export class SearchResultsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.searchResults);
     this.savedCoordinatesMap = new Map();
   }
 

@@ -153,6 +153,14 @@ export class ToolComponent implements OnInit {
     );
   }
 
+  redirect(tool) {
+    if (this.authService.checkLogin()) {
+      this.router.navigateByUrl('/toolTransaction?id=' + tool.id);
+    } else {
+      this.router.navigateByUrl('/login?toolId=' + tool.id);
+    }
+  }
+
 
 
   // TODO we dont need this but could utilize in a different way.

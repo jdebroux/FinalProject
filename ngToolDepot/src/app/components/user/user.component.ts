@@ -49,6 +49,8 @@ export class UserComponent implements OnInit, AfterContentInit {
   allTools: Tool[] = [];
   myToolRentals: ToolRental[] = [];
   myToolLoans: ToolRental[] = [];
+  imageUrl: string = '';
+  admin: boolean = false;
   // 'use strict';
   // tslint:disable-next-line: max-line-length
   states = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
@@ -65,8 +67,9 @@ export class UserComponent implements OnInit, AfterContentInit {
     // this.setLoggedInUser();
     if (localStorage.getItem('role') === 'admin') {
       this.reloadUsers();
+      this.admin = true;
       // this.getLoggedInUserTransactions();
-      this.getLoggedInUserTools();
+      // this.getLoggedInUserTools();
     } else if (localStorage.getItem('role') === 'user') {
       // this.getLoggedInUserTransactions();
       // this.getLoggedInUserTools();
@@ -80,6 +83,8 @@ export class UserComponent implements OnInit, AfterContentInit {
   }
 
   getLoggedInUserTransactions() {
+    this.myToolRentals = [];
+    this.myToolLoans = [];
     const userName = this.authService.getUsername();
     this.toolRentalService.getToolTransactionsByUserName(userName).subscribe(
       data => {
@@ -192,6 +197,15 @@ export class UserComponent implements OnInit, AfterContentInit {
     this.editUser = null;
   }
 
+  updatePhoto() {
+    this.loggedInUser.photo = this.imageUrl;
+    this.updateUser(this.loggedInUser.id);
+  }
+
+  returnRole(): string {
+    return localStorage.getItem('role');
+  }
+
   updateUser(id: number) {
     // TODO logic needs to be entered here
 
@@ -224,14 +238,14 @@ export class UserComponent implements OnInit, AfterContentInit {
     this.userService.index().subscribe(
       lifeIsGood => {
         this.users = lifeIsGood;
-        if (this.urlUserId) {
-          this.selected = this.users.find(
-            data => data.id === Number(this.urlUserId)
-          );
-          if (!this.selected) {
-            this.router.navigateByUrl('**');
-          }
-        }
+        // if (this.urlUserId) {
+        //   this.selected = this.users.find(
+        //     data => data.id === Number(this.urlUserId)
+        //   );
+        //   if (!this.selected) {
+        //     this.router.navigateByUrl('**');
+        //   }
+        // }
       },
       lifeIsBad => {
         console.error('Error in UserComponent.reloadUsers()');
@@ -262,6 +276,24 @@ export class UserComponent implements OnInit, AfterContentInit {
     );
   }
 
+  disableProfile() {
+    this.loggedInUser.enabled = false;
+    this.userService.update(this.loggedInUser.id, this.loggedInUser).subscribe(
+      () => {
+        console.log('User has been updated with false for enabled');
+      },
+      err => {
+        console.error('ERROR UPDATING FALSE FOR ENABLED');
+        console.error(err);
+      }
+    );
+    this.authService.logout();
+    this.router.navigateByUrl('/home');
+  }
+
+  redirectTool(toolRental) {
+    this.router.navigateByUrl('/toolTransaction?id=' + toolRental.tool.id);
+  }
   // TODO we dont need this but could utilize in a different way.
 
   // checkTotalUsers(): string {

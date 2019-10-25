@@ -30,7 +30,7 @@ public class User {
 	
 	private String password;
 	
-	private Boolean enabled;
+	private Boolean enabled = true;
 	
 	private String role;
 	
@@ -44,7 +44,7 @@ public class User {
 	
 	private String phone;
 	
-	private String photo;
+	private String photo = "https://i.imgur.com/345CKMe.png";
 	
 	@CreationTimestamp
 	@Column(name="create_date")

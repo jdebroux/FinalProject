@@ -40,7 +40,6 @@ addReviewOfRenter(form: NgForm) {
     } else {
       this.reviewOfRenterSvc.create(this.toolTransaction.id, this.reviewOfRenter).subscribe(
         () => {
-          location.reload();
         },
         err => {
           console.error('ERROR IN ADD REVIEW RENTER - ADD REVIEW OF RENTER ()');

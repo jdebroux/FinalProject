@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User create(String username, User user) {
+	public User create(User user) {
 		return repo.saveAndFlush(user);
 	}
 

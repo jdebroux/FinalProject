@@ -94,7 +94,7 @@ DROP TABLE IF EXISTS `tool_rental` ;
 
 CREATE TABLE IF NOT EXISTS `tool_rental` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `tool_id` INT NOT NULL,
+  `tool_id` INT NULL,
   `renter_id` INT NOT NULL,
   `checkout` DATETIME NULL,
   `returned` DATETIME NULL,
@@ -124,7 +124,7 @@ DROP TABLE IF EXISTS `tool_photo` ;
 
 CREATE TABLE IF NOT EXISTS `tool_photo` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `tool_id` INT NOT NULL,
+  `tool_id` INT NULL,
   `photo_url` VARCHAR(500) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_tool_photo_tool_idx` (`tool_id` ASC),
@@ -143,7 +143,7 @@ DROP TABLE IF EXISTS `review_of_renter` ;
 
 CREATE TABLE IF NOT EXISTS `review_of_renter` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `tool_rental_id` INT NOT NULL,
+  `tool_rental_id` INT NULL,
   `tool_review` TEXT(2000) NULL,
   `tool_rating` INT NULL,
   `lender_review` TEXT(2000) NULL,
@@ -165,7 +165,7 @@ DROP TABLE IF EXISTS `review_of_lender` ;
 
 CREATE TABLE IF NOT EXISTS `review_of_lender` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `tool_rental_id` INT NOT NULL,
+  `tool_rental_id` INT NULL,
   `renter_review` TEXT(2000) NULL,
   `renter_rating` DOUBLE NULL,
   PRIMARY KEY (`id`),
@@ -318,7 +318,9 @@ INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES
 INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (5, '6155 Logan Pl', 'Centennial', 'CO', '80121', 'US');
 INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (6, '10391 Tennyson CT\n', 'Westminster', 'CO', '80036', 'US');
 INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (7, '509 Emporia ST\n', 'Aurora', 'CO', '80019', 'US');
-
+INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (8, '1901 Youngfield St Ste 105, Golden', 'Golden', 'CO', '80401', 'US');
+INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (9, '7837 W Jewell Ave', 'Lakewood', 'CO', '80232', 'US');
+INSERT INTO `address` (`id`, `street`, `city`, `state`, `zip`, `country`) VALUES (10, '3418 S Broadway', 'Englewood', 'CO', '80113', 'US');
 COMMIT;
 
 
@@ -328,12 +330,14 @@ COMMIT;
 START TRANSACTION;
 USE `tooldepotdb`;
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (1, 1, 'admin', '$2a$10$aNWARjmakD5DkADI851RbeGyuElJUMfAelfciTVP1/tUI5AiAunAe', 1, 'admin', 'admin', 'admin', 'admin@admin.com', '123-456-7890', 'http://bit.ly/33QGafY', NULL, NULL);
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (2, 2, 'tool', '$2a$10$vcwvfqyX0CPHPYjKm9PpUepfBsCvF.TBmtY5NXcjIdLxK8W9ZGmVC', 1, 'admin', 'tool', 'tool', 'tool@tool.com', '123-456-9999', 'none', NULL, NULL);
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (3, 3, 'josh', '$2a$10$3VUQSFrQL8lyUloI1hUk.e4fBPPZrxP.7BrfDbB7i3Bo4Et0APMKa', 1, 'user', 'Josh', 'Howell', 'josh@tooldepot.com', '458-489-6253', 'https://bit.ly/2MpfRrz', '2019-10-14 21:19:52', '2019-10-14 21:19:53');
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (4, 4, 'alicia', '$2a$10$o8HY6CAEHkP5936ncklGau2DOwryTXJJM/8Mpv6zbuLQUal/Yeu5G', 1, 'user', 'Alicia', 'Glassmeyer', 'alicia@tooldepot.com', '254-896-3521', 'https://bit.ly/2pvn5kp', '2019-10-14 21:19:53', '2019-10-14 21:19:54');
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (5, 5, 'joe', '$2a$10$kTw3gwrI7NqIMqF2cI8JZu9mYc9nXDP8.tUF6u1BQEVjf31x2GV1i', 1, 'user', 'Joe', 'DeBroux', 'joe@tooldepot.com', '258-741-9632', 'https://bit.ly/2BuacKx', '2019-10-14 21:19:54', '2019-10-14 21:19:55');
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (6, 6, 'justin', '$2a$10$p/LdfLwWHylswLT1fIFvDuFDC8k0SjuoxzbhkDAQn12/Kw5Is2KcC', 1, 'user', 'Justin', 'Choi', 'justin@tooldepot.com', '369-852-7451', 'https://bit.ly/2MKOmaE', '2019-10-14 21:19:55', '2019-10-14 21:19:56');
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (7, 7, 'cody', '$2a$10$KGWJsc9dSYa00HAd218Jx.lCM5LKOebGrjxCHL6xC9CnGJ.OVHSuK', 1, 'user', 'Cody', 'Fulker', 'cody@tooldepot.com', '254-987-1246', 'https://bit.ly/2MkPW3U', '2019-10-14 21:19:56', '2019-10-14 21:19:57');
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (8, 8, 'jdoe', '$2a$10$czjj2KM25F66EDv.WPcJZOKW4NYHYoTO3iFXEOivSshbfRCnMN91u', 1, 'user', 'John', 'Doe', 'jdoe@tooldepot.com', '839-203-3929', 'http://bit.ly/2NcR6hl', NULL, NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (9, 9, 'builder', '$2a$10$QPCBgldtv2SbPgA/TFW5lea.TY.Q5P6QKIwIebFrlPWIbpCTSHCvi', 1, 'user', 'Bob', 'Builder', 'bob@tooldepot.com', '848-322-5543', 'http://bit.ly/2PjLQuT', NULL, NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `enabled`, `role`, `first_name`, `last_name`, `email`, `phone`, `photo`, `create_date`, `update_date`) VALUES (10, 10, 'depot', '$2a$10$JGEdSB3R1K7YRWU7G8nV7OwRnDo9.snGRlO0JqKAvqisKm6255RAa', 1, 'user', 'Tim', 'Smith', 'depot@tooldepot.com', '425-521-6334', 'http://bit.ly/2pe7O83', NULL, NULL);
 
 COMMIT;
 
@@ -346,16 +350,16 @@ USE `tooldepotdb`;
 INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (1, 4, 'Table Saw', 'This DEWALT offers the ultimate in table saw mobility by pairing a DEWALT 10 in. table saw with a rolling stand. This table saw is designed with a 15 Amp motor that quickly rips through hardwoods with ease. A rack and pinion fence system makes fence adjustments fast, smooth and accurate. The rolling stand is designed for easy set up and break down with excellent stability.', 'Saw', 25, 1, '2017', 'Excellent');
 INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (2, 3, 'Cordless Electric Leaf Blower', 'The M18 FUEL Blower has the power to clear from 15 ft. gets to full throttle in under 1 second, and is up to 4 lbs. lighter than competitors. Designed to meet landscape maintenance professional needs.', 'Yard Equipment', 10, 1, '2015', 'Good');
 INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (3, 4, 'Shop Vac', 'The RIDGID 14 Gal. NXT wet dry vac is more powerful than ever. Best for tackling large-volume messes or heavy-duty pro cleanups. ', 'Large Equipment', 10, 1, '2018', 'Excellent');
-INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (4, 3, 'Cordless Electric Weed Trimmer', 'The RYOBI 40-Volt X Expand-it Trimmer delivers power like a gas trimmer, with none of the hassle of mixing oil and gas. Attachment capability means you can add on RYOBI Expand-It attachments, saving you time, money and space.', 'Yard Equipment', 10, 1, '2018', 'Excellent');
+INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (4, 6, 'Cordless Electric Weed Trimmer', 'The RYOBI 40-Volt X Expand-it Trimmer delivers power like a gas trimmer, with none of the hassle of mixing oil and gas. Attachment capability means you can add on RYOBI Expand-It attachments, saving you time, money and space.', 'Yard Equipment', 10, 1, '2018', 'Excellent');
 INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (5, 6, 'Pole Saw', 'ECHO PPF-225 pole saw is lightweight & easy to maneuver. Pole chainsaw\'s 94 in. shaft gives the user maximum reach', 'Saw', 10, 1, '2017', 'Excellent');
-INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (6, 5, 'Gas Weed Trimmer', '30 cc 4-cycle engine is cleaner and produces less noise.  Eliminate the need to mix oil and gas Troy-Bilt\'s 4-cycle engines take regular gas. Quick change cutting head option makes it easy to refill without disassembling the cutting head, simply feed the line through the eyelets and then twist the head to wind the line in seconds\n ', 'Yard Equipment', 5, 1, '2010', 'Poor');
-INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (7, 5, 'Gas Leaf Blower', 'This RYOBI 2 Cycle backpack blower is the most powerful residential backpack blower on the market. The motor delivers a best in class 760 CFM and 175 MPH.', 'Yard Equipment', 5, 1, '2009', 'Good');
+INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (6, 7, 'Gas Weed Trimmer', '30 cc 4-cycle engine is cleaner and produces less noise.  Eliminate the need to mix oil and gas Troy-Bilt\'s 4-cycle engines take regular gas. Quick change cutting head option makes it easy to refill without disassembling the cutting head, simply feed the line through the eyelets and then twist the head to wind the line in seconds\n ', 'Yard Equipment', 5, 1, '2010', 'Poor');
+INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (7, 8, 'Gas Leaf Blower', 'This RYOBI 2 Cycle backpack blower is the most powerful residential backpack blower on the market. The motor delivers a best in class 760 CFM and 175 MPH.', 'Yard Equipment', 5, 1, '2009', 'Good');
 INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (8, 4, 'Corded Electric Leaf Blower', 'Electric blower with 12 Amp Blower/Vac/Mulch with 2 bushel capacity Vac collection bag. Variable speeds of 140 MPH to 240 MPH. Strong enough to vac and mulch everyday lightweight yard waste. ', 'Yard Equipment', 5, 1, '2015', 'Good');
 INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (9, 6, 'Chainsaw', 'The professional-grade ECHO chainsaw CS-310 comes equipped with a 14 in. bar and chain. The rear handle chainsaw is both lightweight and delivers powerful performance. This chainsaw is also packed with features including the side a access chain tensioner for quick chain adjustments and the reduced starting effort feature.', 'Saw', 15, 1, '2012', 'Fair');
 INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (10, 3, 'Air Compressor', '6 Gal. tank allows users to drive a large quantity of nails on a single tank charge. ', 'Large Equipment', 15, 1, '2104', 'Excellent');
 INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (11, 4, 'Pressure Washer', 'This Pressure Washer is engineered to handle even your toughest jobs. With a powerful Honda 187 cc gasoline engine, this RYOBI Pressure Washer delivers 3100 psi of force for quick cleaning of driveways, decks, windows and other areas around the house. Featuring a durable and compact roll-cage frame design this pressure washer is designed for easy transport.', 'Large Equipment', 15, 1, '2013', 'Excellent');
 INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (12, 5, 'Gas Push Lawn Mower', 'This walk-behind lawn mower features a dependable, easy starting 140cc Briggs & Stratton 500e series OHV engine with primer and is equipped with the TriAction cutting system. The TriAction cutting system on this push mower features a rake bumper to lift grass upright, a specially designed blade for a finer mulch and a symmetrical deck for superior grass flow, eliminating clumping.', 'Yard Equipment', 10, 1, '2010', 'Poor');
-INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (13, 3, 'Electric Lawn Mower', 'The EGO 21 Self-Propelled mower with PeakPower technology combines the power of 2 EGO batteries for longer run time and efficient power draw. The push start button provides a quick and easy start, while the self-propel speed control allows you to power through tough terrain at your personal preference. ', 'Yard Equipment', 10, 1, '2016', 'Excellent');
+INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (13, 9, 'Electric Lawn Mower', 'The EGO 21 Self-Propelled mower with PeakPower technology combines the power of 2 EGO batteries for longer run time and efficient power draw. The push start button provides a quick and easy start, while the self-propel speed control allows you to power through tough terrain at your personal preference. ', 'Yard Equipment', 10, 1, '2016', 'Excellent');
 INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (14, 4, 'Snow Blower', 'Tackle small driveway/walkway jobs in no time with the Toro Power Clear Single-Stage 18 in. Gas Snow Blower with push-of-a-button electric start. Quickly and easily clear 18 in. wide by 12 in. deep snow, and blast compacted snow and ice where you want it up to 25 ft. Ideal for concrete and asphalt surfaces that can park up to 4+ cars and 2 - 9 in. of snow at a time. ', 'Large Equipment', 20, 1, '2015', 'Good');
 INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (15, 5, '22 Foot Ladder', 'This  28 telescoping adjustable heights, this ladder can be used as an Extension Ladder, Double-Sided Twin Stepladder, 90-degree Wall Ladder and a Stairway Stepladder. Easily adjust the height from all sides with one hand with the user-friendly speed locks. The extra-large, heavy-duty MPX hinges give you improved strength with less flex and sway for safer climbing. ', 'Ladder', 10, 1, '2008', 'Good');
 INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (16, 5, '16 Foot Ladder', 'This 16 ft. Aluminum Extension Ladder, offering a 225 lb. load capacity and lightweight aluminum construction. It features slip-resistant, TRACTION-TRED D-rungs and ALFLO rung joints for safe, twist-proof performance. ', 'Ladder', 5, 1, '2005', 'Fair');
@@ -368,7 +372,6 @@ INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `c
 INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (23, 4, 'Corded Power Drill', 'Matrix quick connect system allows for tool-free change of a variety of tool attachments. Powerful 4.0 Amp motor provides enough power for a full range of applications and attachments', 'Power Tool', 10, 1, '2014', 'Good');
 INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (24, 6, 'Reciprocating Saw', 'The DEWALT DWE305 features a powerful 12 Amp motor designed for heavy-duty applications. This reciprocating saw is ideal for cutting wood and nail embedded wood, light to heavy gauge metal, drywall or plaster and plastics, rubber, fiberglass and composites', 'Saw', 10, 1, '2017', 'Great');
 INSERT INTO `tool` (`id`, `user_id`, `tool_name`, `description`, `tool_type`, `cost_per_day`, `available`, `manufacture_year`, `tool_condition`) VALUES (25, 5, 'Dehumidifier', '30 pints per day dehumidifier, Hose connection for continous drain option. Easy-roll hidden wheels - Out-of-sight wheels roll easily for bucket emptying\n', 'Large Equipment', 10, 1, '2013', 'Excellent');
-
 COMMIT;
 
 
