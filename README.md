@@ -15,9 +15,32 @@ tools, search by tool name, see results on a map, and begin a rental transaction
 All users can see their tool rental transactions and list of tools, and update
 their profile information.
 ### Viewing the project
-Hosted live on AWS (18.222.90.180:8080/ToolDepot)
+[Hosted live on AWS ](http://18.222.90.180:8080/ToolDepot/)
 * Login credentials for Admin- username: admin password: admin
 * Login credentials for User- username: joe password: joe
+
+Home Page
+![HomePage](pictures/homepage.png)
+
+User Page
+![UserPage](pictures/userpage.png)
+![UserPage2](pictures/userpage2.png)
+
+Admin Page
+![AdminPage](pictures/adminpage.png)
+
+Search For Tool Page
+![SearchPage](pictures/searchpage.png)
+
+See All Tools Page
+![SeeAllPage](pictures/seeallpage.png)
+
+Tool Transaction Page
+![ToolTransactionPage](pictures/transactionpage.png)
+
+Database Structure
+![DatabaseStructure](pictures/databasestructure.png)
+
 ### Technologies Used
 * Java, JPA
 * Spring Boot, Spring Security, Spring Tool Suite
